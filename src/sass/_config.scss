@@ -1,0 +1,38 @@
+$primary-color: #0078c8;
+$success-color: #42ba96;
+$danger-color: #df4759;
+$light-color: #ffffff;
+$dark-color: #000000;
+
+@function set-text-color($bg-color) {
+	@if (lightness($bg-color) > 60) {
+		@return $dark-color;
+	} @else {
+		@return $light-color;
+	}
+}
+
+@function set-transparency($color, $opacity) {
+	@return rgba($color, $opacity);
+}
+
+@mixin set-size($width, $height) {
+	width: $width;
+	height: $height;
+}
+
+@mixin set-blur($blurStrength) {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	backdrop-filter: blur($blurStrength);
+	-webkit-backdrop-filter: blur($blurStrength);
+}
+
+@mixin set-background-color($bg-color) {
+	background-color: $bg-color;
+	color: set-text-color($bg-color);
+}
