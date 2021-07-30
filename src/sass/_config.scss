@@ -1,8 +1,10 @@
-$primary-color: #0078c8;
+$primary-color: #005fb8;
 $success-color: #42ba96;
 $danger-color: #df4759;
-$light-color: #ffffff;
-$dark-color: #000000;
+$light-color: #f3f3f3;
+$dark-color: #202020;
+$light-button-color: #fdfdfd;
+$dark-button-color: #393939;
 
 @function set-text-color($bg-color) {
 	@if (lightness($bg-color) > 60) {
