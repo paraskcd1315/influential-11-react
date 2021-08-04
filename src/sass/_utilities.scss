@@ -1,0 +1,20 @@
+@for $space from 1 through 5 {
+	.m-#{$space} {
+		margin: #{$space}rem;
+	}
+	.mx-#{$space} {
+		margin: 0 #{$space}rem;
+	}
+	.my-#{$space} {
+		margin: #{$space}rem 0;
+	}
+	.p-#{$space} {
+		padding: #{$space}rem;
+	}
+	.px-#{$space} {
+		padding: 0 #{$space}rem;
+	}
+	.py-#{$space} {
+		padding: #{$space}rem 0;
+	}
+}

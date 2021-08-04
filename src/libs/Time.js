@@ -1065,11 +1065,25 @@ const timeFunctions = {
 	date: function () {
 		return timeFunctions.d.getDate();
 	},
+	dateNum: function () {
+		return timeFunctions.zeroPadding === true
+			? timeFunctions.d.getDate() < 10
+				? '0' + timeFunctions.d.getDate()
+				: '' + timeFunctions.d.getDate()
+			: timeFunctions.d.getDate();
+	},
 	day: function () {
 		return timeFunctions.d.getDay();
 	},
 	month: function () {
 		return timeFunctions.d.getMonth();
+	},
+	monthNum: function () {
+		return timeFunctions.zeroPadding === true
+			? timeFunctions.d.getMonth() < 10
+				? '0' + (timeFunctions.d.getMonth() + 1)
+				: timeFunctions.d.getMonth() + 1
+			: timeFunctions.d.getMonth() + 1;
 	},
 	year: function () {
 		return timeFunctions.d.getFullYear();

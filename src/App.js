@@ -1,5 +1,6 @@
 import React from 'react';
 import Common from './components/Common';
+import './sass/style.scss';
 
 import { Provider } from 'react-redux';
 import store from './store';
