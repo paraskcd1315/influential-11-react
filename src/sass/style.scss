@@ -11,14 +11,13 @@
 	left: 50%;
 	bottom: 45px;
 	transform: translateX(-50%);
-	@include set-background-color(set-transparency($light-color, 0.8));
-	// @include set-background-color(set-transparency($dark-color, 0.8));
+	@include set-background-color(set-transparency($light-color, 0.6));
 	@include set-border-radius(1.2rem);
 	@include set-shadows(
 		set-transparency($dark-color, 0.3),
 		set-transparency($dark-color, 0.2)
 	);
-	@include set-size(80%, auto);
+	@include set-size(90%, auto);
 
 	.top-part,
 	.bottom-part {
@@ -52,7 +51,7 @@
 			@include set-size(10px, 10px);
 			@include set-border-radius(5rem);
 			background-color: set-transparency($dark-color, 0.4);
-			margin: -50px 0 0 60px;
+			margin: -20px 0 0 30px;
 			@include set-shadows(
 				set-transparency($dark-color, 0.3),
 				set-transparency($dark-color, 0.2)
@@ -79,6 +78,7 @@
 			border: solid 1px #0000;
 			@include set-border-radius(0.5rem);
 			transition: 250ms ease;
+			margin-left: 2rem;
 
 			&.active {
 				span {
@@ -90,7 +90,7 @@
 			span {
 				pointer-events: none;
 				@include set-size(15px, 15px);
-				background-color: lighten($primary-color, 20%);
+				background-color: $primary-color;
 				@include set-border-radius(0.1rem);
 				@include set-shadows(
 					set-transparency($dark-color, 0),
@@ -101,7 +101,7 @@
 				&:first-child {
 					background-image: linear-gradient(
 						120deg,
-						lighten($primary-color, 40%),
+						#67cffd,
 						lighten($primary-color, 20%)
 					);
 				}
@@ -118,8 +118,12 @@
 	.right-part {
 		padding: 0.8rem;
 		.statusIcons {
-			font-size: 1.3rem;
+			font-size: 1.4rem;
 			padding: 0.1rem;
+
+			&:first-child {
+				padding: unset;
+			}
 		}
 	}
 }
@@ -137,7 +141,7 @@
 	}
 
 	#taskbar {
-		@include set-background-color(set-transparency($dark-color, 0.8));
+		@include set-background-color(set-transparency($dark-color, 0.5));
 
 		.bottom-part {
 			background-color: set-transparency(lighten($dark-button-color, 10%), 0.4);

@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { openStartMenu } from '../actions/components';
 
 const Taskbar = ({
 	timeReducer,
 	appsReducer,
 	storageReducer,
-	commsReducer
+	commsReducer,
+	resourcesReducer,
+	componentsReducer,
+	openStartMenu
 }) => {
 	const [activeStart, setStartActiveToggle] = useState(false);
 
@@ -24,6 +29,24 @@ const Taskbar = ({
 		'icon-ic_fluent_cellular_data_1_24_regular'
 	];
 
+	const batteryCharging = 'icon-ic_fluent_battery_charge_24_regular';
+
+	const batteryBars = [
+		'icon-ic_fluent_battery_0_24_regular',
+		'icon-ic_fluent_battery_1_24_regular',
+		'icon-ic_fluent_battery_2_24_regular',
+		'icon-ic_fluent_battery_3_24_regular',
+		'icon-ic_fluent_battery_4_24_regular',
+		'icon-ic_fluent_battery_5_24_regular',
+		'icon-ic_fluent_battery_6_24_regular',
+		'icon-ic_fluent_battery_7_24_regular',
+		'icon-ic_fluent_battery_8_24_regular',
+		'icon-ic_fluent_battery_9_24_regular',
+		'icon-ic_fluent_battery_full_24_regular'
+	];
+
+	const fullyCharged = 'icon-ic_fluent_battery_full_24_regular';
+
 	const buttonAnimate = (e) => {
 		e.target.style.transform = 'scale(0.8)';
 		setTimeout(() => {
@@ -41,6 +64,20 @@ const Taskbar = ({
 				<i className={wifiBars[commsReducer.wifi.bars] + ' statusIcons'}></i>
 			</>
 		);
+	};
+
+	const renderBattery = () => {
+		let battLevel = Math.ceil(resourcesReducer.battery['percentage'] / 10);
+		switch (resourcesReducer.battery['state']) {
+			default:
+				return <i className={batteryBars[battLevel] + ' statusIcons'}></i>;
+
+			case 1:
+				return <i className={batteryCharging + ' statusIcons'}></i>;
+
+			case 2:
+				return <i className={fullyCharged + ' statusIcons'}></i>;
+		}
 	};
 
 	const renderApps = () => {
@@ -93,6 +130,7 @@ const Taskbar = ({
 						onClick={(e) => {
 							e.preventDefault();
 							buttonAnimate(e);
+							openStartMenu(!componentsReducer.startMenuOpen);
 							setStartActiveToggle(!activeStart);
 						}}>
 						<span></span>
@@ -101,15 +139,22 @@ const Taskbar = ({
 						<span></span>
 					</div>
 				</div>
-				<div className='right-part'>{renderComms()}</div>
+				<div className='right-part'>
+					{renderComms()}
+					{renderBattery()}
+				</div>
 			</div>
 			<div className='bottom-part'>{renderApps()}</div>
 		</div>
 	);
 };
 
+Taskbar.propTypes = {
+	openStartMenu: PropTypes.func.isRequired
+};
+
 const mapStateToProps = (state) => {
 	return state;
 };
 
-export default connect(mapStateToProps, null)(Taskbar);
+export default connect(mapStateToProps, { openStartMenu })(Taskbar);

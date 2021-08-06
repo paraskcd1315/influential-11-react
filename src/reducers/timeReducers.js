@@ -1,12 +1,20 @@
 import { UPDATE_TIME } from '../actions/types';
+import { Time } from '../libs/Time';
+
+let hours, minutes;
+
+Time({
+	twentyfour: false,
+	zeroPadding: true,
+	callback: (t) => {
+		hours = t.hour();
+		minutes = t.minute();
+	}
+});
 
 const initialState = {
-	hours: null,
-	minutes: null,
-	seconds: null,
-	date: null,
-	month: null,
-	year: null
+	hours: hours,
+	minutes: minutes
 };
 
 function timeReducer(state = initialState, action) {
@@ -17,11 +25,7 @@ function timeReducer(state = initialState, action) {
 			return {
 				...state,
 				hours: payload.hours,
-				minutes: payload.minutes,
-				seconds: payload.seconds,
-				date: payload.date,
-				month: payload.month,
-				year: payload.year
+				minutes: payload.minutes
 			};
 
 		default:

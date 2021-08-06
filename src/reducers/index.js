@@ -4,7 +4,9 @@ import weatherReducer from './weatherReducer';
 import mediaReducer from './mediaReducer';
 import appsReducer from './appsReducer';
 import commsReducer from './commsReducer';
+import resourcesReducer from './resourcesReducer';
 import storageReducer from './storageReducer';
+import componentsReducer from './componentsReducers';
 
 export default combineReducers({
 	timeReducer,
@@ -12,5 +14,7 @@ export default combineReducers({
 	mediaReducer,
 	appsReducer,
 	commsReducer,
-	storageReducer
+	resourcesReducer,
+	storageReducer,
+	componentsReducer
 });

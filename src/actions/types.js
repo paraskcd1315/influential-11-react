@@ -6,3 +6,5 @@ export const ADD_APPS = 'ADD_APPS';
 export const REPLACE_APPS = 'REPLACE_APPS';
 export const REMOVE_APPS = 'REMOVE_APPS';
 export const UPDATE_COMMS = 'UPDATE_COMMS';
+export const UPDATE_RESOURCES = 'UPDATE_RESOURCES';
+export const OPEN_START_MENU = 'OPEN_START_MENU';

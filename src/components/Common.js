@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { updateTime } from '../actions/time';
 import { updateApps } from '../actions/apps';
 import { updateMedia } from '../actions/media';
 import { updateWeather } from '../actions/weather';
 import { updateComms } from '../actions/comms';
+import { updateResources } from '../actions/resources';
 import { Time } from '../libs/Time';
 
 import Taskbar from './Taskbar';
@@ -14,7 +15,8 @@ const Common = ({
 	updateWeather,
 	updateApps,
 	updateMedia,
-	updateComms
+	updateComms,
+	updateResources
 }) => {
 	window.api.apps.observeData((newAppData) => {
 		updateApps(newAppData);
@@ -28,21 +30,27 @@ const Common = ({
 	window.api.comms.observeData((newCommData) => {
 		updateComms(newCommData);
 	});
-	setInterval(() => {
-		Time({
-			twentyfour: false,
-			zeroPadding: true,
-			callback: (t) => {
-				updateTime({
-					hours: t.hour(),
-					minutes: t.minute(),
-					date: t.dateNum(),
-					month: t.monthNum(),
-					year: t.year()
-				});
-			}
-		});
-	}, 1000);
+	window.api.resources.observeData((newResourcesData) => {
+		updateResources(newResourcesData);
+	});
+	useEffect(() => {
+		const newTime = setInterval(() => {
+			Time({
+				twentyfour: false,
+				zeroPadding: true,
+				callback: (t) => {
+					updateTime({
+						hours: t.hour(),
+						minutes: t.minute()
+					});
+				}
+			});
+		}, 1000);
+
+		return () => {
+			clearInterval(newTime);
+		};
+	}, [updateTime]);
 	return (
 		<>
 			<div
@@ -63,5 +71,6 @@ export default connect(null, {
 	updateWeather,
 	updateApps,
 	updateMedia,
-	updateComms
+	updateComms,
+	updateResources
 })(Common);
