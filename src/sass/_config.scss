@@ -5,6 +5,8 @@ $light-color: #f3f3f3;
 $dark-color: #202020;
 $light-button-color: #fdfdfd;
 $dark-button-color: #393939;
+$light-input-text: #ffffff;
+$dark-input-text: #1f1f1f;
 
 @function set-text-color($bg-color) {
 	@if (lightness($bg-color) > 60) {
@@ -46,7 +48,6 @@ $dark-button-color: #393939;
 @mixin set-background-color($bg-color) {
 	background-color: $bg-color;
 	color: set-text-color($bg-color);
-	border: solid 1px set-text-color-transparency($bg-color, 0.1) !important;
 }
 
 @mixin set-shadows($shadow-color1, $shadow-color2) {

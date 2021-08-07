@@ -9,6 +9,7 @@ import { updateResources } from '../actions/resources';
 import { Time } from '../libs/Time';
 
 import Taskbar from './Taskbar';
+import StartMenu from './StartMenu';
 
 const Common = ({
 	updateTime,
@@ -18,6 +19,12 @@ const Common = ({
 	updateComms,
 	updateResources
 }) => {
+	const buttonAnimate = (e) => {
+		e.target.style.transform = 'scale(0.8)';
+		setTimeout(() => {
+			e.target.style.transform = 'scale(1.0)';
+		}, 100);
+	};
 	window.api.apps.observeData((newAppData) => {
 		updateApps(newAppData);
 	});
@@ -41,7 +48,9 @@ const Common = ({
 				callback: (t) => {
 					updateTime({
 						hours: t.hour(),
-						minutes: t.minute()
+						minutes: t.minute(),
+						date: t.dateNum(),
+						month: t.sMonthText()
 					});
 				}
 			});
@@ -61,7 +70,8 @@ const Common = ({
 					height: '100vh',
 					backgroundSize: 'contain'
 				}}></div>
-			<Taskbar />
+			<Taskbar buttonAnimate={buttonAnimate} />
+			<StartMenu />
 		</>
 	);
 };

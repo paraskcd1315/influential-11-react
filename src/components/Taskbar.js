@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { openStartMenu } from '../actions/components';
 
+import App from './individualComponents/App';
+
 const Taskbar = ({
 	timeReducer,
 	appsReducer,
@@ -10,7 +12,8 @@ const Taskbar = ({
 	commsReducer,
 	resourcesReducer,
 	componentsReducer,
-	openStartMenu
+	openStartMenu,
+	buttonAnimate
 }) => {
 	const [activeStart, setStartActiveToggle] = useState(false);
 
@@ -46,13 +49,6 @@ const Taskbar = ({
 	];
 
 	const fullyCharged = 'icon-ic_fluent_battery_full_24_regular';
-
-	const buttonAnimate = (e) => {
-		e.target.style.transform = 'scale(0.8)';
-		setTimeout(() => {
-			e.target.style.transform = 'scale(1.0)';
-		}, 100);
-	};
 
 	const renderComms = () => {
 		return (
@@ -96,20 +92,16 @@ const Taskbar = ({
 
 		return apps.map((app) => {
 			return (
-				<div
-					id={app.identifier}
-					key={app.identifier}
-					className='favApp'
-					onClick={(e) => {
-						e.preventDefault();
-						buttonAnimate(e);
-						window.api.apps.launchApplication(app.identifier);
-					}}>
-					{app.badge !== '' ? <div className='badge'></div> : ''}
-					<div className='icon'>
-						<img src={app.icon} alt={app.identifier} />
-					</div>
-				</div>
+				<App
+					key={app.identifier + 'favApp'}
+					identifier={app.identifier}
+					badge={app.badge}
+					icon={app.icon}
+					name={app.name}
+					className={'favApp'}
+					hideName={true}
+					buttonAnimate={buttonAnimate}
+				/>
 			);
 		});
 	};

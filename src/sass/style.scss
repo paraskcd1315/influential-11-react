@@ -6,18 +6,24 @@
 	border-top: 1px solid set-text-color-transparency($light-color, 0.2) !important;
 }
 
-#taskbar {
+#taskbar,
+#startMenu {
 	position: absolute;
 	left: 50%;
-	bottom: 45px;
 	transform: translateX(-50%);
 	@include set-background-color(set-transparency($light-color, 0.6));
-	@include set-border-radius(1.2rem);
 	@include set-shadows(
 		set-transparency($dark-color, 0.3),
 		set-transparency($dark-color, 0.2)
 	);
 	@include set-size(90%, auto);
+	border: 1px solid set-text-color-transparency($light-color, 0.3) !important;
+	@include set-border-radius(1.2rem);
+}
+
+#taskbar {
+	bottom: 3rem;
+	z-index: 3;
 
 	.top-part,
 	.bottom-part {
@@ -78,11 +84,11 @@
 			border: solid 1px #0000;
 			@include set-border-radius(0.5rem);
 			transition: 250ms ease;
-			margin-left: 2rem;
+			margin-left: 2.13rem;
 
 			&.active {
 				span {
-					background-color: lighten($primary-color, 20%) !important;
+					background-color: darken($primary-color, 10%) !important;
 					background-image: unset !important;
 				}
 			}
@@ -99,11 +105,7 @@
 				transition: 250ms ease;
 
 				&:first-child {
-					background-image: linear-gradient(
-						120deg,
-						#67cffd,
-						lighten($primary-color, 20%)
-					);
+					background-image: linear-gradient(120deg, #67cffd, $primary-color);
 				}
 			}
 		}
@@ -117,6 +119,8 @@
 
 	.right-part {
 		padding: 0.8rem;
+		line-height: 12px;
+
 		.statusIcons {
 			font-size: 1.4rem;
 			padding: 0.1rem;
@@ -128,29 +132,282 @@
 	}
 }
 
-#taskbar:before {
+#startMenu {
+	bottom: 14rem;
+	transition: 150ms ease-in;
+
+	.startTabs {
+		background-color: set-transparency(lighten($light-button-color, 10%), 0.4);
+		border-bottom: 1px solid set-text-color-transparency($light-color, 0.2) !important;
+		padding: 0.5rem 0;
+		border-top-left-radius: 1.2rem;
+		border-top-right-radius: 1.2rem;
+		border-bottom-left-radius: 0.8rem;
+		border-bottom-right-radius: 0.8rem;
+		height: 450px;
+	}
+
+	.searchbar {
+		margin: 1rem;
+		@include set-background-color(set-transparency($light-input-text, 0.7));
+		border: 1px solid set-text-color-transparency($light-color, 0.2);
+		border-bottom: 3px solid $primary-color;
+		@include set-border-radius(0.4rem);
+		display: flex;
+		align-items: center;
+
+		.searchIcon {
+			padding: 0.5rem;
+			font-size: 1.2rem;
+			line-height: 12px;
+			transform: rotateZ(90deg);
+		}
+
+		input {
+			width: 100%;
+			padding: 0.7rem 0;
+			background-color: transparent;
+			border: none;
+		}
+
+		input:focus {
+			outline: none;
+		}
+	}
+
+	.content {
+		margin-top: -15px;
+		padding: 0.5rem 1rem;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		height: 310px;
+		overflow-y: scroll;
+		mask-image: linear-gradient(transparent, #000 15%, #000 85%, transparent);
+
+		.app {
+			@include set-size(50px, 50px);
+			margin: 1rem 0.5rem;
+			text-align: center;
+
+			.badge {
+				position: absolute;
+				@include set-size(10px, 10px);
+				@include set-border-radius(5rem);
+				background-color: set-transparency($dark-color, 0.4);
+				margin: -5px 0 0 50px;
+				@include set-shadows(
+					set-transparency($dark-color, 0.3),
+					set-transparency($dark-color, 0.2)
+				);
+				pointer-events: none;
+			}
+
+			.icon {
+				pointer-events: none;
+
+				img {
+					@include set-size(45px, 45px);
+				}
+			}
+
+			.title {
+				font-size: 0.7rem;
+				width: 50px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+		}
+	}
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 1rem 1.5rem;
+
+		.title {
+			font-size: 0.8rem;
+			font-weight: 700;
+		}
+
+		button {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			outline: none;
+			appearance: none;
+			@include set-background-color(set-transparency($light-input-text, 0.7));
+			border: 1px solid set-text-color-transparency($light-color, 0.2);
+			@include set-border-radius(0.4rem);
+			padding: 0.5rem;
+			font-size: 0.8rem;
+
+			.btn-chevron,
+			.btn-chevron-back {
+				line-height: 12px;
+				font-size: 1.2rem;
+				margin-left: 1rem;
+			}
+
+			.btn-chevron-back {
+				margin-left: unset;
+			}
+
+			.btn-title-back {
+				margin-left: 1rem;
+			}
+		}
+	}
+
+	.pages {
+		display: flex;
+
+		> div {
+			position: absolute;
+			flex-basis: 0;
+			flex-grow: 1;
+			width: 100%;
+			transition: 250ms ease-out;
+
+			&.disabled {
+				pointer-events: none;
+			}
+		}
+	}
+
+	.footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.6rem 1.5rem;
+
+		.user {
+			img {
+				margin-top: 0.45rem;
+				margin-right: 0.5rem;
+				@include set-border-radius(50rem);
+				@include set-size(35px, 35px);
+				@include set-shadows(
+					set-transparency($dark-color, 0),
+					set-transparency($dark-color, 0.3)
+				);
+			}
+		}
+
+		.start-tabs {
+			i {
+				padding: 0.75rem;
+				font-size: 1.1rem;
+				border: solid 1px #0000;
+				@include set-border-radius(0.5rem);
+				line-height: 12px;
+			}
+		}
+
+		.start-tabs,
+		.user {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 0.9rem;
+		}
+	}
+}
+
+#taskbar:before,
+#startMenu:before {
 	@include set-blur(20px);
 	@include set-border-radius(1.2rem);
 	border: 1px solid #0000;
 }
 
 @media (prefers-color-scheme: dark) {
+	$primary-color: #60cdff;
+
+	::placeholder {
+		color: $light-color;
+		opacity: 0.5;
+	}
+
 	.active {
-		background-color: set-transparency(lighten($dark-button-color, 10%), 0.4);
+		background-color: set-transparency(lighten($dark-button-color, 20%), 0.4);
 		border-top: 1px solid set-text-color-transparency($dark-color, 0.2) !important;
 	}
 
-	#taskbar {
+	#taskbar,
+	#startMenu {
 		@include set-background-color(set-transparency($dark-color, 0.5));
+		border: 1px solid set-text-color-transparency($dark-color, 0.3) !important;
+	}
 
+	#taskbar {
 		.bottom-part {
 			background-color: set-transparency(lighten($dark-button-color, 10%), 0.4);
 			border-top: 1px solid set-text-color-transparency($dark-color, 0.2) !important;
+		}
+		.center-part {
+			.start-button {
+				&.active {
+					span {
+						background-color: darken($primary-color, 10%) !important;
+					}
+				}
+
+				span {
+					background-color: darken($primary-color, 20%) !important;
+
+					&:first-child {
+						background-image: linear-gradient(
+							120deg,
+							#67cffd,
+							darken($primary-color, 20%)
+						);
+					}
+				}
+			}
 		}
 
 		.favApp {
 			.badge {
 				background-color: set-transparency($light-color, 0.4);
+			}
+		}
+
+		.app {
+			.badge {
+				background-color: set-transparency($light-color, 0.4);
+			}
+		}
+	}
+
+	#startMenu {
+		.startTabs {
+			background-color: set-transparency(lighten($dark-button-color, 10%), 0.4);
+			border-bottom: 1px solid set-text-color-transparency($dark-color, 0.2) !important;
+		}
+
+		.searchbar {
+			@include set-background-color(
+				set-transparency(lighten($dark-button-color, 5%), 0.4)
+			);
+			border: 1px solid set-text-color-transparency($dark-color, 0.2);
+			border-bottom: 3px solid $primary-color;
+
+			input {
+				color: $light-color;
+			}
+		}
+
+		.header {
+			button {
+				@include set-background-color(
+					set-transparency(lighten($dark-button-color, 5%), 0.4)
+				);
+				border: 1px solid set-text-color-transparency($dark-color, 0.2);
 			}
 		}
 	}
