@@ -61,7 +61,13 @@ const StartMenu = ({ componentsReducer, timeReducer }) => {
 	return (
 		<div id='startMenu' style={showStartMenu()}>
 			<div id='home' className='startTabs'>
-				<Searchbar />
+				<Searchbar
+					allAppsOpen={allAppsOpen}
+					openAllApps={openAllApps}
+					moreWidgetsOpen={moreWidgetsOpen}
+					openMoreWidgets={openMoreWidgets}
+					hideMainScreen={hideMainScreen}
+				/>
 				<div className='pages'>
 					<MainScreen
 						allAppsOpen={allAppsOpen}

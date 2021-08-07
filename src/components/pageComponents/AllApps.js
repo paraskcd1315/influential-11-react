@@ -8,11 +8,30 @@ const AllApps = ({
 	allAppsOpen,
 	showAllApps,
 	openAllApps,
-	hideMainScreen
+	hideMainScreen,
+	componentsReducer
 }) => {
 	const allApps = appsReducer.allApplications;
 
 	const renderAllApps = () => {
+		if (componentsReducer.searchQuery !== '') {
+			let filteredApps = allApps.filter((app) => {
+				return app.name.toLowerCase().includes(componentsReducer.searchQuery);
+			});
+
+			return filteredApps.map((app) => {
+				return (
+					<App
+						key={app.identifier + 'filteredApp'}
+						identifier={app.identifier}
+						badge={app.badge}
+						icon={app.icon}
+						name={app.name}
+						className={'app'}
+					/>
+				);
+			});
+		}
 		return allApps.map((app) => {
 			return (
 				<App

@@ -62,14 +62,14 @@ const Common = ({
 	}, [updateTime]);
 	return (
 		<>
-			<div
+			{/* <div
 				className='wallpaper'
 				style={{
 					backgroundImage: 'url(https://wallpapercave.com/wp/wp8791332.jpg)',
 					width: '100vw',
 					height: '100vh',
 					backgroundSize: 'contain'
-				}}></div>
+				}}></div> */}
 			<Taskbar buttonAnimate={buttonAnimate} />
 			<StartMenu />
 		</>

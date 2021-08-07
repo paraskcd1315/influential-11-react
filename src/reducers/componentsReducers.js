@@ -1,7 +1,13 @@
-import { OPEN_START_MENU } from '../actions/types';
+import {
+	OPEN_START_MENU,
+	SEARCHBAR_ACTIVE,
+	SEARCHQUERY
+} from '../actions/types';
 
 const initialState = {
-	startMenuOpen: false
+	startMenuOpen: false,
+	searchbarActive: false,
+	searchQuery: ''
 };
 
 function componentsReducer(state = initialState, action) {
@@ -12,6 +18,18 @@ function componentsReducer(state = initialState, action) {
 			return {
 				...state,
 				startMenuOpen: payload
+			};
+
+		case SEARCHBAR_ACTIVE:
+			return {
+				...state,
+				searchbarActive: payload
+			};
+
+		case SEARCHQUERY:
+			return {
+				...state,
+				searchQuery: payload
 			};
 
 		default:
