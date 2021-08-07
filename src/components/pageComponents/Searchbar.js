@@ -8,6 +8,7 @@ const Searchbar = ({
 	openAllApps,
 	openMoreWidgets,
 	hideMainScreen,
+	componentsReducer,
 	searchQuery,
 	activateSearchbar
 }) => {
@@ -25,9 +26,11 @@ const Searchbar = ({
 					hideMainScreen();
 				}}
 				onBlur={() => {
-					activateSearchbar(false);
-					openAllApps(false);
-					hideMainScreen();
+					if (componentsReducer.searchQuery === '') {
+						activateSearchbar(false);
+						openAllApps(false);
+						hideMainScreen();
+					}
 				}}
 				onKeyUp={(e) => {
 					e.preventDefault();
