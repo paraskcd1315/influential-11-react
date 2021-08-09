@@ -10,7 +10,7 @@ export const addApp = (app) => (dispatch) => {
 
 	dockIcons.push(app);
 
-	localstore['dockicons'] = dockIcons;
+	localstore['dockIcons'] = dockIcons;
 
 	localStorage.setItem('FluentUI', JSON.stringify(localstore));
 
@@ -38,7 +38,7 @@ export const replaceApp =
 			}
 		}
 
-		localstore['dockicons'] = dockIcons;
+		localstore['dockIcons'] = dockIcons;
 
 		localStorage.setItem('FluentUI', JSON.stringify(localstore));
 
@@ -55,7 +55,7 @@ export const removeApp = (app) => (dispatch) => {
 	let index = dockIcons.indexOf(app);
 	dockIcons.splice(index, 1);
 
-	localstore['dockicons'] = dockIcons;
+	localstore['dockIcons'] = dockIcons;
 
 	localStorage.setItem('FluentUI', JSON.stringify(localstore));
 

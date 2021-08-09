@@ -1,4 +1,9 @@
-import { OPEN_START_MENU, SEARCHBAR_ACTIVE, SEARCHQUERY } from './types';
+import {
+	OPEN_START_MENU,
+	SEARCHBAR_ACTIVE,
+	SEARCHQUERY,
+	SHOWMENU
+} from './types';
 
 export const openStartMenu = (startMenuOpen) => (dispatch) => {
 	dispatch({
@@ -18,5 +23,12 @@ export const activateSearchbar = (searchbarActive) => (dispatch) => {
 	dispatch({
 		type: SEARCHBAR_ACTIVE,
 		payload: searchbarActive
+	});
+};
+
+export const showMenu = (showMenu) => (dispatch) => {
+	dispatch({
+		type: SHOWMENU,
+		payload: showMenu
 	});
 };

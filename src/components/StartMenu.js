@@ -20,7 +20,8 @@ const StartMenu = ({ componentsReducer, timeReducer }) => {
 			: {
 					opacity: 0,
 					transform: 'translate(-50%, 50px)',
-					transition: '150ms ease-out'
+					transition: '150ms ease-out',
+					pointerEvents: 'none'
 			  };
 	};
 

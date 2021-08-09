@@ -7,6 +7,7 @@ import commsReducer from './commsReducer';
 import resourcesReducer from './resourcesReducer';
 import storageReducer from './storageReducer';
 import componentsReducer from './componentsReducers';
+import menuReducer from './menuReducer';
 
 export default combineReducers({
 	timeReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
 	commsReducer,
 	resourcesReducer,
 	storageReducer,
-	componentsReducer
+	componentsReducer,
+	menuReducer
 });

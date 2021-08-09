@@ -25,7 +25,7 @@ function storageReducer(state = initialState, action) {
 		case REMOVE_APPS:
 			return {
 				...state,
-				dockIcons: payload.dockIcons
+				dockIcons: payload
 			};
 
 		default:

@@ -10,6 +10,7 @@ import { Time } from '../libs/Time';
 
 import Taskbar from './Taskbar';
 import StartMenu from './StartMenu';
+import Menu from './individualComponents/Menu';
 
 const Common = ({
 	updateTime,
@@ -72,6 +73,7 @@ const Common = ({
 				}}></div> */}
 			<Taskbar buttonAnimate={buttonAnimate} />
 			<StartMenu />
+			<Menu />
 		</>
 	);
 };
