@@ -1,0 +1,111 @@
+#taskbar {
+	bottom: 2.3rem;
+	z-index: 3;
+
+	.top-part,
+	.bottom-part {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.5rem;
+	}
+
+	.bottom-part {
+		background-color: set-transparency(lighten($light-button-color, 10%), 0.4);
+		border-top: 1px solid set-text-color-transparency($light-color, 0.2) !important;
+		border-top-left-radius: 0.8rem;
+		border-top-right-radius: 0.8rem;
+		border-bottom-left-radius: 1.2rem;
+		border-bottom-right-radius: 1.2rem;
+	}
+
+	.center-part {
+		.start-button {
+			display: grid;
+			grid-template-columns: 2fr 2fr;
+			row-gap: 0.06rem;
+			column-gap: 0.05rem;
+			padding: 0.8rem;
+			border: solid 1px #0000;
+			@include set-border-radius(0.5rem);
+			transition: 250ms ease;
+			margin-left: 2.13rem;
+
+			&.active {
+				span {
+					background-color: darken($primary-color, 10%) !important;
+					background-image: unset !important;
+				}
+			}
+
+			span {
+				pointer-events: none;
+				@include set-size(15px, 15px);
+				background-color: $primary-color;
+				@include set-border-radius(0.1rem);
+				@include set-shadows(
+					set-transparency($dark-color, 0),
+					set-transparency($dark-color, 0.3)
+				);
+				transition: 250ms ease;
+
+				&:first-child {
+					background-image: linear-gradient(120deg, #67cffd, $primary-color);
+				}
+			}
+		}
+	}
+
+	.left-part {
+		.timeDate {
+			padding: 0.8rem;
+		}
+	}
+
+	.right-part {
+		padding: 0.8rem;
+		line-height: 12px;
+
+		.statusIcons {
+			font-size: 1.4rem;
+			padding: 0.1rem;
+
+			&:first-child {
+				padding: unset;
+			}
+		}
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	$primary-color: #60cdff;
+
+	#taskbar {
+		.bottom-part {
+			background-color: set-transparency(lighten($dark-button-color, 10%), 0.4);
+			border-top: 1px solid set-text-color-transparency($dark-color, 0.2) !important;
+		}
+		.center-part {
+			.start-button {
+				&.active {
+					span {
+						background-color: darken($primary-color, 10%) !important;
+					}
+				}
+
+				span {
+					background-color: darken($primary-color, 20%) !important;
+
+					&:first-child {
+						background-image: linear-gradient(
+							120deg,
+							#67cffd,
+							darken($primary-color, 20%)
+						);
+					}
+				}
+			}
+		}
+	}
+}

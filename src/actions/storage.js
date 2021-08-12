@@ -6,6 +6,7 @@ export const addApp = (app) => (dispatch) => {
 
 	if (localstore['dockIcons'].indexOf(app) > -1) {
 		alert('App already placed');
+		return;
 	}
 
 	dockIcons.push(app);

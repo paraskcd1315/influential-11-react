@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { showMenu } from '../../actions/components';
 import { showAddAppsMenu, showReplaceAppsMenu } from '../../actions/menu';
+import { searchQuery } from '../../actions/components';
 import { useState } from 'react';
 
 const App = ({
@@ -16,7 +17,9 @@ const App = ({
 	showMenu,
 	showAddAppsMenu,
 	showReplaceAppsMenu,
-	buttonAnimate
+	buttonAnimate,
+	searchQuery,
+	hideBadge
 }) => {
 	const [moved, setPointerMove] = useState(false);
 
@@ -46,6 +49,12 @@ const App = ({
 				if (buttonAnimate) {
 					buttonAnimate(e);
 				}
+				if (
+					document.getElementsByClassName('searchInput')[0].value.length > 0
+				) {
+					searchQuery('');
+					document.getElementsByClassName('searchInput')[0].value = '';
+				}
 				if (!moved) {
 					window.api.apps.launchApplication(identifier);
 				}
@@ -63,7 +72,7 @@ const App = ({
 
 	return (
 		<div id={identifier} className={className} {...longPress}>
-			{badge !== '' ? <div className='badge'></div> : ''}
+			{hideBadge ? '' : badge !== '' ? <div className='badge'></div> : ''}
 			<div className='icon'>
 				<img src={icon} alt={name} />
 			</div>
@@ -79,5 +88,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
 	showMenu,
 	showAddAppsMenu,
-	showReplaceAppsMenu
+	showReplaceAppsMenu,
+	searchQuery
 })(App);
