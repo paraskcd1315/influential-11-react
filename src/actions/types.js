@@ -13,3 +13,5 @@ export const SEARCHQUERY = 'SEARCHQUERY';
 export const SHOWMENU = 'SHOWMENU';
 export const ADD_APPS_MENU = 'ADD_APPS_MENU';
 export const REPLACE_APPS_MENU = 'REPLACE_APPS_MENU';
+export const OPEN_CC = 'OPEN_CC';
+export const UPDATE_SYSTEM = 'UPDATE_SYSTEM';

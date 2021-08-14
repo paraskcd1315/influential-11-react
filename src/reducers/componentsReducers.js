@@ -1,4 +1,5 @@
 import {
+	OPEN_CC,
 	OPEN_START_MENU,
 	SEARCHBAR_ACTIVE,
 	SEARCHQUERY,
@@ -7,6 +8,7 @@ import {
 
 const initialState = {
 	startMenuOpen: false,
+	ccOpen: false,
 	searchbarActive: false,
 	searchQuery: '',
 	showMenu: false
@@ -20,6 +22,12 @@ function componentsReducer(state = initialState, action) {
 			return {
 				...state,
 				startMenuOpen: payload
+			};
+
+		case OPEN_CC:
+			return {
+				...state,
+				ccOpen: payload
 			};
 
 		case SEARCHBAR_ACTIVE:

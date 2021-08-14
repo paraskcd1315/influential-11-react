@@ -48,7 +48,6 @@ $noise: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51A
 }
 
 @mixin set-background-color($bg-color) {
-	background-image: $noise;
 	background-color: $bg-color;
 	color: set-text-color($bg-color);
 }

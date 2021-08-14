@@ -64,10 +64,17 @@
 	}
 
 	.right-part {
-		padding: 0.8rem;
 		line-height: 12px;
 
+		.status-bar {
+			transition: 250ms ease;
+			padding: 0.8rem;
+			border: solid 1px #0000;
+			@include set-border-radius(0.5rem);
+		}
+
 		.statusIcons {
+			pointer-events: none;
 			font-size: 1.4rem;
 			padding: 0.1rem;
 

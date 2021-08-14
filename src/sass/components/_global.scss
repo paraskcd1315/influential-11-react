@@ -6,7 +6,8 @@
 #taskbar:before,
 #startMenu:before,
 .appMenu:before,
-.scrollHelper:before {
+.scrollHelper:before,
+#controlCenter:before {
 	@include set-blur(20px);
 	@include set-border-radius(1.2rem);
 	border: 1px solid #0000;
@@ -20,8 +21,8 @@
 	left: 50%;
 	display: flex;
 	flex-direction: column;
-	@include set-background-color(set-transparency($light-button-color, 0.6));
-	border: 1px solid set-text-color-transparency($light-color, 0.3) !important;
+	@include set-background-color(set-transparency($light-button-color, 0.4));
+	border: 1px solid set-text-color-transparency($light-color, 0.2) !important;
 	@include set-border-radius(1.2rem);
 	@include set-shadows(
 		set-transparency($dark-color, 0.3),
@@ -31,17 +32,18 @@
 }
 
 #taskbar,
-#startMenu {
+#startMenu,
+#controlCenter {
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-	@include set-background-color(set-transparency($light-color, 0.6));
+	@include set-background-color(set-transparency($light-color, 0.4));
 	@include set-shadows(
 		set-transparency($dark-color, 0.3),
 		set-transparency($dark-color, 0.2)
 	);
 	@include set-size(90%, auto);
-	border: 1px solid set-text-color-transparency($light-color, 0.3) !important;
+	border: 1px solid set-text-color-transparency($light-color, 0.2) !important;
 	@include set-border-radius(1.2rem);
 }
 
@@ -96,9 +98,10 @@
 	}
 
 	#taskbar,
-	#startMenu {
-		@include set-background-color(set-transparency($dark-color, 0.5));
-		border: 1px solid set-text-color-transparency($dark-color, 0.3) !important;
+	#startMenu,
+	#controlCenter {
+		@include set-background-color(set-transparency($dark-color, 0.4));
+		border: 1px solid set-text-color-transparency($dark-color, 0.2) !important;
 	}
 
 	.appMenu,

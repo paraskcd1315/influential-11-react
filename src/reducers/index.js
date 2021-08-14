@@ -8,6 +8,7 @@ import resourcesReducer from './resourcesReducer';
 import storageReducer from './storageReducer';
 import componentsReducer from './componentsReducers';
 import menuReducer from './menuReducer';
+import systemReducer from './systemReducer';
 
 export default combineReducers({
 	timeReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
 	resourcesReducer,
 	storageReducer,
 	componentsReducer,
-	menuReducer
+	menuReducer,
+	systemReducer
 });

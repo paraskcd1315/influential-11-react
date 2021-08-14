@@ -1,5 +1,6 @@
 import {
 	OPEN_START_MENU,
+	OPEN_CC,
 	SEARCHBAR_ACTIVE,
 	SEARCHQUERY,
 	SHOWMENU
@@ -9,6 +10,13 @@ export const openStartMenu = (startMenuOpen) => (dispatch) => {
 	dispatch({
 		type: OPEN_START_MENU,
 		payload: startMenuOpen
+	});
+};
+
+export const openCC = (ccOpen) => (dispatch) => {
+	dispatch({
+		type: OPEN_CC,
+		payload: ccOpen
 	});
 };
 

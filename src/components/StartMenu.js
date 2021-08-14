@@ -99,7 +99,7 @@ const StartMenu = ({ componentsReducer, timeReducer }) => {
 					<div className='user-name'>Paras KCD</div>
 				</div>
 				<div className='start-tabs'>
-					<i className='apps icon-ic_fluent_launcher_settings_24_regular'></i>
+					<i className='apps icon-ic_fluent_settings_24_regular'></i>
 					<i className='explorer icon-ic_fluent_apps_list_24_regular'></i>
 					<div className='date'>
 						{timeReducer.month + ' ' + timeReducer.date}

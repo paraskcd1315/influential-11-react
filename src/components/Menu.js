@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import MenuButton from './MenuButton';
-import { addApp, removeApp } from '../../actions/storage';
-import { showMenu } from '../../actions/components';
-import { showAddAppsMenu, showReplaceAppsMenu } from '../../actions/menu';
+import MenuButton from './individualComponents/MenuButton';
+import { addApp, removeApp } from '../actions/storage';
+import { showMenu, openStartMenu } from '../actions/components';
+import { showAddAppsMenu, showReplaceAppsMenu } from '../actions/menu';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
@@ -14,7 +14,8 @@ const Menu = ({
 	addApp,
 	removeApp,
 	showMenu,
-	showAddAppsMenu
+	showAddAppsMenu,
+	openStartMenu
 }) => {
 	const { identifier, icon, name } = menuReducer;
 	const [style, setStyle] = useState({ pointerEvents: 'none' });
@@ -77,22 +78,40 @@ const Menu = ({
 			);
 		} else {
 			return (
-				<MenuButton
-					icon={'icon-ic_fluent_pin_off_24_regular'}
-					title={'Unpin App'}
-					callback={() => {
-						removeApp(identifier);
-						showReplaceAppsMenu({
-							identifier: '',
-							icon: '',
-							name: '',
-							replaceApp: false,
-							removeApp: false
-						});
-						showMenu(false);
-						setStyle({ pointerEvents: 'none' });
-					}}
-				/>
+				<>
+					<MenuButton
+						icon={'icon-ic_fluent_apps_24_regular'}
+						title={'Replace App'}
+						callback={() => {
+							removeApp(identifier);
+							showReplaceAppsMenu({
+								identifier: '',
+								icon: '',
+								name: '',
+								replaceApp: false,
+								removeApp: false
+							});
+							showMenu(false);
+							setStyle({ pointerEvents: 'none' });
+						}}
+					/>
+					<MenuButton
+						icon={'icon-ic_fluent_pin_off_24_regular'}
+						title={'Unpin App'}
+						callback={() => {
+							removeApp(identifier);
+							showReplaceAppsMenu({
+								identifier: '',
+								icon: '',
+								name: '',
+								replaceApp: false,
+								removeApp: false
+							});
+							showMenu(false);
+							setStyle({ pointerEvents: 'none' });
+						}}
+					/>
+				</>
 			);
 		}
 	};
@@ -166,5 +185,6 @@ export default connect(mapStateToProps, {
 	showMenu,
 	showAddAppsMenu,
 	addApp,
-	removeApp
+	removeApp,
+	openStartMenu
 })(Menu);

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import { openStartMenu } from '../actions/components';
+import { openCC } from '../actions/components';
 
 import App from './individualComponents/App';
 
@@ -13,9 +15,11 @@ const Taskbar = ({
 	resourcesReducer,
 	componentsReducer,
 	openStartMenu,
-	buttonAnimate
+	buttonAnimate,
+	openCC
 }) => {
 	const [activeStart, setStartActiveToggle] = useState(false);
+	const [activeCC, setCCActiveToggle] = useState(false);
 
 	const wifiBars = [
 		'icon-ic_fluent_wifi_4_24_regular',
@@ -52,13 +56,31 @@ const Taskbar = ({
 
 	const renderComms = () => {
 		return (
-			<>
-				<i
-					className={
-						telephonyBars[commsReducer.telephony.bars - 1] + ' statusIcons'
-					}></i>
-				<i className={wifiBars[commsReducer.wifi.bars] + ' statusIcons'}></i>
-			</>
+			<div
+				className={activeCC ? 'status-bar active' : 'status-bar'}
+				onClick={(e) => {
+					e.preventDefault();
+					buttonAnimate(e);
+					openCC(!componentsReducer.ccOpen);
+					setCCActiveToggle(!activeCC);
+				}}>
+				{commsReducer.telephony.airplaneMode ? (
+					<i className={'icon-ic_fluent_airplane_24_regular statusIcons'}></i>
+				) : commsReducer.telephony.type === '' ? (
+					''
+				) : (
+					<i
+						className={
+							telephonyBars[commsReducer.telephony.bars - 1] + ' statusIcons'
+						}></i>
+				)}
+				{commsReducer.wifi.enabled ? (
+					<i className={wifiBars[commsReducer.wifi.bars] + ' statusIcons'}></i>
+				) : (
+					''
+				)}
+				{renderBattery()}
+			</div>
 		);
 	};
 
@@ -131,10 +153,7 @@ const Taskbar = ({
 						<span></span>
 					</div>
 				</div>
-				<div className='right-part'>
-					{renderComms()}
-					{renderBattery()}
-				</div>
+				<div className='right-part'>{renderComms()}</div>
 			</div>
 			<div className='bottom-part'>{renderApps()}</div>
 		</div>
@@ -149,4 +168,4 @@ const mapStateToProps = (state) => {
 	return state;
 };
 
-export default connect(mapStateToProps, { openStartMenu })(Taskbar);
+export default connect(mapStateToProps, { openStartMenu, openCC })(Taskbar);
