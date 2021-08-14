@@ -21,6 +21,9 @@
 	}
 
 	.center-part {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-68%);
 		.start-button {
 			display: grid;
 			grid-template-columns: 2fr 2fr;

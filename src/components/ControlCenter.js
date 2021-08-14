@@ -85,7 +85,7 @@ const ControlCenter = ({
 					}
 				/>
 				<CCButton
-					isEnabled={commsReducer.telephony.type === '' ? false : true}
+					isEnabled={false}
 					toggleName='Cellular Data'
 					toggleIcon={'icon-ic_fluent_cellular_data_1_24_regular'}
 					toggleCallback={() =>
@@ -94,8 +94,8 @@ const ControlCenter = ({
 					}
 				/>
 				<CCButton
-					isEnabled={window.matchMedia('(prefers-color-scheme: dark').matches}
-					toggleName='Dark Mode'
+					isEnabled={false}
+					toggleName='DarkMode'
 					toggleIcon={'icon-ic_fluent_dark_theme_24_regular'}
 					toggleCallback={() =>
 						(window.location.href =

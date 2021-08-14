@@ -15,6 +15,7 @@ const Menu = ({
 	removeApp,
 	showMenu,
 	showAddAppsMenu,
+	showReplaceAppsMenu,
 	openStartMenu
 }) => {
 	const { identifier, icon, name } = menuReducer;
@@ -83,12 +84,14 @@ const Menu = ({
 						icon={'icon-ic_fluent_apps_24_regular'}
 						title={'Replace App'}
 						callback={() => {
-							removeApp(identifier);
+							if (!componentsReducer.startMenuOpen) {
+								openStartMenu(true);
+							}
 							showReplaceAppsMenu({
-								identifier: '',
+								identifier: identifier,
 								icon: '',
 								name: '',
-								replaceApp: false,
+								replaceApp: true,
 								removeApp: false
 							});
 							showMenu(false);
@@ -184,6 +187,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
 	showMenu,
 	showAddAppsMenu,
+	showReplaceAppsMenu,
 	addApp,
 	removeApp,
 	openStartMenu

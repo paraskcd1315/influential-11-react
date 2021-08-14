@@ -3,6 +3,7 @@ import { useLongPress } from 'use-long-press';
 import { connect } from 'react-redux';
 
 import { showMenu } from '../../actions/components';
+import { replaceApp } from '../../actions/storage';
 import { showAddAppsMenu, showReplaceAppsMenu } from '../../actions/menu';
 import { searchQuery } from '../../actions/components';
 import { useState } from 'react';
@@ -18,6 +19,8 @@ const App = ({
 	showAddAppsMenu,
 	showReplaceAppsMenu,
 	buttonAnimate,
+	menuReducer,
+	replaceApp,
 	searchQuery,
 	hideBadge
 }) => {
@@ -25,23 +28,25 @@ const App = ({
 
 	const longPress = useLongPress(
 		() => {
-			if (className === 'app') {
-				showAddAppsMenu({
-					identifier: identifier,
-					name: name,
-					icon: icon,
-					addApp: true
-				});
-				showMenu(true);
-			} else {
-				showReplaceAppsMenu({
-					identifier: identifier,
-					name: name,
-					icon: icon,
-					replaceApp: true,
-					removeApp: true
-				});
-				showMenu(true);
+			if (!menuReducer.replaceApp) {
+				if (className === 'app') {
+					showAddAppsMenu({
+						identifier: identifier,
+						name: name,
+						icon: icon,
+						addApp: true
+					});
+					showMenu(true);
+				} else {
+					showReplaceAppsMenu({
+						identifier: identifier,
+						name: name,
+						icon: icon,
+						replaceApp: true,
+						removeApp: true
+					});
+					showMenu(true);
+				}
 			}
 		},
 		{
@@ -56,7 +61,21 @@ const App = ({
 					document.getElementsByClassName('searchInput')[0].value = '';
 				}
 				if (!moved) {
-					window.api.apps.launchApplication(identifier);
+					if (menuReducer.replaceApp) {
+						replaceApp({
+							older: menuReducer.identifier,
+							newer: identifier
+						});
+						showReplaceAppsMenu({
+							identifier: '',
+							name: '',
+							icon: '',
+							replaceApp: false,
+							removeApp: false
+						});
+					} else {
+						window.api.apps.launchApplication(identifier);
+					}
 				}
 				setPointerMove(false);
 			},
@@ -89,5 +108,6 @@ export default connect(mapStateToProps, {
 	showMenu,
 	showAddAppsMenu,
 	showReplaceAppsMenu,
-	searchQuery
+	searchQuery,
+	replaceApp
 })(App);

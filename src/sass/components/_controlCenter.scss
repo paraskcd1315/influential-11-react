@@ -87,6 +87,14 @@
 					set-transparency(lighten($dark-button-color, 20%), 0.4)
 				);
 				border: 1px solid set-text-color-transparency($dark-color, 0.2);
+
+				&.enabled {
+					@include set-background-color(set-transparency($primary-color, 1));
+				}
+			}
+
+			#DarkMode {
+				@include set-background-color(set-transparency($primary-color, 1));
 			}
 		}
 	}
