@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 Paras Khanchandani
+ * All rights reserved.
+ */
+
 import {
 	OPEN_START_MENU,
 	OPEN_CC,

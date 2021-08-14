@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 Paras Khanchandani
+ * All rights reserved.
+ */
+
 import { UPDATE_TIME } from '../actions/types';
 import { Time } from '../libs/Time';
 

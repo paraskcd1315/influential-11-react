@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 Paras Khanchandani
+ * All rights reserved.
+ */
+
 import { ADD_APPS_MENU, REPLACE_APPS_MENU } from '../actions/types';
 
 const initialState = {

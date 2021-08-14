@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 Paras Khanchandani
+ * All rights reserved.
+ */
+
 import { combineReducers } from 'redux';
 import timeReducer from './timeReducers';
 import weatherReducer from './weatherReducer';

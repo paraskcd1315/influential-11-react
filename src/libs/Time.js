@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 Paras Khanchandani
+ * All rights reserved.
+ */
+
 const translate = {
 	en: {
 		greets: ['Good Morning', 'Good Afternoon', 'Good Evening'],

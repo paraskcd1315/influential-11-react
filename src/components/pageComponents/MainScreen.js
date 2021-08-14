@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 Paras Khanchandani
+ * All rights reserved.
+ */
+
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';

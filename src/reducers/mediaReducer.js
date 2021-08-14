@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 Paras Khanchandani
+ * All rights reserved.
+ */
+
 import { UPDATE_MEDIA } from '../actions/types';
 
 const initialState = window.api.media;

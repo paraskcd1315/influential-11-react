@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 Paras Khanchandani
+ * All rights reserved.
+ */
+
 import { ADD_APPS, REPLACE_APPS, REMOVE_APPS } from '../actions/types';
 
 const initialState = localStorage.getItem('FluentUI')

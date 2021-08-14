@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 Paras Khanchandani
+ * All rights reserved.
+ */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import CCButton from './individualComponents/CCButton';
