@@ -20,6 +20,7 @@ import Taskbar from './Taskbar';
 import StartMenu from './StartMenu';
 import Menu from './Menu';
 import ControlCenter from './ControlCenter';
+import Desktop from './Desktop';
 
 const Common = ({
 	updateTime,
@@ -84,6 +85,7 @@ const Common = ({
 					height: '100vh',
 					backgroundSize: 'contain'
 				}}></div> */}
+			<Desktop />
 			<Taskbar buttonAnimate={buttonAnimate} />
 			<StartMenu />
 			<Menu />

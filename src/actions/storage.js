@@ -3,7 +3,43 @@
  * All rights reserved.
  */
 
-import { ADD_APPS, REPLACE_APPS, REMOVE_APPS } from './types';
+import {
+	ADD_APPS,
+	REPLACE_APPS,
+	REMOVE_APPS,
+	ADD_VALUE,
+	REMOVE_VALUE
+} from './types';
+
+export const addValue = (value) => (dispatch) => {
+	const localstore = JSON.parse(localStorage.getItem('FluentUI'));
+
+	localstore.extraValues[value.key] = value.value;
+
+	localStorage.setItem('FluentUI', JSON.stringify(localstore));
+
+	dispatch({
+		type: ADD_VALUE,
+		payload: localstore.extraValues
+	});
+};
+
+export const removeValue = (value) => (dispatch) => {
+	const localstore = JSON.parse(localStorage.getItem('FluentUI'));
+
+	localstore.extraValues[value] = null;
+
+	let index = localstore.extraValues.indexOf(value);
+
+	localstore.extraValues.splice(index, 1);
+
+	localStorage.setItem('FluentUI', JSON.stringify(localstore));
+
+	dispatch({
+		type: REMOVE_VALUE,
+		payload: localstore.extraValues
+	});
+};
 
 export const addApp = (app) => (dispatch) => {
 	const localstore = JSON.parse(localStorage.getItem('FluentUI'));

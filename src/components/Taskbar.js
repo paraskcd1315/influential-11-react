@@ -23,7 +23,6 @@ const Taskbar = ({
 	buttonAnimate,
 	openCC
 }) => {
-	const [activeStart, setStartActiveToggle] = useState(false);
 	const [activeCC, setCCActiveToggle] = useState(false);
 
 	const wifiBars = [
@@ -145,12 +144,15 @@ const Taskbar = ({
 				</div>
 				<div className='center-part'>
 					<div
-						className={activeStart ? 'start-button active' : 'start-button'}
+						className={
+							componentsReducer.startMenuOpen
+								? 'start-button active'
+								: 'start-button'
+						}
 						onClick={(e) => {
 							e.preventDefault();
 							buttonAnimate(e);
 							openStartMenu(!componentsReducer.startMenuOpen);
-							setStartActiveToggle(!activeStart);
 						}}>
 						<span></span>
 						<span></span>

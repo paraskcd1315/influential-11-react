@@ -3,7 +3,13 @@
  * All rights reserved.
  */
 
-import { ADD_APPS, REPLACE_APPS, REMOVE_APPS } from '../actions/types';
+import {
+	ADD_APPS,
+	REPLACE_APPS,
+	REMOVE_APPS,
+	ADD_VALUE,
+	REMOVE_VALUE
+} from '../actions/types';
 
 const initialState = localStorage.getItem('FluentUI')
 	? JSON.parse(localStorage.getItem('FluentUI'))
@@ -31,6 +37,13 @@ function storageReducer(state = initialState, action) {
 			return {
 				...state,
 				dockIcons: payload
+			};
+
+		case ADD_VALUE:
+		case REMOVE_VALUE:
+			return {
+				...state,
+				extraValues: payload
 			};
 
 		default:

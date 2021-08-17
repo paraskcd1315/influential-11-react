@@ -10,8 +10,15 @@ import Searchbar from './pageComponents/Searchbar';
 import MainScreen from './pageComponents/MainScreen';
 import AllApps from './pageComponents/AllApps';
 import MoreWidgets from './pageComponents/MoreWidgets';
+import { openSettings } from '../actions/widget';
+import { openStartMenu } from '../actions/components';
 
-const StartMenu = ({ componentsReducer, timeReducer }) => {
+const StartMenu = ({
+	componentsReducer,
+	timeReducer,
+	openSettings,
+	openStartMenu
+}) => {
 	const { startMenuOpen } = componentsReducer;
 	const [allAppsOpen, openAllApps] = useState(false);
 	const [moreWidgetsOpen, openMoreWidgets] = useState(false);
@@ -104,7 +111,12 @@ const StartMenu = ({ componentsReducer, timeReducer }) => {
 					<div className='user-name'>Paras KCD</div>
 				</div>
 				<div className='start-tabs'>
-					<i className='apps icon-ic_fluent_settings_24_regular'></i>
+					<i
+						className='apps icon-ic_fluent_settings_24_regular'
+						onClick={() => {
+							openSettings(true);
+							openStartMenu(false);
+						}}></i>
 					<i className='explorer icon-ic_fluent_apps_list_24_regular'></i>
 					<div className='date'>
 						{timeReducer.month + ' ' + timeReducer.date}
@@ -119,4 +131,6 @@ const mapStateToProps = (state) => {
 	return state;
 };
 
-export default connect(mapStateToProps, null)(StartMenu);
+export default connect(mapStateToProps, { openSettings, openStartMenu })(
+	StartMenu
+);
