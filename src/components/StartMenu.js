@@ -14,28 +14,14 @@ import { openSettings } from '../actions/widget';
 import { openStartMenu } from '../actions/components';
 
 const StartMenu = ({
-	componentsReducer,
 	timeReducer,
 	openSettings,
-	openStartMenu
+	openStartMenu,
+	startMenuStyle,
+	hideStartMenu
 }) => {
-	const { startMenuOpen } = componentsReducer;
 	const [allAppsOpen, openAllApps] = useState(false);
 	const [moreWidgetsOpen, openMoreWidgets] = useState(false);
-
-	const showStartMenu = () => {
-		return startMenuOpen
-			? {
-					opacity: 1,
-					transform: 'translate(-50%, 0)'
-			  }
-			: {
-					opacity: 0,
-					transform: 'translate(-50%, 50px)',
-					transition: '150ms ease-out',
-					pointerEvents: 'none'
-			  };
-	};
 
 	const hideMainScreen = () => {
 		return allAppsOpen || moreWidgetsOpen
@@ -72,7 +58,7 @@ const StartMenu = ({
 	};
 
 	return (
-		<div id='startMenu' style={showStartMenu()}>
+		<div id='startMenu' style={startMenuStyle}>
 			<div id='home' className='startTabs'>
 				<Searchbar
 					allAppsOpen={allAppsOpen}
@@ -115,7 +101,10 @@ const StartMenu = ({
 						className='apps icon-ic_fluent_settings_24_regular'
 						onClick={() => {
 							openSettings(true);
-							openStartMenu(false);
+							hideStartMenu();
+							setTimeout(() => {
+								openStartMenu(false);
+							}, 250);
 						}}></i>
 					<i className='explorer icon-ic_fluent_apps_list_24_regular'></i>
 					<div className='date'>

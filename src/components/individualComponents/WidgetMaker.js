@@ -14,7 +14,8 @@ const WidgetMaker = ({
 	showPinButton,
 	showMaximiseButton,
 	showMenu,
-	showBackButton
+	showBackButton,
+	closeCallback
 }) => {
 	return (
 		<div style={style} id={id} className={className + ' widget'}>
@@ -46,13 +47,15 @@ const WidgetMaker = ({
 							''
 						)}
 						{showMaximiseButton ? (
-							<button className='pinButton widget-btn'>
+							<button className='maximizeButton widget-btn'>
 								<i className='icon-ic_fluent_maximize_24_regular'></i>
 							</button>
 						) : (
 							''
 						)}
-						<button className='pinButton widget-btn'>
+						<button
+							className='dismissButton widget-btn'
+							onClick={() => closeCallback()}>
 							<i className='icon-ic_fluent_dismiss_24_regular'></i>
 						</button>
 					</div>

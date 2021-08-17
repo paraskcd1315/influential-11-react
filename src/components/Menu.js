@@ -21,7 +21,9 @@ const Menu = ({
 	showMenu,
 	showAddAppsMenu,
 	showReplaceAppsMenu,
-	openStartMenu
+	openStartMenu,
+	menuStyle,
+	hideMenu
 }) => {
 	const { identifier, icon, name } = menuReducer;
 	const [style, setStyle] = useState({ pointerEvents: 'none' });
@@ -33,21 +35,6 @@ const Menu = ({
 			}, 250);
 		}
 	}, [componentsReducer]);
-
-	const showTheMenu = () => {
-		if (componentsReducer.showMenu) {
-			return {
-				opacity: 1,
-				transform: 'translate(-50%, -50%)'
-			};
-		} else {
-			return {
-				opacity: 0,
-				transform: 'translate(-50%, -40%)',
-				pointerEvents: 'none'
-			};
-		}
-	};
 
 	const showFooter = () => {
 		if (identifier) {
@@ -77,8 +64,11 @@ const Menu = ({
 							name: '',
 							addApp: false
 						});
-						showMenu(false);
+						hideMenu();
 						setStyle({ pointerEvents: 'none' });
+						setTimeout(() => {
+							showMenu(false);
+						}, 250);
 					}}
 				/>
 			);
@@ -99,8 +89,11 @@ const Menu = ({
 								replaceApp: true,
 								removeApp: false
 							});
-							showMenu(false);
+							hideMenu();
 							setStyle({ pointerEvents: 'none' });
+							setTimeout(() => {
+								showMenu(false);
+							}, 250);
 						}}
 					/>
 					<MenuButton
@@ -115,8 +108,11 @@ const Menu = ({
 								replaceApp: false,
 								removeApp: false
 							});
-							showMenu(false);
+							hideMenu();
 							setStyle({ pointerEvents: 'none' });
+							setTimeout(() => {
+								showMenu(false);
+							}, 250);
 						}}
 					/>
 				</>
@@ -125,15 +121,18 @@ const Menu = ({
 	};
 
 	return (
-		<div className={'appMenu'} style={showTheMenu()}>
+		<div className={'appMenu'} style={menuStyle}>
 			<div className='settings' style={style}>
 				{showMenuButtons()}
 				<MenuButton
 					icon={'icon-ic_fluent_prohibited_24_regular'}
 					title={'Cancel'}
 					callback={() => {
-						showMenu(false);
+						hideMenu();
 						setStyle({ pointerEvents: 'none' });
+						setTimeout(() => {
+							showMenu(false);
+						}, 250);
 						setTimeout(() => {
 							if (menuReducer.addApp) {
 								showAddAppsMenu({
@@ -176,8 +175,11 @@ const Menu = ({
 							removeApp: false
 						});
 					}
-					showMenu(false);
+					hideMenu();
 					setStyle({ pointerEvents: 'none' });
+					setTimeout(() => {
+						showMenu(false);
+					}, 250);
 				}}>
 				{identifier ? showFooter() : ''}
 			</div>

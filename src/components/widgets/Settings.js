@@ -7,8 +7,9 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import WidgetMaker from '../individualComponents/WidgetMaker';
+import { openSettings } from '../../actions/widget';
 
-const Settings = ({ widgetReducer }) => {
+const Settings = ({ widgetReducer, openSettings }) => {
 	const [style, setStyle] = useState({
 		opacity: 0,
 		transform: 'translate(-50%, -40%)'
@@ -35,6 +36,12 @@ const Settings = ({ widgetReducer }) => {
 			title={'Settings'}
 			style={style}
 			content={settingsContent()}
+			closeCallback={() => {
+				setStyle((state) => {
+					return { ...state, opacity: 0, transform: 'translate(-50%, -40%)' };
+				});
+				setTimeout(() => openSettings(false), 250);
+			}}
 		/>
 	);
 };
@@ -43,4 +50,4 @@ const mapStateToProps = (state) => {
 	return state;
 };
 
-export default connect(mapStateToProps, null)(Settings);
+export default connect(mapStateToProps, { openSettings })(Settings);

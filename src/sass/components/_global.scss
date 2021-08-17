@@ -7,14 +7,23 @@
 #startMenu:before,
 .appMenu:before,
 .scrollHelper:before,
-#controlCenter:before {
+#controlCenter:before,
+.widget:before {
 	@include set-blur(20px);
 	@include set-border-radius(1.2rem);
 	border: 1px solid #0000;
 }
 
+#desktop {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	z-index: 0;
+}
+
 .appMenu,
-.scrollHelper {
+.scrollHelper,
+.widget {
 	transition: 250ms ease-out;
 	position: absolute;
 	top: 50%;
@@ -105,7 +114,8 @@
 	}
 
 	.appMenu,
-	.scrollHelper {
+	.scrollHelper,
+	.widget {
 		@include set-background-color(set-transparency($dark-color, 0.8));
 		border: 1px solid set-text-color-transparency($dark-color, 0.3) !important;
 	}

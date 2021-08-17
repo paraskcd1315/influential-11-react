@@ -10,11 +10,9 @@ import CCButton from './individualComponents/CCButton';
 const ControlCenter = ({
 	commsReducer,
 	systemReducer,
-	componentsReducer,
-	resourcesReducer
+	resourcesReducer,
+	ccStyle
 }) => {
-	const { ccOpen } = componentsReducer;
-
 	const batteryCharging = 'icon-ic_fluent_battery_charge_24_regular';
 
 	const batteryBars = [
@@ -47,21 +45,8 @@ const ControlCenter = ({
 		}
 	};
 
-	const showControlCenter = () => {
-		return ccOpen
-			? {
-					opacity: 1,
-					transform: 'translateX(-50%)'
-			  }
-			: {
-					opacity: 0,
-					transform: 'translateX(-47%)',
-					transition: '150ms ease-out',
-					pointerEvents: 'none'
-			  };
-	};
 	return (
-		<div id='controlCenter' style={showControlCenter()}>
+		<div id='controlCenter' style={ccStyle}>
 			<div className='header'>
 				<CCButton
 					isEnabled={commsReducer.telephony.airplaneMode}

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { updateTime } from '../actions/time';
@@ -29,7 +29,8 @@ const Common = ({
 	updateMedia,
 	updateComms,
 	updateResources,
-	updateSystem
+	updateSystem,
+	components: { startMenuOpen, ccOpen, showMenu }
 }) => {
 	const buttonAnimate = (e) => {
 		e.target.style.transform = 'scale(0.8)';
@@ -75,26 +76,132 @@ const Common = ({
 			clearInterval(newTime);
 		};
 	}, [updateTime]);
+
+	const [startMenuStyle, setStyle] = useState({
+		opacity: 0,
+		transform: 'translate(-50%, 50px)',
+		transition: '150ms ease-out',
+		pointerEvents: 'none'
+	});
+
+	useEffect(() => {
+		if (startMenuOpen) {
+			setTimeout(() => {
+				setStyle((state) => {
+					return {
+						...state,
+						opacity: 1,
+						transform: 'translate(-50%, 0)',
+						pointerEvents: null
+					};
+				});
+			}, 250);
+		}
+	}, [startMenuOpen]);
+
+	const hideStartMenu = () => {
+		setStyle((state) => {
+			return {
+				...state,
+				opacity: 0,
+				transform: 'translate(-50%, 50px)',
+				pointerEvents: 'none'
+			};
+		});
+	};
+
+	const [ccStyle, setCCStyle] = useState({
+		opacity: 0,
+		transform: 'translateX(-45%)',
+		transition: '150ms ease-out',
+		pointerEvents: 'none'
+	});
+
+	useEffect(() => {
+		if (ccOpen) {
+			setTimeout(() => {
+				setCCStyle((state) => {
+					return {
+						...state,
+						opacity: 1,
+						transform: 'translateX(-50%)',
+						pointerEvents: null
+					};
+				});
+			}, 250);
+		}
+	}, [ccOpen]);
+
+	const hideCC = () => {
+		setCCStyle((state) => {
+			return {
+				...state,
+				opacity: 0,
+				transform: 'translateX(-45%)',
+				pointerEvents: 'none'
+			};
+		});
+	};
+
+	const [menuStyle, setMenuStyle] = useState({
+		opacity: 0,
+		transform: 'translate(-50%, -40%)',
+		pointerEvents: 'none'
+	});
+
+	useEffect(() => {
+		if (showMenu) {
+			setTimeout(() => {
+				setMenuStyle((state) => {
+					return {
+						...state,
+						opacity: 1,
+						transform: 'translate(-50%, -50%)',
+						pointerEvents: null
+					};
+				});
+			});
+		}
+	}, [showMenu]);
+
+	const hideMenu = () => {
+		setMenuStyle((state) => {
+			return {
+				...state,
+				opacity: 0,
+				transform: 'translate(-50%, -40%)',
+				pointerEvents: 'none'
+			};
+		});
+	};
+
 	return (
 		<>
-			{/* <div
-				className='wallpaper'
-				style={{
-					backgroundImage: 'url(https://wallpapercave.com/wp/wp8791332.jpg)',
-					width: '100vw',
-					height: '100vh',
-					backgroundSize: 'contain'
-				}}></div> */}
 			<Desktop />
-			<Taskbar buttonAnimate={buttonAnimate} />
-			<StartMenu />
-			<Menu />
-			<ControlCenter />
+			<Taskbar
+				buttonAnimate={buttonAnimate}
+				hideStartMenu={hideStartMenu}
+				hideCC={hideCC}
+			/>
+			{startMenuOpen ? (
+				<StartMenu
+					startMenuStyle={startMenuStyle}
+					hideStartMenu={hideStartMenu}
+				/>
+			) : (
+				''
+			)}
+			{showMenu ? <Menu menuStyle={menuStyle} hideMenu={hideMenu} /> : ''}
+			{ccOpen ? <ControlCenter ccStyle={ccStyle} /> : ''}
 		</>
 	);
 };
 
-export default connect(null, {
+const mapStateToProps = (state) => ({
+	components: state.componentsReducer
+});
+
+export default connect(mapStateToProps, {
 	updateTime,
 	updateWeather,
 	updateApps,

@@ -25,6 +25,8 @@ const AllApps = ({
 		let regExp = /\d+/;
 		if (e.name[0] === '\u200e') {
 			alphabet = e.name[1];
+		} else if (/[a-z]/.test(e.name[0])) {
+			alphabet = e.name[0].toUpperCase();
 		} else if (e.name[0] === '\u2800' || regExp.test(e.name[0])) {
 			alphabet = '#';
 		} else {

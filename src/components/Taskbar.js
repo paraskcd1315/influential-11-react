@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -21,10 +21,10 @@ const Taskbar = ({
 	componentsReducer,
 	openStartMenu,
 	buttonAnimate,
-	openCC
+	openCC,
+	hideStartMenu,
+	hideCC
 }) => {
-	const [activeCC, setCCActiveToggle] = useState(false);
-
 	const wifiBars = [
 		'icon-ic_fluent_wifi_4_24_regular',
 		'icon-ic_fluent_wifi_3_24_regular',
@@ -61,12 +61,20 @@ const Taskbar = ({
 	const renderComms = () => {
 		return (
 			<div
-				className={activeCC ? 'status-bar active' : 'status-bar'}
+				className={
+					componentsReducer.ccOpen ? 'status-bar active' : 'status-bar'
+				}
 				onClick={(e) => {
 					e.preventDefault();
 					buttonAnimate(e);
-					openCC(!componentsReducer.ccOpen);
-					setCCActiveToggle(!activeCC);
+					if (componentsReducer.ccOpen) {
+						hideCC();
+						setTimeout(() => {
+							openCC(false);
+						}, 250);
+					} else {
+						openCC(true);
+					}
 				}}>
 				{commsReducer.telephony.airplaneMode ? (
 					<i className={'icon-ic_fluent_airplane_24_regular statusIcons'}></i>
@@ -152,7 +160,14 @@ const Taskbar = ({
 						onClick={(e) => {
 							e.preventDefault();
 							buttonAnimate(e);
-							openStartMenu(!componentsReducer.startMenuOpen);
+							if (componentsReducer.startMenuOpen) {
+								hideStartMenu();
+								setTimeout(() => {
+									openStartMenu(false);
+								}, 250);
+							} else {
+								openStartMenu(true);
+							}
 						}}>
 						<span></span>
 						<span></span>
