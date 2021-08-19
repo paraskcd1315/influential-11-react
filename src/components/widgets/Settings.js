@@ -17,7 +17,8 @@ import ColorSettings from '../settingsWidget/pages/ColorSettings';
 const Settings = ({
 	widgetReducer: { settingsOpen },
 	openSettings,
-	systemReducer: { deviceModel, deviceModelPromotional, deviceName }
+	systemReducer: { deviceModel, deviceModelPromotional, deviceName },
+	storageReducer
 }) => {
 	const [style, setStyle] = useState({
 		opacity: 0,
@@ -141,7 +142,13 @@ const Settings = ({
 						<div className='userPic'>
 							<img src='images/account.png' alt='userPic' />
 						</div>
-						<div className='userName'>ParasKCD</div>
+						<div className='userName'>
+							{!storageReducer.extraValues
+								? 'Username'
+								: !storageReducer.extraValues.username
+								? 'Username'
+								: storageReducer.extraValues.username}
+						</div>
 					</div>
 				</div>
 				<div className='settings-content'>
@@ -229,8 +236,10 @@ const Settings = ({
 	);
 };
 
-const mapStateToProps = (state) => {
-	return state;
-};
+const mapStateToProps = (state) => ({
+	widgetReducer: state.widgetReducer,
+	systemReducer: state.systemReducer,
+	storageReducer: state.storageReducer
+});
 
 export default connect(mapStateToProps, { openSettings })(Settings);

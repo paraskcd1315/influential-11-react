@@ -126,6 +126,13 @@ const ControlCenter = ({
 							'mk1://runscript/InfluentialScript/safemode')
 					}
 				/>
+				<CCButton
+					isEnabled={false}
+					toggleName='Refresh Widget'
+					toggleIcon={'icon-ic_fluent_arrow_reset_24_regular'}
+					// eslint-disable-next-line
+					toggleCallback={() => (window.location.href = window.location.href)}
+				/>
 			</div>
 			<div className='footer'>
 				<div className='batteryInfo'>
@@ -146,8 +153,10 @@ const ControlCenter = ({
 	);
 };
 
-const mapStateToProps = (state) => {
-	return state;
-};
+const mapStateToProps = (state) => ({
+	commsReducer: state.commsReducer,
+	systemReducer: state.systemReducer,
+	resourcesReducer: state.resourcesReducer
+});
 
 export default connect(mapStateToProps, null)(ControlCenter);

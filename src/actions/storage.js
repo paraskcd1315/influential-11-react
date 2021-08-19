@@ -11,18 +11,33 @@ import {
 	REMOVE_VALUE
 } from './types';
 
-export const addValue = (value) => (dispatch) => {
-	const localstore = JSON.parse(localStorage.getItem('FluentUI'));
+export const addValue =
+	({ key, value }) =>
+	(dispatch) => {
+		const localstore = JSON.parse(localStorage.getItem('FluentUI'));
 
-	localstore.extraValues[value.key] = value.value;
+		if (!localstore.extraValues) {
+			let extraValues = {
+				[key]: value
+			};
 
-	localStorage.setItem('FluentUI', JSON.stringify(localstore));
+			localstore.extraValues = extraValues;
+		} else {
+			let extraValues = {
+				...localstore.extraValues,
+				[key]: value
+			};
 
-	dispatch({
-		type: ADD_VALUE,
-		payload: localstore.extraValues
-	});
-};
+			localstore.extraValues = extraValues;
+		}
+
+		localStorage.setItem('FluentUI', JSON.stringify(localstore));
+
+		dispatch({
+			type: ADD_VALUE,
+			payload: localstore.extraValues
+		});
+	};
 
 export const removeValue = (value) => (dispatch) => {
 	const localstore = JSON.parse(localStorage.getItem('FluentUI'));

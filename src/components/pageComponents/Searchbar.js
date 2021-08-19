@@ -73,9 +73,9 @@ const Searchbar = ({
 	);
 };
 
-const mapStateToProps = (state) => {
-	return state;
-};
+const mapStateToProps = (state) => ({
+	componentsReducer: state.componentsReducer
+});
 
 export default connect(mapStateToProps, { activateSearchbar, searchQuery })(
 	Searchbar

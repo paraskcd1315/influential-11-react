@@ -13,12 +13,12 @@ import { openCC } from '../actions/components';
 import App from './individualComponents/App';
 
 const Taskbar = ({
-	timeReducer,
-	appsReducer,
-	storageReducer,
+	timeReducer: { hours, minutes },
+	appsReducer: { allApplications },
+	storageReducer: { dockIcons },
 	commsReducer,
-	resourcesReducer,
-	componentsReducer,
+	resourcesReducer: { battery },
+	componentsReducer: { ccOpen, startMenuOpen },
 	openStartMenu,
 	buttonAnimate,
 	openCC,
@@ -61,13 +61,11 @@ const Taskbar = ({
 	const renderComms = () => {
 		return (
 			<div
-				className={
-					componentsReducer.ccOpen ? 'status-bar active' : 'status-bar'
-				}
+				className={ccOpen ? 'status-bar active' : 'status-bar'}
 				onClick={(e) => {
 					e.preventDefault();
 					buttonAnimate(e);
-					if (componentsReducer.ccOpen) {
+					if (ccOpen) {
 						hideCC();
 						setTimeout(() => {
 							openCC(false);
@@ -97,8 +95,8 @@ const Taskbar = ({
 	};
 
 	const renderBattery = () => {
-		let battLevel = Math.ceil(resourcesReducer.battery['percentage'] / 10);
-		switch (resourcesReducer.battery['state']) {
+		let battLevel = Math.ceil(battery['percentage'] / 10);
+		switch (battery['state']) {
 			default:
 				return <i className={batteryBars[battLevel] + ' statusIcons'}></i>;
 
@@ -114,12 +112,9 @@ const Taskbar = ({
 		let apps = [];
 
 		for (let i = 0; i < 5; i++) {
-			for (let j = 0; j < appsReducer['allApplications'].length; j++) {
-				if (
-					appsReducer['allApplications'][j].identifier ===
-					storageReducer['dockIcons'][i]
-				) {
-					apps.push(appsReducer['allApplications'][j]);
+			for (let j = 0; j < allApplications.length; j++) {
+				if (allApplications[j].identifier === dockIcons[i]) {
+					apps.push(allApplications[j]);
 				}
 			}
 		}
@@ -147,21 +142,17 @@ const Taskbar = ({
 				<div className='left-part'>
 					<div className='timeDate'>
 						<div className='time'>
-							{timeReducer.hours}:{timeReducer.minutes}
+							{hours}:{minutes}
 						</div>
 					</div>
 				</div>
 				<div className='center-part'>
 					<div
-						className={
-							componentsReducer.startMenuOpen
-								? 'start-button active'
-								: 'start-button'
-						}
+						className={startMenuOpen ? 'start-button active' : 'start-button'}
 						onClick={(e) => {
 							e.preventDefault();
 							buttonAnimate(e);
-							if (componentsReducer.startMenuOpen) {
+							if (startMenuOpen) {
 								hideStartMenu();
 								setTimeout(() => {
 									openStartMenu(false);
@@ -187,8 +178,13 @@ Taskbar.propTypes = {
 	openStartMenu: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
-	return state;
-};
+const mapStateToProps = (state) => ({
+	timeReducer: state.timeReducer,
+	appsReducer: state.appsReducer,
+	storageReducer: state.storageReducer,
+	commsReducer: state.commsReducer,
+	resourcesReducer: state.resourcesReducer,
+	componentsReducer: state.componentsReducer
+});
 
 export default connect(mapStateToProps, { openStartMenu, openCC })(Taskbar);

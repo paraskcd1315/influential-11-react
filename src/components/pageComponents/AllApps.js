@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import App from '../individualComponents/App';
 
 const AllApps = ({
-	appsReducer,
+	appsReducer: { allApplications },
 	allAppsOpen,
 	showAllApps,
 	openAllApps,
@@ -17,7 +17,7 @@ const AllApps = ({
 	componentsReducer,
 	hideStartMenu
 }) => {
-	const allApps = appsReducer.allApplications;
+	const allApps = allApplications;
 
 	const [scrollHelper, setScrollHelper] = useState(false);
 
@@ -169,8 +169,9 @@ const AllApps = ({
 	);
 };
 
-const mapStateToProps = (state) => {
-	return state;
-};
+const mapStateToProps = (state) => ({
+	appsReducer: state.appsReducer,
+	componentsReducer: state.componentsReducer
+});
 
 export default connect(mapStateToProps, null)(AllApps);

@@ -60,8 +60,8 @@ const MainScreen = ({
 	);
 };
 
-const mapStateToProps = (state) => {
-	return state;
-};
+const mapStateToProps = (state) => ({
+	storageReducer: state.storageReducer
+});
 
 export default connect(mapStateToProps, null)(MainScreen);

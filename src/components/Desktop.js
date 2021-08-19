@@ -9,8 +9,8 @@ const Desktop = ({ widgetReducer }) => {
 	);
 };
 
-const mapStateToProps = (state) => {
-	return state;
-};
+const mapStateToProps = (state) => ({
+	widgetReducer: state.widgetReducer
+});
 
 export default connect(mapStateToProps, null)(Desktop);

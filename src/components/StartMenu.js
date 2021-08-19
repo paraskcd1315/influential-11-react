@@ -14,11 +14,12 @@ import { openSettings } from '../actions/widget';
 import { openStartMenu } from '../actions/components';
 
 const StartMenu = ({
-	timeReducer,
+	timeReducer: { month, date },
 	openSettings,
 	openStartMenu,
 	startMenuStyle,
-	hideStartMenu
+	hideStartMenu,
+	storageReducer
 }) => {
 	const [allAppsOpen, openAllApps] = useState(false);
 	const [moreWidgetsOpen, openMoreWidgets] = useState(false);
@@ -96,7 +97,13 @@ const StartMenu = ({
 					<div className='user-profile'>
 						<img src='images/account.png' alt='userAccount' />
 					</div>
-					<div className='user-name'>Paras KCD</div>
+					<div className='user-name'>
+						{!storageReducer.extraValues
+							? 'Username'
+							: !storageReducer.extraValues.username
+							? 'Username'
+							: storageReducer.extraValues.username}
+					</div>
 				</div>
 				<div className='start-tabs'>
 					<i
@@ -109,18 +116,17 @@ const StartMenu = ({
 							}, 250);
 						}}></i>
 					<i className='explorer icon-ic_fluent_apps_list_24_regular'></i>
-					<div className='date'>
-						{timeReducer.month + ' ' + timeReducer.date}
-					</div>
+					<div className='date'>{month + ' ' + date}</div>
 				</div>
 			</div>
 		</div>
 	);
 };
 
-const mapStateToProps = (state) => {
-	return state;
-};
+const mapStateToProps = (state) => ({
+	timeReducer: state.timeReducer,
+	storageReducer: state.storageReducer
+});
 
 export default connect(mapStateToProps, { openSettings, openStartMenu })(
 	StartMenu

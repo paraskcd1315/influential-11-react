@@ -30,7 +30,8 @@ const Common = ({
 	updateComms,
 	updateResources,
 	updateSystem,
-	components: { startMenuOpen, ccOpen, showMenu }
+	components: { startMenuOpen, ccOpen, showMenu },
+	storage
 }) => {
 	const buttonAnimate = (e) => {
 		e.target.style.transform = 'scale(0.8)';
@@ -56,10 +57,15 @@ const Common = ({
 	window.api.system.observeData((newSystemData) => {
 		updateSystem(newSystemData);
 	});
+
 	useEffect(() => {
 		const newTime = setInterval(() => {
 			Time({
-				twentyfour: false,
+				twentyfour: !storage.extraValues
+					? false
+					: !storage.extraValues.twentyFourHourTime
+					? false
+					: true,
 				zeroPadding: true,
 				callback: (t) => {
 					updateTime({
@@ -75,7 +81,7 @@ const Common = ({
 		return () => {
 			clearInterval(newTime);
 		};
-	}, [updateTime]);
+	}, [updateTime, storage]);
 
 	const [startMenuStyle, setStyle] = useState({
 		opacity: 0,
@@ -198,7 +204,8 @@ const Common = ({
 };
 
 const mapStateToProps = (state) => ({
-	components: state.componentsReducer
+	components: state.componentsReducer,
+	storage: state.storageReducer
 });
 
 export default connect(mapStateToProps, {

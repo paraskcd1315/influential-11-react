@@ -22,11 +22,19 @@
 		}
 
 		.userStuff {
+			display: flex;
+			flex-direction: column;
 			text-align: center;
+			justify-content: center;
+			align-items: center;
+			width: 100px;
+			height: 100px;
+			text-overflow: ellipsis;
 
 			.userPic {
 				img {
 					@include set-size(50px, 50px);
+					@include set-border-radius(99px);
 				}
 			}
 		}
@@ -37,8 +45,9 @@
 
 		.settings-pages .page {
 			overflow-y: scroll;
+			overflow-x: hidden;
 			position: absolute;
-			width: 90%;
+			width: 92%;
 			height: 350px;
 			transition: 250ms ease;
 		}
@@ -78,11 +87,114 @@
 			}
 		}
 	}
+
+	&-label {
+		padding: 0.2rem 1rem;
+		opacity: 0.6;
+	}
+
+	&-text {
+		width: 100%;
+		margin-bottom: 1rem;
+		border-top: 1px solid set-text-color-transparency($light-color, 0.1) !important;
+		@include set-border-radius(0.5rem);
+		@include set-background-color(set-transparency($light-button-color, 0.4));
+
+		input {
+			outline: none;
+			width: 100%;
+			padding: 1.3rem;
+			background-color: transparent;
+			border: none;
+			color: set-text-color($light-color);
+		}
+	}
+
+	&-inputSwitch {
+		display: flex;
+		justify-content: space-between;
+		width: 93%;
+		align-items: center;
+		margin-bottom: 1rem;
+		padding: 0.8rem;
+		border-top: 1px solid set-text-color-transparency($light-color, 0.1) !important;
+		@include set-border-radius(0.5rem);
+		@include set-background-color(set-transparency($light-button-color, 0.4));
+
+		.toggle {
+			position: relative;
+			display: inline-block;
+			width: 60px;
+			height: 30px;
+			@include set-background-color(set-transparency($light-button-color, 0.4));
+			@include set-border-radius(30px);
+			border: 2px solid set-text-color-transparency($light-color, 0.1) !important;
+
+			&::after {
+				content: '';
+				position: absolute;
+				width: 29px;
+				height: 29px;
+				@include set-border-radius(50%);
+				@include set-background-color(
+					set-transparency($light-button-color, 0.7)
+				);
+				@include set-shadows(
+					set-transparency($dark-color, 0.3),
+					set-transparency($dark-color, 0.2)
+				);
+				top: 1px;
+				left: 1px;
+				transition: all 0.5s;
+			}
+		}
+
+		input[type='checkbox']:checked + .toggle {
+			background-color: $primary-color;
+		}
+
+		input[type='checkbox']:checked + .toggle::after {
+			transform: translateX(29px);
+		}
+
+		input[type='checkbox'] {
+			display: none;
+		}
+	}
 }
 
 @media (prefers-color-scheme: dark) {
+	$primary-color: #60cdff;
+
 	.settings-menu {
 		border-top: 1px solid set-text-color-transparency($dark-color, 0.1) !important;
 		@include set-background-color(set-transparency($dark-button-color, 0.4));
+	}
+
+	.settings-text {
+		border-top: 1px solid set-text-color-transparency($dark-color, 0.1) !important;
+		@include set-background-color(set-transparency($dark-button-color, 0.4));
+
+		input {
+			color: set-text-color($dark-color);
+		}
+	}
+
+	.settings-inputSwitch {
+		border-top: 1px solid set-text-color-transparency($dark-color, 0.1) !important;
+		@include set-background-color(set-transparency($dark-button-color, 0.4));
+
+		.toggle {
+			@include set-background-color(set-transparency($dark-button-color, 1));
+			border: 2px solid set-text-color-transparency($dark-color, 0.1) !important;
+
+			&::after {
+				@include set-background-color(set-transparency($dark-color, 0.7));
+			}
+		}
+
+		input[type='checkbox']:checked + .toggle {
+			background-color: $primary-color;
+		}
 	}
 }

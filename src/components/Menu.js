@@ -187,9 +187,10 @@ const Menu = ({
 	);
 };
 
-const mapStateToProps = (state) => {
-	return state;
-};
+const mapStateToProps = (state) => ({
+	componentsReducer: state.componentsReducer,
+	menuReducer: state.menuReducer
+});
 
 export default connect(mapStateToProps, {
 	showMenu,
