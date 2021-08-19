@@ -15,7 +15,8 @@ const MainScreen = ({
 	hideMainScreen,
 	openAllApps,
 	openMoreWidgets,
-	storageReducer
+	storageReducer,
+	hideStartMenu
 }) => {
 	const [style, setStyle] = useState({ display: 'block' });
 
@@ -43,7 +44,7 @@ const MainScreen = ({
 				</button>
 			</div>
 			<div style={style} id='pinnedApps' className='content'>
-				<PinnedApps />
+				<PinnedApps hideStartMenu={hideStartMenu} />
 			</div>
 			<div className='header'>
 				<div className='title'>Widgets</div>

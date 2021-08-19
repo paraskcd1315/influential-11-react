@@ -1,0 +1,88 @@
+.settings {
+	&-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		.deviceStuff {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.devicePic {
+				margin-right: 1rem;
+				img {
+					@include set-size(auto, 95px);
+				}
+			}
+
+			.deviceModelPromotional {
+				font-weight: 800;
+			}
+		}
+
+		.userStuff {
+			text-align: center;
+
+			.userPic {
+				img {
+					@include set-size(50px, 50px);
+				}
+			}
+		}
+	}
+
+	&-content {
+		margin-top: 1rem;
+
+		.settings-pages .page {
+			overflow-y: scroll;
+			position: absolute;
+			width: 90%;
+			height: 350px;
+			transition: 250ms ease;
+		}
+	}
+
+	&-menu {
+		border: none;
+		outline: none;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		border-top: 1px solid set-text-color-transparency($light-color, 0.1) !important;
+		@include set-border-radius(0.5rem);
+		@include set-background-color(set-transparency($light-button-color, 0.4));
+		padding: 1rem;
+		margin-bottom: 1rem;
+
+		.settings-menu-stuff {
+			display: flex;
+			align-items: center;
+			text-align: left;
+
+			.settings-menu-icon {
+				font-size: 1.7rem;
+				line-height: 1.5rem;
+				margin-right: 1rem;
+			}
+
+			.settings-menu-title {
+				font-weight: 800;
+			}
+
+			.settings-menu-description {
+				font-size: 0.7rem;
+				opacity: 0.5;
+			}
+		}
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.settings-menu {
+		border-top: 1px solid set-text-color-transparency($dark-color, 0.1) !important;
+		@include set-background-color(set-transparency($dark-button-color, 0.4));
+	}
+}

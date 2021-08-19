@@ -17,6 +17,7 @@ function systemReducer(state = initialState, action) {
 				deviceName: payload.deviceName,
 				deviceType: payload.deviceType,
 				deviceModel: payload.deviceModel,
+				deviceModelPromotional: payload.deviceModelPromotional,
 				deviceDisplayBrightness: payload.deviceDisplayBrightness,
 				deviceDisplayHeight: payload.deviceDisplayHeight,
 				deviceDisplayWidth: payload.deviceDisplayWidth,

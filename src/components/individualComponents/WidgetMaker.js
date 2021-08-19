@@ -15,7 +15,9 @@ const WidgetMaker = ({
 	showMaximiseButton,
 	showMenu,
 	showBackButton,
-	closeCallback
+	closeCallback,
+	activeBackButton,
+	backButtonCallback
 }) => {
 	return (
 		<div style={style} id={id} className={className + ' widget'}>
@@ -23,14 +25,19 @@ const WidgetMaker = ({
 				<div className='widget-header'>
 					<div className='widget-buttons-left'>
 						{showBackButton ? (
-							<div className='widget-backButton'>
+							<div
+								className='backButton widget-btn'
+								style={activeBackButton ? { opacity: 0.3 } : { opacity: 1 }}
+								onClick={() => {
+									backButtonCallback();
+								}}>
 								<i className='icon-ic_fluent_chevron_left_24_regular'></i>
 							</div>
 						) : (
 							''
 						)}
 						{showMenu ? (
-							<div className='widget-hamburgerMenu'>
+							<div className='hamburgerMenu widget-btn'>
 								<i className='icon-ic_fluent_line_horizontal_3_20_regular'></i>
 							</div>
 						) : (

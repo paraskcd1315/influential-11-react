@@ -7,7 +7,7 @@ import React from 'react';
 import { useLongPress } from 'use-long-press';
 import { connect } from 'react-redux';
 
-import { showMenu } from '../../actions/components';
+import { showMenu, openStartMenu } from '../../actions/components';
 import { replaceApp } from '../../actions/storage';
 import { showAddAppsMenu, showReplaceAppsMenu } from '../../actions/menu';
 import { searchQuery } from '../../actions/components';
@@ -27,7 +27,10 @@ const App = ({
 	menuReducer,
 	replaceApp,
 	searchQuery,
-	hideBadge
+	hideBadge,
+	componentsReducer: { startMenuOpen },
+	openStartMenu,
+	hideStartMenu
 }) => {
 	const [moved, setPointerMove] = useState(false);
 
@@ -60,6 +63,7 @@ const App = ({
 					buttonAnimate(e);
 				}
 				if (
+					document.getElementsByClassName('searchInput')[0] &&
 					document.getElementsByClassName('searchInput')[0].value.length > 0
 				) {
 					searchQuery('');
@@ -80,6 +84,12 @@ const App = ({
 						});
 					} else {
 						window.api.apps.launchApplication(identifier);
+						if (startMenuOpen) {
+							hideStartMenu();
+							setTimeout(() => {
+								openStartMenu(false);
+							}, 250);
+						}
 					}
 				}
 				setPointerMove(false);
@@ -114,5 +124,6 @@ export default connect(mapStateToProps, {
 	showAddAppsMenu,
 	showReplaceAppsMenu,
 	searchQuery,
-	replaceApp
+	replaceApp,
+	openStartMenu
 })(App);

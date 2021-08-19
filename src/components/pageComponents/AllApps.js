@@ -14,7 +14,8 @@ const AllApps = ({
 	showAllApps,
 	openAllApps,
 	hideMainScreen,
-	componentsReducer
+	componentsReducer,
+	hideStartMenu
 }) => {
 	const allApps = appsReducer.allApplications;
 
@@ -104,6 +105,7 @@ const AllApps = ({
 						icon={app.icon}
 						name={app.name}
 						className={'app'}
+						hideStartMenu={hideStartMenu}
 					/>
 				);
 			});
@@ -133,6 +135,7 @@ const AllApps = ({
 						name={loopVar[i].record[j].name}
 						className={'app'}
 						hideBadge={true}
+						hideStartMenu={hideStartMenu}
 					/>
 				);
 			}

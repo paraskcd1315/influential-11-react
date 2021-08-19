@@ -7,7 +7,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import App from './App';
 
-const PinnedApps = ({ appsReducer, storageReducer }) => {
+const PinnedApps = ({ appsReducer, storageReducer, hideStartMenu }) => {
 	const renderApps = () => {
 		if (storageReducer['dockIcons'].length > 5) {
 			let apps = [];
@@ -32,6 +32,7 @@ const PinnedApps = ({ appsReducer, storageReducer }) => {
 						icon={app.icon}
 						name={app.name}
 						className={'favApp'}
+						hideStartMenu={hideStartMenu}
 					/>
 				);
 			});

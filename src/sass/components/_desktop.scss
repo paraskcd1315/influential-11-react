@@ -7,8 +7,14 @@
 
 	&.x-large {
 		width: 90%;
-		height: 70%;
-		top: 40%;
+		height: 60%;
+		top: 41%;
+	}
+
+	&-buttons-left,
+	&-buttons-right {
+		display: flex;
+		align-items: center;
 	}
 
 	&-header {
@@ -35,5 +41,6 @@
 	&-content {
 		display: flex;
 		flex-direction: column;
+		padding: 1rem;
 	}
 }

@@ -135,6 +135,7 @@ const Taskbar = ({
 					className={'favApp'}
 					hideName={true}
 					buttonAnimate={buttonAnimate}
+					hideStartMenu={hideStartMenu}
 				/>
 			);
 		});

@@ -74,12 +74,14 @@ const StartMenu = ({
 						hideMainScreen={hideMainScreen}
 						openAllApps={openAllApps}
 						openMoreWidgets={openMoreWidgets}
+						hideStartMenu={hideStartMenu}
 					/>
 					<AllApps
 						allAppsOpen={allAppsOpen}
 						showAllApps={showAllApps}
 						openAllApps={openAllApps}
 						hideMainScreen={hideMainScreen}
+						hideStartMenu={hideStartMenu}
 					/>
 					<MoreWidgets
 						moreWidgetsOpen={moreWidgetsOpen}
