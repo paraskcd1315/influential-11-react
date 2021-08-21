@@ -13,6 +13,7 @@
 				margin-right: 1rem;
 				img {
 					@include set-size(auto, 95px);
+					@include set-image-shadows(set-transparency($dark-color, 0.3));
 				}
 			}
 
@@ -35,6 +36,7 @@
 				img {
 					@include set-size(50px, 50px);
 					@include set-border-radius(99px);
+					@include set-image-shadows(set-transparency($dark-color, 0.6));
 				}
 			}
 		}
@@ -50,6 +52,7 @@
 			width: 92%;
 			height: 350px;
 			transition: 250ms ease;
+			mask-image: linear-gradient(transparent, #000 15%, #000 85%, transparent);
 		}
 	}
 
@@ -91,6 +94,7 @@
 	&-label {
 		padding: 0.2rem 1rem;
 		opacity: 0.6;
+		font-size: 0.8rem;
 	}
 
 	&-text {
@@ -126,9 +130,14 @@
 			display: inline-block;
 			width: 60px;
 			height: 30px;
+			margin-right: 1rem;
 			@include set-background-color(set-transparency($light-button-color, 0.4));
 			@include set-border-radius(30px);
 			border: 2px solid set-text-color-transparency($light-color, 0.1) !important;
+			@include set-shadows(
+				set-transparency($dark-color, 0.3),
+				set-transparency($dark-color, 0.2)
+			);
 
 			&::after {
 				content: '';

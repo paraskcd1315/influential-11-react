@@ -13,13 +13,84 @@ import MainSettings from '../settingsWidget/pages/MainSettings';
 import IndividualWidgetSettings from '../settingsWidget/pages/IndividualWidgetSettings';
 import LookNFeelSettings from '../settingsWidget/pages/LookNFeelSettings';
 import ColorSettings from '../settingsWidget/pages/ColorSettings';
+import { addValue } from '../../actions/storage';
 
 const Settings = ({
 	widgetReducer: { settingsOpen },
 	openSettings,
 	systemReducer: { deviceModel, deviceModelPromotional, deviceName },
-	storageReducer
+	storageReducer,
+	addValue
 }) => {
+	const [options, setOptions] = useState({
+		username: '',
+		hideIconLabels: false,
+		twentyFourHourTime: false
+	});
+
+	useEffect(() => {
+		setOptions((state) => {
+			return {
+				...state,
+				username: !storageReducer.extraValues
+					? ''
+					: !storageReducer.extraValues.username
+					? ''
+					: storageReducer.extraValues.username,
+				hideIconLabels: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.hideIconLabels
+					? false
+					: true,
+				twentyFourHourTime: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.twentyFourHourTime
+					? false
+					: true
+			};
+		});
+	}, [storageReducer]);
+
+	const handleTextChange = (e) => {
+		setOptions((state) => {
+			return {
+				...state,
+				[e.target.name]: e.target.value
+			};
+		});
+		addValue({
+			key: e.target.name,
+			value: e.target.value
+		});
+	};
+
+	const handleSwitchChange = (e) => {
+		const { checked } = e.target;
+		if (checked) {
+			setOptions((state) => {
+				return {
+					...state,
+					[e.target.name]: true
+				};
+			});
+			addValue({
+				key: e.target.name,
+				value: true
+			});
+		} else {
+			setOptions((state) => {
+				return {
+					...state,
+					[e.target.name]: false
+				};
+			});
+			addValue({
+				key: e.target.name,
+				value: false
+			});
+		}
+	};
+
 	const [style, setStyle] = useState({
 		opacity: 0,
 		transform: 'translate(-50%, -40%)'
@@ -206,7 +277,12 @@ const Settings = ({
 								});
 							}}
 						/>
-						<MainSettings style={mainSettingsStyle.style} />
+						<MainSettings
+							style={mainSettingsStyle.style}
+							options={options}
+							handleTextChange={handleTextChange}
+							handleSwitchChange={handleSwitchChange}
+						/>
 						<IndividualWidgetSettings style={individualSettingsStyle.style} />
 						<LookNFeelSettings style={lookNFeelSettingsStyle.style} />
 						<ColorSettings style={colorSettingsStyle.style} />
@@ -242,4 +318,4 @@ const mapStateToProps = (state) => ({
 	storageReducer: state.storageReducer
 });
 
-export default connect(mapStateToProps, { openSettings })(Settings);
+export default connect(mapStateToProps, { openSettings, addValue })(Settings);

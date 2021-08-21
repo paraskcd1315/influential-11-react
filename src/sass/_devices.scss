@@ -18,6 +18,26 @@
 	#allApps {
 		height: 385px;
 	}
+	.settings {
+		&-header {
+			.deviceStuff .devicePic img {
+				@include set-size(auto, 80px);
+			}
+
+			.userStuff .userPic img {
+				@include set-size(40px, 40px);
+			}
+		}
+
+		&-content .settings-pages .page {
+			width: 92%;
+			height: 290px;
+		}
+
+		&-inputSwitch {
+			width: 92%;
+		}
+	}
 }
 
 //iPhone X/XS/11/11Pro
@@ -28,6 +48,27 @@
 
 	#allApps {
 		height: 355px;
+	}
+
+	.settings {
+		&-header {
+			.deviceStuff .devicePic img {
+				@include set-size(auto, 80px);
+			}
+
+			.userStuff .userPic img {
+				@include set-size(40px, 40px);
+			}
+		}
+
+		&-content .settings-pages .page {
+			width: 92%;
+			height: 275px;
+		}
+
+		&-inputSwitch {
+			width: 92%;
+		}
 	}
 }
 
@@ -40,6 +81,27 @@
 	#allApps {
 		height: 305px;
 	}
+
+	.settings {
+		&-header {
+			.deviceStuff .devicePic img {
+				@include set-size(auto, 80px);
+			}
+
+			.userStuff .userPic img {
+				@include set-size(40px, 40px);
+			}
+		}
+
+		&-content .settings-pages .page {
+			width: 90%;
+			height: 255px;
+		}
+
+		&-inputSwitch {
+			width: 91%;
+		}
+	}
 }
 
 //iPhone 6/7/8 plus
@@ -51,6 +113,33 @@
 	#allApps {
 		height: 278px;
 	}
+
+	.widget {
+		&.x-large {
+			top: 40%;
+		}
+	}
+
+	.settings {
+		&-header {
+			.deviceStuff .devicePic img {
+				@include set-size(auto, 80px);
+			}
+
+			.userStuff .userPic img {
+				@include set-size(40px, 40px);
+			}
+		}
+
+		&-content .settings-pages .page {
+			width: 92%;
+			height: 225px;
+		}
+
+		&-inputSwitch {
+			width: 92%;
+		}
+	}
 }
 
 //iPhone 6/7/8
@@ -61,5 +150,38 @@
 
 	#allApps {
 		height: 205px;
+	}
+
+	#controlCenter {
+		.header button {
+			padding: 0.4rem;
+		}
+	}
+
+	.widget {
+		&.x-large {
+			top: 38%;
+		}
+	}
+
+	.settings {
+		&-header {
+			.deviceStuff .devicePic img {
+				@include set-size(auto, 80px);
+			}
+
+			.userStuff .userPic img {
+				@include set-size(40px, 40px);
+			}
+		}
+
+		&-content .settings-pages .page {
+			width: 92%;
+			height: 185px;
+		}
+
+		&-inputSwitch {
+			width: 92%;
+		}
 	}
 }

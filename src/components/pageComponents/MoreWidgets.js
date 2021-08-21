@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import Weather from '../widgets/Weather';
 
 const MoreWidgets = ({
 	moreWidgetsOpen,
@@ -30,6 +31,9 @@ const MoreWidgets = ({
 					<i className='btn-chevron-back icon-ic_fluent_chevron_left_48_regular'></i>
 					<div className='btn-title-back'>Back</div>
 				</button>
+			</div>
+			<div id='allWidgets' className='content'>
+				<Weather startMenu={true} />
 			</div>
 		</div>
 	);

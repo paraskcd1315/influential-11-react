@@ -54,11 +54,23 @@
 		mask-image: linear-gradient(transparent, #000 15%, #000 85%, transparent);
 	}
 
-	#allApps {
+	#allApps,
+	#allWidgets {
 		align-items: start;
 		justify-content: start;
 		flex-direction: column;
 		flex-wrap: nowrap;
+	}
+
+	.widget:before {
+		backdrop-filter: unset;
+		background-image: unset;
+		content: unset;
+		position: unset;
+	}
+
+	.widget {
+		position: unset;
 	}
 
 	#pinnedApps,

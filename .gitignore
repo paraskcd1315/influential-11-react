@@ -11,6 +11,9 @@
 # production
 /build
 
+/public/assets/weatherIcons
+/public/assets/iPhoneModels
+
 # misc
 .DS_Store
 .env.local
