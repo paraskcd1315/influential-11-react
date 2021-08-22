@@ -675,10 +675,10 @@ const metric_weather = {
 				dewpoint: 11
 			},
 			condition: {
-				description: 'Cloudy',
+				description: 'Haze',
 				narrative:
 					'Partly cloudy today. It’s currently 17°; the high will be 18°. ',
-				code: 26
+				code: 21
 			},
 			ultraviolet: {
 				index: 2,

@@ -22,10 +22,10 @@ const WidgetMaker = ({
 }) => {
 	return (
 		<div style={style} id={id} className={className + ' widget'}>
-			<div className='widget-header'>
-				{startMenu ? (
-					''
-				) : (
+			{startMenu ? (
+				''
+			) : (
+				<div className='widget-header'>
 					<div className='widget-buttons-left'>
 						{showBackButton ? (
 							<div
@@ -48,34 +48,30 @@ const WidgetMaker = ({
 						)}
 						<div className='widget-title'>{title}</div>
 					</div>
-				)}
 
-				<div className='widget-buttons-right'>
-					{showPinButton ? (
-						<button className='pinButton widget-btn'>
-							<i className='icon-ic_fluent_pin_24_regular'></i>
-						</button>
-					) : (
-						''
-					)}
-					{showMaximiseButton ? (
-						<button className='maximizeButton widget-btn'>
-							<i className='icon-ic_fluent_maximize_24_regular'></i>
-						</button>
-					) : (
-						''
-					)}
-					{startMenu ? (
-						''
-					) : (
+					<div className='widget-buttons-right'>
+						{showPinButton ? (
+							<button className='pinButton widget-btn'>
+								<i className='icon-ic_fluent_pin_24_regular'></i>
+							</button>
+						) : (
+							''
+						)}
+						{showMaximiseButton ? (
+							<button className='maximizeButton widget-btn'>
+								<i className='icon-ic_fluent_maximize_24_regular'></i>
+							</button>
+						) : (
+							''
+						)}
 						<button
 							className='dismissButton widget-btn'
 							onClick={() => closeCallback()}>
 							<i className='icon-ic_fluent_dismiss_24_regular'></i>
 						</button>
-					)}
+					</div>
 				</div>
-			</div>
+			)}
 			<div className='widget-content'>{content}</div>
 		</div>
 	);

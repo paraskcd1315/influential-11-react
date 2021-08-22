@@ -211,7 +211,7 @@ const Settings = ({
 					</div>
 					<div className='userStuff'>
 						<div className='userPic'>
-							<img src='images/account.png' alt='userPic' />
+							<img src='images/account.jpg' alt='userPic' />
 						</div>
 						<div className='userName'>
 							{!storageReducer.extraValues

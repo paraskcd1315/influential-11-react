@@ -95,7 +95,7 @@ const StartMenu = ({
 			<div className='footer'>
 				<div className='user'>
 					<div className='user-profile'>
-						<img src='images/account.png' alt='userAccount' />
+						<img src='images/account.jpg' alt='userAccount' />
 					</div>
 					<div className='user-name'>
 						{!storageReducer.extraValues

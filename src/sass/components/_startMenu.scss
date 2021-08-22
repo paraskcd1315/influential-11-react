@@ -71,10 +71,11 @@
 
 	.widget {
 		position: unset;
+		width: 100%;
+		max-height: 95px;
 	}
 
-	#pinnedApps,
-	#pinnedWidgets {
+	#pinnedApps {
 		scroll-snap-type: y proximity;
 		margin-top: -10px;
 		margin-bottom: -10px;
@@ -84,6 +85,14 @@
 		display: grid;
 		flex-wrap: unset;
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	}
+
+	#pinnedWidgets {
+		display: flex;
+		flex-direction: column;
+		overflow-y: scroll;
+		height: 130px;
+		margin-top: -30px;
 	}
 
 	.alphabet {

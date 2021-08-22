@@ -1064,7 +1064,7 @@ const timeFunctions = {
 		if (timeFunctions.twentyfour === true) {
 			return ' ';
 		} else {
-			return timeFunctions.funcs.rawHour() >= 12 ? 'pm' : 'am';
+			return timeFunctions.d.getHours() >= 12 ? 'pm' : 'am';
 		}
 	},
 	date: function () {

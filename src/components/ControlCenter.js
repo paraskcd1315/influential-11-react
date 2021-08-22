@@ -129,7 +129,7 @@ const ControlCenter = ({
 				<CCButton
 					isEnabled={false}
 					toggleName='Refresh Widget'
-					toggleIcon={'icon-ic_fluent_arrow_reset_24_regular'}
+					toggleIcon={'icon-ic_fluent_arrow_counterclockwise_24_regular'}
 					// eslint-disable-next-line
 					toggleCallback={() => (window.location.href = window.location.href)}
 				/>

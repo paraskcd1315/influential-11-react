@@ -13,9 +13,9 @@ import { openCC } from '../actions/components';
 import App from './individualComponents/App';
 
 const Taskbar = ({
-	timeReducer: { hours, minutes },
+	timeReducer: { hours, minutes, ampm },
 	appsReducer: { allApplications },
-	storageReducer: { dockIcons },
+	storageReducer: { dockIcons, extraValues },
 	commsReducer,
 	resourcesReducer: { battery },
 	componentsReducer: { ccOpen, startMenuOpen },
@@ -142,7 +142,12 @@ const Taskbar = ({
 				<div className='left-part'>
 					<div className='timeDate'>
 						<div className='time'>
-							{hours}:{minutes}
+							{hours}:{minutes}{' '}
+							{!extraValues
+								? ampm
+								: !extraValues.twentyFourHourTime
+								? ampm
+								: ''}
 						</div>
 					</div>
 				</div>

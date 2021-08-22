@@ -72,7 +72,9 @@ const Common = ({
 						hours: t.hour(),
 						minutes: t.minute(),
 						date: t.dateNum(),
-						month: t.sMonthText()
+						month: t.sMonthText(),
+						ampm: t.ampm(),
+						rawHour: t.rawHour()
 					});
 				}
 			});

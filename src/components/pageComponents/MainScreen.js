@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import Weather from '../widgets/Weather';
+
 import PinnedApps from '../individualComponents/PinnedApps';
 
 const MainScreen = ({
@@ -55,7 +57,9 @@ const MainScreen = ({
 					<i className='btn-chevron icon-ic_fluent_chevron_right_48_regular'></i>
 				</button>
 			</div>
-			<div id='pinnedWidgets' className='content'></div>
+			<div id='pinnedWidgets' className='content'>
+				<Weather startMenu={true} />
+			</div>
 		</div>
 	);
 };
