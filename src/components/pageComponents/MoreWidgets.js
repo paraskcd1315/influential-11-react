@@ -10,7 +10,8 @@ const MoreWidgets = ({
 	moreWidgetsOpen,
 	showMoreWidgets,
 	openMoreWidgets,
-	hideMainScreen
+	hideMainScreen,
+	hideStartMenu
 }) => {
 	return (
 		<div
@@ -33,7 +34,7 @@ const MoreWidgets = ({
 				</button>
 			</div>
 			<div id='allWidgets' className='content'>
-				<Weather startMenu={true} />
+				<Weather startMenu={true} hideStartMenu={hideStartMenu} />
 			</div>
 		</div>
 	);

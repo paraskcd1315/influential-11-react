@@ -1,12 +1,16 @@
+.widget:before {
+	background-image: unset;
+}
+
 .widget {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	display: flex;
 	flex-direction: column;
+	width: 90%;
 
 	&.x-large {
-		width: 90%;
 		height: 60%;
 		top: 41%;
 	}
@@ -42,6 +46,13 @@
 		display: flex;
 		flex-direction: column;
 		padding: 1rem;
+		height: auto;
+		overflow-y: auto;
+		overflow-x: hidden;
+
+		> div {
+			flex: 0 1 auto;
+		}
 	}
 }
 

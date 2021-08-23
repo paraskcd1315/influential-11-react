@@ -44,10 +44,6 @@ export const removeValue = (value) => (dispatch) => {
 
 	localstore.extraValues[value] = null;
 
-	let index = localstore.extraValues.indexOf(value);
-
-	localstore.extraValues.splice(index, 1);
-
 	localStorage.setItem('FluentUI', JSON.stringify(localstore));
 
 	dispatch({

@@ -1,4 +1,4 @@
-.startWidget .weather-header {
+.weather-header {
 	display: flex;
 	text-align: center;
 	align-items: center;
@@ -15,7 +15,7 @@
 	}
 }
 
-.startWidget .weather-content {
+.weather-content {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -58,6 +58,47 @@
 				margin-top: 0.1rem;
 				margin-right: 0.5rem;
 			}
+		}
+	}
+}
+
+.desktopWidget {
+	.weather-header {
+		font-size: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.weather-content {
+		.weather-daily {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			margin-top: 1.5rem;
+			padding: 1rem;
+			background-color: #f8f8f820;
+			@include set-border-radius(1.2rem);
+			@include set-shadows(
+				set-transparency($dark-color, 0),
+				set-transparency($dark-color, 0.3)
+			);
+
+			.weather-day {
+				font-size: 0.6rem;
+			}
+
+			.weather-temperature {
+				font-size: 0.8rem;
+			}
+
+			img {
+				@include set-size(50px, 50px);
+				margin-bottom: 0.5rem;
+			}
+		}
+
+		img {
+			@include set-size(70px, 70px);
 		}
 	}
 }

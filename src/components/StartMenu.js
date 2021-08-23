@@ -89,6 +89,7 @@ const StartMenu = ({
 						showMoreWidgets={showMoreWidgets}
 						openMoreWidgets={openMoreWidgets}
 						hideMainScreen={hideMainScreen}
+						hideStartMenu={hideStartMenu}
 					/>
 				</div>
 			</div>

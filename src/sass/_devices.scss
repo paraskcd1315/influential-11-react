@@ -18,7 +18,7 @@
 		max-height: 120px;
 	}
 
-	.widget-content {
+	.startWidget .widget-content {
 		justify-content: space-around;
 	}
 
@@ -35,6 +35,9 @@
 @media only screen and (max-height: 844px) {
 	#allApps {
 		height: 385px;
+	}
+	.desktopWidget .weather-content .weather-daily img {
+		@include set-size(40px, 40px);
 	}
 	.settings {
 		&-header {
@@ -87,6 +90,13 @@
 		&-inputSwitch {
 			width: 92%;
 		}
+	}
+	.desktopWidget .weather-content .weather-daily img {
+		@include set-size(35px, 35px);
+	}
+
+	.desktopWidget .weather-content .weather-daily .weather-temperature {
+		font-size: 0.6rem;
 	}
 }
 
@@ -144,6 +154,14 @@
 		&-inputSwitch {
 			width: 91%;
 		}
+	}
+
+	.desktopWidget .weather-content .weather-daily img {
+		@include set-size(35px, 35px);
+	}
+
+	.desktopWidget .weather-content .weather-daily .weather-temperature {
+		font-size: 0.6rem;
 	}
 }
 

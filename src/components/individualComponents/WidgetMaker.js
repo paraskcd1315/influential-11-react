@@ -4,6 +4,9 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { openStartMenu } from '../../actions/components';
 
 const WidgetMaker = ({
 	id,
@@ -18,14 +21,33 @@ const WidgetMaker = ({
 	closeCallback,
 	activeBackButton,
 	backButtonCallback,
-	startMenu
+	startMenu,
+	onStartClick,
+	openStartMenu,
+	hideStartMenu,
+	maximize,
+	maximizeCallback
 }) => {
 	return (
-		<div style={style} id={id} className={className + ' widget'}>
+		<div
+			style={style}
+			id={id}
+			className={className + ' widget'}
+			onClick={
+				startMenu
+					? () => {
+							onStartClick();
+							hideStartMenu();
+							setTimeout(() => {
+								openStartMenu(false);
+							}, 250);
+					  }
+					: null
+			}>
 			{startMenu ? (
 				''
 			) : (
-				<div className='widget-header'>
+				<div className={'widget-header widget-header-' + id}>
 					<div className='widget-buttons-left'>
 						{showBackButton ? (
 							<div
@@ -58,8 +80,15 @@ const WidgetMaker = ({
 							''
 						)}
 						{showMaximiseButton ? (
-							<button className='maximizeButton widget-btn'>
-								<i className='icon-ic_fluent_maximize_24_regular'></i>
+							<button
+								className='maximizeButton widget-btn'
+								onClick={() => maximizeCallback()}>
+								<i
+									className={
+										!maximize
+											? 'icon-ic_fluent_maximize_16_regular'
+											: 'icon-ic_fluent_restore_16_regular'
+									}></i>
 							</button>
 						) : (
 							''
@@ -77,4 +106,4 @@ const WidgetMaker = ({
 	);
 };
 
-export default WidgetMaker;
+export default connect(null, { openStartMenu })(WidgetMaker);

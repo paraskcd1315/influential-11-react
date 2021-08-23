@@ -58,7 +58,7 @@ const MainScreen = ({
 				</button>
 			</div>
 			<div id='pinnedWidgets' className='content'>
-				<Weather startMenu={true} />
+				<Weather startMenu={true} hideStartMenu={hideStartMenu} />
 			</div>
 		</div>
 	);
