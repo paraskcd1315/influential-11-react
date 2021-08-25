@@ -16,6 +16,7 @@ const Weather = ({
 	weatherReducer,
 	storageReducer: { extraValues },
 	widgetReducer: { weatherOpen },
+	timeReducer: { date, rawHour },
 	startMenu,
 	openWeather,
 	addValue,
@@ -39,8 +40,6 @@ const Weather = ({
 		}
 
 		return {
-			position: !startMenu ? 'absolute' : null,
-			left: !startMenu ? '50%' : null,
 			maxHeight: !startMenu ? '200px' : null,
 			backgroundColor: color_2,
 			backgroundImage:
@@ -156,29 +155,33 @@ const Weather = ({
 				<div className='weather-content'>
 					{weatherReducer.daily
 						.slice(0, 4)
-						.map(({ dayOfWeek, condition, temperature }) => {
+						.map(({ dayOfWeek, condition, temperature }, index) => {
 							return (
 								<div key={dayOfWeek} id={dayOfWeek} className='weather-daily'>
-									<div className='weather-day'>{dayOfWeek}</div>
+									<div className='weather-day'>
+										{index === 0
+											? 'Today'
+											: dayOfWeek.substring(0, 3) +
+											  ' ' +
+											  (parseInt(date) + index)}
+									</div>
 									<div className='weather-condition-icon'>
 										<img
-											src={`assets/weatherIcons/${condition.code}.svg`}
+											src={
+												rawHour > 18 && 19 <= condition.code <= 25
+													? `assets/weatherIcons/${condition.code}_1.svg`
+													: `assets/weatherIcons/${condition.code}.svg`
+											}
 											alt={condition.description}
 										/>
 									</div>
 									<div className='weather-temperature'>
 										{temperature.minimum}
-										<span>
-											°{weatherReducer.units.temperature}{' '}
-											<i className='icon-ic_fluent_arrow_down_24_regular'></i>
-										</span>
+										<span>°{weatherReducer.units.temperature}</span>
 									</div>
 									<div className='weather-temperature'>
 										{temperature.maximum}
-										<span>
-											°{weatherReducer.units.temperature}{' '}
-											<i className='icon-ic_fluent_arrow_up_24_regular'></i>
-										</span>
+										<span>°{weatherReducer.units.temperature}</span>
 									</div>
 								</div>
 							);
@@ -240,11 +243,18 @@ const Weather = ({
 				setStyle((state) => {
 					return {
 						...state,
-						transform: `translate(-50%, ${yPosition.currentY}px)`
+						transform: `translate(-50%, ${yPosition.currentY}px)`,
+						zIndex: 99
 					};
 				});
 			}}
 			onStop={() => {
+				setStyle((state) => {
+					return {
+						...state,
+						zIndex: null
+					};
+				});
 				setYPosition((state) => {
 					return {
 						...state,
@@ -304,7 +314,8 @@ const Weather = ({
 const mapStateToProps = (state) => ({
 	weatherReducer: state.weatherReducer,
 	storageReducer: state.storageReducer,
-	widgetReducer: state.widgetReducer
+	widgetReducer: state.widgetReducer,
+	timeReducer: state.timeReducer
 });
 
 export default connect(mapStateToProps, { openWeather, addValue, removeValue })(

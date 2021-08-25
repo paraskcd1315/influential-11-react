@@ -1,11 +1,24 @@
 //iPhone 12 Pro Max
 @media only screen and (max-height: 926px) {
+	#startMenu #pinnedApps {
+		height: 240px;
+	}
+
+	#startMenu #pinnedWidgets {
+		margin-top: -10px;
+		height: 135px;
+	}
+
+	#startMenu .header {
+		margin: 0.8rem 1.5rem;
+	}
+
 	.scrollHelper {
 		height: 370px;
 	}
 
 	#startMenu .startTabs {
-		height: 520px;
+		height: 560px;
 	}
 
 	#allApps {
@@ -16,14 +29,11 @@
 		position: unset;
 		width: 100%;
 		max-height: 120px;
+		margin-bottom: 1rem;
 	}
 
 	.startWidget .widget-content {
 		justify-content: space-around;
-	}
-
-	#startMenu #pinnedWidgets {
-		margin-top: 10px;
 	}
 
 	.startWidget .weather-header {
@@ -33,6 +43,19 @@
 
 //iPhone 12 Pro
 @media only screen and (max-height: 844px) {
+	#startMenu {
+		bottom: 13rem;
+	}
+
+	#startMenu #pinnedApps {
+		height: 210px;
+	}
+
+	#startMenu #pinnedWidgets {
+		margin-top: -16px;
+		height: 125px;
+	}
+
 	#allApps {
 		height: 385px;
 	}
@@ -63,12 +86,25 @@
 
 //iPhone X/XS/11/11Pro
 @media only screen and (max-height: 812px) {
+	#startMenu {
+		bottom: 13rem;
+	}
+
 	#startMenu .startTabs {
 		height: 490px;
 	}
 
 	#allApps {
 		height: 355px;
+	}
+
+	#startMenu #pinnedApps {
+		height: 175px;
+	}
+
+	#startMenu #pinnedWidgets {
+		margin-top: -15px;
+		height: 120px;
 	}
 
 	.settings {
@@ -92,11 +128,11 @@
 		}
 	}
 	.desktopWidget .weather-content .weather-daily img {
-		@include set-size(35px, 35px);
+		@include set-size(40px, 40px);
 	}
 
 	.desktopWidget .weather-content .weather-daily .weather-temperature {
-		font-size: 0.6rem;
+		font-size: 0.8rem;
 	}
 }
 
@@ -104,6 +140,10 @@
 @media only screen and (max-height: 780px) {
 	#startMenu .startTabs {
 		height: 440px;
+	}
+
+	#startMenu #pinnedApps {
+		height: 160px;
 	}
 
 	.startWidget .weather-header {
@@ -157,11 +197,11 @@
 	}
 
 	.desktopWidget .weather-content .weather-daily img {
-		@include set-size(35px, 35px);
+		@include set-size(40px, 40px);
 	}
 
 	.desktopWidget .weather-content .weather-daily .weather-temperature {
-		font-size: 0.6rem;
+		font-size: 0.8rem;
 	}
 }
 
@@ -173,6 +213,14 @@
 
 	#allApps {
 		height: 278px;
+	}
+
+	#startMenu #pinnedApps {
+		height: 230px;
+	}
+
+	#startMenu #pinnedWidgets {
+		display: none;
 	}
 
 	.widget {
@@ -211,6 +259,10 @@
 
 	#allApps {
 		height: 205px;
+	}
+
+	#startMenu #pinnedApps {
+		height: 160px;
 	}
 
 	#startMenu #pinnedWidgets {

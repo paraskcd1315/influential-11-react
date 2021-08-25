@@ -12,6 +12,8 @@ import AllApps from './pageComponents/AllApps';
 import MoreWidgets from './pageComponents/MoreWidgets';
 import { openSettings } from '../actions/widget';
 import { openStartMenu } from '../actions/components';
+import { openExplorer } from '../actions/widget';
+import { addValue } from '../actions/storage';
 
 const StartMenu = ({
 	timeReducer: { month, date },
@@ -19,7 +21,9 @@ const StartMenu = ({
 	openStartMenu,
 	startMenuStyle,
 	hideStartMenu,
-	storageReducer
+	storageReducer,
+	openExplorer,
+	addValue
 }) => {
 	const [allAppsOpen, openAllApps] = useState(false);
 	const [moreWidgetsOpen, openMoreWidgets] = useState(false);
@@ -116,7 +120,24 @@ const StartMenu = ({
 								openStartMenu(false);
 							}, 250);
 						}}></i>
-					<i className='explorer icon-ic_fluent_apps_list_24_regular'></i>
+					<i
+						className='explorer icon-ic_fluent_apps_list_24_regular'
+						onClick={() => {
+							if (
+								!storageReducer.extraValues ||
+								!storageReducer.extraValues.Explorer
+							) {
+								openExplorer(true);
+								addValue({
+									key: 'Explorer',
+									value: 0
+								});
+								hideStartMenu();
+								setTimeout(() => {
+									openStartMenu(false);
+								}, 250);
+							}
+						}}></i>
 					<div className='date'>{month + ' ' + date}</div>
 				</div>
 			</div>
@@ -129,6 +150,9 @@ const mapStateToProps = (state) => ({
 	storageReducer: state.storageReducer
 });
 
-export default connect(mapStateToProps, { openSettings, openStartMenu })(
-	StartMenu
-);
+export default connect(mapStateToProps, {
+	openSettings,
+	openStartMenu,
+	openExplorer,
+	addValue
+})(StartMenu);

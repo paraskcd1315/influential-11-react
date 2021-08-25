@@ -11,8 +11,9 @@
 # production
 /build
 
-/public/assets/weatherIcons
-/public/assets/iPhoneModels
+/public/assets/
+
+/src/fluent-system-icons
 
 # misc
 .DS_Store
