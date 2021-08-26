@@ -21,6 +21,7 @@ const WidgetMaker = ({
 	closeCallback,
 	activeBackButton,
 	backButtonCallback,
+	menuButtonCallback,
 	startMenu,
 	onStartClick,
 	openStartMenu,
@@ -62,7 +63,11 @@ const WidgetMaker = ({
 							''
 						)}
 						{showMenu ? (
-							<div className='hamburgerMenu widget-btn'>
+							<div
+								className='hamburgerMenu widget-btn'
+								onClick={() => {
+									menuButtonCallback();
+								}}>
 								<i className='icon-ic_fluent_line_horizontal_3_20_regular'></i>
 							</div>
 						) : (

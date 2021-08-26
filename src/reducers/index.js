@@ -15,6 +15,7 @@ import componentsReducer from './componentsReducers';
 import menuReducer from './menuReducer';
 import systemReducer from './systemReducer';
 import widgetReducer from './widgetsReducer';
+import explorerAppsReducer from './explorerAppsReducer';
 
 export default combineReducers({
 	timeReducer,
@@ -27,5 +28,6 @@ export default combineReducers({
 	componentsReducer,
 	menuReducer,
 	systemReducer,
-	widgetReducer
+	widgetReducer,
+	explorerAppsReducer
 });

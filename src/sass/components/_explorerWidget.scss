@@ -1,0 +1,70 @@
+#explorerWidget {
+	.explorer-stuff {
+		display: flex;
+		justify-content: space-between;
+		transition: 250ms ease;
+		margin-top: -26px;
+	}
+
+	.explorer-sidebar {
+		width: 0px;
+		transition: 250ms ease;
+
+		&.open {
+			width: 120px;
+		}
+	}
+
+	.explorer-header {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		padding: 0.5rem 1rem;
+		transition: 250ms ease;
+
+		i {
+			font-size: 32px;
+			line-height: 32px;
+		}
+
+		img {
+			@include set-size(auto, 32px);
+			margin-top: 6px;
+		}
+
+		.explorer-title {
+			margin-left: 1rem;
+		}
+	}
+
+	.explorer-apps {
+		display: flex;
+		flex-wrap: wrap;
+
+		.explorerApp {
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			@include set-size(70px, 100px);
+
+			.icon {
+				margin-bottom: 0.5rem;
+			}
+
+			.icon,
+			.icon img {
+				@include set-size(50px, 50px);
+			}
+
+			.title {
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				font-size: 0.8rem;
+				width: 55px;
+			}
+		}
+	}
+}
