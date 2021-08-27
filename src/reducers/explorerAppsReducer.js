@@ -1,8 +1,15 @@
+import {
+	ADD_DOCUMENT_FOLDER,
+	ADD_PHOTO_FOLDER,
+	ADD_MUSIC_FOLDER,
+	ADD_VIDEO_FOLDER
+} from '../actions/types';
+
 const localstore = localStorage.getItem('FluentUI');
 
 const initialState = {
 	documentApps: {
-		folders: 'documentFolders' in localstore ? localstore.documentFolders : {},
+		folders: localstore.documentFolders ? localstore.documentFolders : {},
 		apps: [
 			'ru.domo.cocoatop64',
 			'com.getdropbox.Dropbox',
@@ -51,7 +58,7 @@ const initialState = {
 		]
 	},
 	musicApps: {
-		folders: 'musicFolders' in localstore ? localstore.musicFolders : {},
+		folders: localstore.musicFolders ? localstore.musicFolders : {},
 		apps: [
 			'com.apple.Music',
 			'com.spotify.client',
@@ -83,7 +90,7 @@ const initialState = {
 		]
 	},
 	videoApps: {
-		folders: 'videoFolders' in localstore ? localstore.videoFolders : {},
+		folders: localstore.videoFolders ? localstore.videoFolders : {},
 		apps: [
 			'com.google.ios.youtube',
 			'com.netflix.Netflix',
@@ -123,7 +130,7 @@ const initialState = {
 		]
 	},
 	photoApps: {
-		folders: 'photoFolders' in localstore ? localstore.photoFolders : {},
+		folders: localstore.photoFolders ? localstore.photoFolders : {},
 		apps: [
 			'com.burbn.instagram',
 			'com.toyopagroup.picaboo',
@@ -165,8 +172,45 @@ const initialState = {
 	}
 };
 
-function explorerAppsReducer(state = initialState) {
-	return state;
+function explorerAppsReducer(state = initialState, action) {
+	const { type, payload } = action;
+
+	switch (type) {
+		case ADD_DOCUMENT_FOLDER:
+			return {
+				...state,
+				documentApps: {
+					...state.documentApps,
+					documentFolders: payload
+				}
+			};
+		case ADD_MUSIC_FOLDER:
+			return {
+				...state,
+				musicApps: {
+					...state.musicApps,
+					musicFolders: payload
+				}
+			};
+		case ADD_PHOTO_FOLDER:
+			return {
+				...state,
+				photoApps: {
+					...state.photoApps,
+					photoFolders: payload
+				}
+			};
+		case ADD_VIDEO_FOLDER:
+			return {
+				...state,
+				videoApps: {
+					...state.videoApps,
+					videoFolders: payload
+				}
+			};
+		default:
+			return state;
+	}
 }
 
 export default explorerAppsReducer;

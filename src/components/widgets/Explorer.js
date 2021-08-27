@@ -146,6 +146,25 @@ const Explorer = ({
 								: 'explorer-sidebar open'
 							: 'explorer-sidebar'
 					}>
+					{!favouriteAppsPage ? (
+						<SidebarButton
+							id='addFolder'
+							active={false}
+							icon={() => {
+								return (
+									<i
+										className='iconf-ic_fluent_folder_add_24_filled'
+										style={{
+											color: '#2F93DE'
+										}}></i>
+								);
+							}}
+							title='Add Folder'
+							callback={(e) => {}}
+						/>
+					) : (
+						''
+					)}
 					<SidebarButton
 						id='favouriteAppsPage'
 						active={favouriteAppsPage}
