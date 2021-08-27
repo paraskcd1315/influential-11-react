@@ -7,23 +7,33 @@ import React from 'react';
 import { connect } from 'react-redux';
 import App from './App';
 
-const PinnedApps = ({ appsReducer, storageReducer, hideStartMenu }) => {
+const PinnedApps = ({
+	appsReducer: { allApplications },
+	storageReducer: { dockIcons },
+	hideStartMenu
+}) => {
 	const renderApps = () => {
-		if (storageReducer['dockIcons'].length > 5) {
-			let apps = [];
+		if (dockIcons.length > 5) {
+			const filteredApps = allApplications.filter((app) => {
+				return dockIcons.slice(5, dockIcons.length).includes(app.identifier);
+			});
 
-			for (let i = 5; i < storageReducer['dockIcons'].length; i++) {
-				for (let j = 0; j < appsReducer['allApplications'].length; j++) {
-					if (
-						appsReducer['allApplications'][j].identifier ===
-						storageReducer['dockIcons'][i]
-					) {
-						apps.push(appsReducer['allApplications'][j]);
+			let result = [];
+
+			dockIcons.forEach((key) => {
+				let found = false;
+				filteredApps.filter((item) => {
+					if (!found && item.identifier === key) {
+						result.push(item);
+						found = true;
+						return false;
+					} else {
+						return true;
 					}
-				}
-			}
+				});
+			});
 
-			return apps.map((app) => {
+			return result.map((app) => {
 				return (
 					<App
 						key={app.identifier + 'favApp'}
@@ -49,8 +59,9 @@ const PinnedApps = ({ appsReducer, storageReducer, hideStartMenu }) => {
 	return <>{renderApps()}</>;
 };
 
-const mapStateToProps = (state) => {
-	return state;
-};
+const mapStateToProps = (state) => ({
+	appsReducer: state.appsReducer,
+	storageReducer: state.storageReducer
+});
 
 export default connect(mapStateToProps, null)(PinnedApps);

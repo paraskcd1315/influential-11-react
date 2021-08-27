@@ -167,11 +167,7 @@ const Weather = ({
 									</div>
 									<div className='weather-condition-icon'>
 										<img
-											src={
-												rawHour > 18 && 19 <= condition.code <= 25
-													? `assets/weatherIcons/${condition.code}_1.svg`
-													: `assets/weatherIcons/${condition.code}.svg`
-											}
+											src={`assets/weatherIcons/${condition.code}.svg`}
 											alt={condition.description}
 										/>
 									</div>

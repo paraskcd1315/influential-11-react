@@ -1,4 +1,10 @@
 #explorerWidget {
+	.widget-content {
+		padding: 1rem 0;
+		overflow-y: unset;
+		overflow-x: unset;
+	}
+
 	.explorer-stuff {
 		display: flex;
 		justify-content: space-between;
@@ -9,9 +15,54 @@
 	.explorer-sidebar {
 		width: 0px;
 		transition: 250ms ease;
+		pointer-events: none;
+		opacity: 0;
+		overflow: hidden;
+		overflow-y: scroll;
+		height: 207px;
+		transition: 250ms ease;
+
+		&.maximized {
+			height: 285px;
+		}
 
 		&.open {
-			width: 120px;
+			width: 300px;
+			pointer-events: unset;
+			opacity: 1;
+			padding: 1rem;
+			margin-right: 1rem;
+			border-right: 1px solid set-text-color-transparency($light-color, 0.2);
+		}
+
+		.sidebar-button {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			padding: 1rem;
+			margin-right: 0.2rem;
+			margin-bottom: 0.2rem;
+			width: 80%;
+			@include set-border-radius(1.2rem);
+			transition: 250ms ease;
+
+			i {
+				font-size: 20px;
+			}
+
+			img {
+				@include set-size(auto, 20px);
+			}
+
+			.sidebar-title {
+				margin-left: 0.4rem;
+				font-size: 0.7rem;
+				line-height: 20px;
+				width: 85px;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow-x: hidden;
+			}
 		}
 	}
 
@@ -34,12 +85,37 @@
 
 		.explorer-title {
 			margin-left: 1rem;
+			width: 120px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow-x: hidden;
 		}
+	}
+
+	.explorer-main {
+		width: 100%;
+
+		.sidebar-opened {
+			width: 50%;
+		}
+	}
+
+	.explorer-page {
+		transition: 250ms ease;
 	}
 
 	.explorer-apps {
 		display: flex;
 		flex-wrap: wrap;
+		padding-left: 1rem;
+		overflow-y: scroll;
+		height: 187px;
+		transition: 250ms ease;
+		mask-image: linear-gradient(transparent, #000 15%, #000 85%, transparent);
+
+		&.maximized {
+			height: 285px;
+		}
 
 		.explorerApp {
 			text-align: center;
@@ -47,7 +123,7 @@
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			@include set-size(70px, 100px);
+			@include set-size(71px, 90px);
 
 			.icon {
 				margin-bottom: 0.5rem;
@@ -55,16 +131,22 @@
 
 			.icon,
 			.icon img {
-				@include set-size(50px, 50px);
+				@include set-size(40px, 40px);
 			}
 
 			.title {
 				text-overflow: ellipsis;
 				overflow: hidden;
 				white-space: nowrap;
-				font-size: 0.8rem;
-				width: 55px;
+				font-size: 0.7rem;
+				width: 65px;
 			}
 		}
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	#explorerWidget .explorer-sidebar.open {
+		border-right: 1px solid set-text-color-transparency($dark-color, 0.2);
 	}
 }

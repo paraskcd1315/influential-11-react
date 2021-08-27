@@ -100,14 +100,36 @@ const Explorer = ({
 	const sidebarClick = (e) => {
 		const key = e.target.id;
 
-		openPage((state) => {
-			const updatedState = state.reduce((memo, [currentKey]) => {
-				if (currentKey === key) {
-					memo[currentKey] = true;
-				} else {
-					memo[currentKey] = false;
-				}
+		setTimeout(() => {
+			setPageStyle((state) => {
+				const updatedState = Object.entries(state).reduce(
+					(memo, [currentKey]) => {
+						if (currentKey === key + 'Style') {
+							memo[currentKey] = pageOpenedStyle;
+						} else {
+							memo[currentKey] = pageClosedStyle;
+						}
+						return memo;
+					},
+					{}
+				);
+
+				return updatedState;
 			});
+		}, 250);
+
+		openPage((state) => {
+			const updatedState = Object.entries(state).reduce(
+				(memo, [currentKey]) => {
+					if (currentKey === key) {
+						memo[currentKey] = true;
+					} else {
+						memo[currentKey] = false;
+					}
+					return memo;
+				},
+				{}
+			);
 
 			return updatedState;
 		});
@@ -116,7 +138,14 @@ const Explorer = ({
 	const explorerContent = () => {
 		return (
 			<div className='explorer-stuff'>
-				<div className={sidebar ? 'explorer-sidebar open' : 'explorer-sidebar'}>
+				<div
+					className={
+						sidebar
+							? maximize
+								? 'explorer-sidebar open maximized'
+								: 'explorer-sidebar open'
+							: 'explorer-sidebar'
+					}>
 					<SidebarButton
 						id='favouriteAppsPage'
 						active={favouriteAppsPage}
@@ -134,8 +163,57 @@ const Explorer = ({
 							sidebarClick(e);
 						}}
 					/>
+					<SidebarButton
+						id='documentsAppsPage'
+						active={documentsAppsPage}
+						icon={() => {
+							return (
+								<img src='assets/explorerIcons/Documents.png' alt='Documents' />
+							);
+						}}
+						title='Document Apps'
+						callback={(e) => {
+							sidebarClick(e);
+						}}
+					/>
+					<SidebarButton
+						id='photosAppsPage'
+						active={photosAppsPage}
+						icon={() => {
+							return <img src='assets/explorerIcons/Photos.png' alt='Photos' />;
+						}}
+						title='Photo Apps'
+						callback={(e) => {
+							sidebarClick(e);
+						}}
+					/>
+					<SidebarButton
+						id='musicAppsPage'
+						active={musicAppsPage}
+						icon={() => {
+							return <img src='assets/explorerIcons/Music.png' alt='Music' />;
+						}}
+						title='Music Apps'
+						callback={(e) => {
+							sidebarClick(e);
+						}}
+					/>
+					<SidebarButton
+						id='videoAppsPage'
+						active={videoAppsPage}
+						icon={() => {
+							return <img src='assets/explorerIcons/Video.png' alt='Video' />;
+						}}
+						title='Video Apps'
+						callback={(e) => {
+							sidebarClick(e);
+						}}
+					/>
 				</div>
-				<div className='explorer-main'>
+				<div
+					className={
+						sidebar ? 'explorer-main sidebar-opened' : 'explorer-main'
+					}>
 					{favouriteAppsPage ? (
 						<PageMaker
 							id='favouriteApps'
@@ -151,7 +229,9 @@ const Explorer = ({
 							}}
 							appReducer={appsReducer}
 							apps={dockIcons}
+							maximize={maximize}
 							style={favouriteAppsPageStyle}
+							dockIcons={dockIcons}
 						/>
 					) : (
 						''
@@ -169,14 +249,15 @@ const Explorer = ({
 								);
 							}}
 							appReducer={appsReducer}
-							apps={documentApps}
+							apps={documentApps.apps}
+							maximize={maximize}
 							style={documentsAppsPageStyle}
 						/>
 					) : (
 						''
 					)}
 					{photosAppsPage ? (
-						<pageMaker
+						<PageMaker
 							id='photosApps'
 							headerTitle='Photo Apps'
 							headerIcon={() => {
@@ -185,35 +266,38 @@ const Explorer = ({
 								);
 							}}
 							appReducer={appsReducer}
-							apps={photoApps}
+							apps={photoApps.apps}
+							maximize={maximize}
 							style={photosAppsPageStyle}
 						/>
 					) : (
 						''
 					)}
 					{musicAppsPage ? (
-						<pageMaker
+						<PageMaker
 							id='musicApps'
 							headerTitle='Music Apps'
 							headerIcon={() => {
 								return <img src='assets/explorerIcons/Music.png' alt='Music' />;
 							}}
 							appReducer={appsReducer}
-							apps={musicApps}
+							apps={musicApps.apps}
+							maximize={maximize}
 							style={musicAppsPageStyle}
 						/>
 					) : (
 						''
 					)}
 					{videoAppsPage ? (
-						<pageMaker
+						<PageMaker
 							id='videoApps'
 							headerTitle='Video Apps'
 							headerIcon={() => {
 								return <img src='assets/explorerIcons/Video.png' alt='Video' />;
 							}}
 							appReducer={appsReducer}
-							apps={videoApps}
+							apps={videoApps.apps}
+							maximize={maximize}
 							style={videoAppsPageStyle}
 						/>
 					) : (
@@ -282,7 +366,6 @@ const Explorer = ({
 				id={'explorerWidget'}
 				className={'desktopWidget'}
 				title={''}
-				showBackButton={true}
 				showMenu={true}
 				showMaximiseButton={true}
 				startMenu={false}

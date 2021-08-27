@@ -1,5 +1,9 @@
 //iPhone 12 Pro Max
 @media only screen and (max-height: 926px) {
+	#startMenu {
+		bottom: 13rem;
+	}
+
 	#startMenu #pinnedApps {
 		height: 240px;
 	}
@@ -22,7 +26,7 @@
 	}
 
 	#allApps {
-		height: 380px;
+		height: 430px;
 	}
 
 	#startMenu .widget {
@@ -53,7 +57,7 @@
 
 	#startMenu #pinnedWidgets {
 		margin-top: -16px;
-		height: 125px;
+		height: 140px;
 	}
 
 	#allApps {
@@ -82,6 +86,18 @@
 			width: 92%;
 		}
 	}
+
+	#explorerWidget .explorer-apps .explorerApp {
+		width: 60px;
+	}
+
+	#explorerWidget .explorer-apps {
+		padding-left: 1.5rem;
+	}
+
+	#startMenu .startTabs {
+		height: 510px;
+	}
 }
 
 //iPhone X/XS/11/11Pro
@@ -91,11 +107,11 @@
 	}
 
 	#startMenu .startTabs {
-		height: 490px;
+		height: 480px;
 	}
 
 	#allApps {
-		height: 355px;
+		height: 350px;
 	}
 
 	#startMenu #pinnedApps {
@@ -103,8 +119,8 @@
 	}
 
 	#startMenu #pinnedWidgets {
-		margin-top: -15px;
-		height: 120px;
+		margin-top: -10px;
+		height: 130px;
 	}
 
 	.settings {
@@ -127,12 +143,26 @@
 			width: 92%;
 		}
 	}
+
 	.desktopWidget .weather-content .weather-daily img {
 		@include set-size(40px, 40px);
 	}
 
 	.desktopWidget .weather-content .weather-daily .weather-temperature {
 		font-size: 0.8rem;
+	}
+
+	#explorerWidget .explorer-apps .explorerApp .icon,
+	#explorerWidget .explorer-apps .explorerApp .icon img {
+		@include set-size(40px, 40px);
+	}
+
+	#explorerWidget .explorer-apps .explorerApp {
+		width: 60px;
+	}
+
+	#explorerWidget .explorer-apps {
+		padding-left: 1.2rem;
 	}
 }
 
@@ -155,8 +185,8 @@
 	}
 
 	#startMenu #pinnedWidgets {
-		height: 100px;
-		margin-top: -20px;
+		height: 120px;
+		margin-top: -15px;
 	}
 
 	.startWidget .weather-content .weather-left .weather-temperature {
@@ -203,6 +233,10 @@
 	.desktopWidget .weather-content .weather-daily .weather-temperature {
 		font-size: 0.8rem;
 	}
+
+	#explorerWidget .explorer-apps {
+		padding-left: 0.75rem;
+	}
 }
 
 //iPhone 6/7/8 plus
@@ -248,6 +282,14 @@
 		&-inputSwitch {
 			width: 92%;
 		}
+	}
+
+	#explorerWidget .explorer-apps .explorerApp {
+		width: 65px;
+	}
+
+	#explorerWidget .explorer-apps {
+		padding-left: 1.5rem;
 	}
 }
 
@@ -300,5 +342,18 @@
 		&-inputSwitch {
 			width: 92%;
 		}
+	}
+
+	#explorerWidget .explorer-apps .explorerApp {
+		width: 60px;
+	}
+
+	#explorerWidget .explorer-apps {
+		padding-left: 1.2rem;
+	}
+
+	#explorerWidget .explorer-apps .explorerApp .icon,
+	#explorerWidget .explorer-apps .explorerApp .icon img {
+		@include set-size(40px, 40px);
 	}
 }
