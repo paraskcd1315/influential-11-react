@@ -12,6 +12,8 @@
 /build
 
 /public/assets/
+/public/xenEmulationStuff/
+/public/emulation.js
 
 /src/fluent-system-icons
 
