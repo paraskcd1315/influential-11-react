@@ -8,7 +8,12 @@ import {
 	REPLACE_APPS,
 	REMOVE_APPS,
 	ADD_VALUE,
-	REMOVE_VALUE
+	REMOVE_VALUE,
+	ADD_DOCUMENT_FOLDER,
+	REMOVE_DOCUMENT_FOLDER,
+	ADD_PHOTO_FOLDER,
+	ADD_MUSIC_FOLDER,
+	ADD_VIDEO_FOLDER
 } from '../actions/types';
 
 const initialState = localStorage.getItem('FluentUI')
@@ -44,6 +49,31 @@ function storageReducer(state = initialState, action) {
 			return {
 				...state,
 				extraValues: payload
+			};
+
+		case ADD_DOCUMENT_FOLDER:
+		case REMOVE_DOCUMENT_FOLDER:
+			return {
+				...state,
+				documentFolders: payload
+			};
+
+		case ADD_PHOTO_FOLDER:
+			return {
+				...state,
+				photoFolders: payload
+			};
+
+		case ADD_MUSIC_FOLDER:
+			return {
+				...state,
+				musicFolders: payload
+			};
+
+		case ADD_VIDEO_FOLDER:
+			return {
+				...state,
+				videoFolders: payload
 			};
 
 		default:

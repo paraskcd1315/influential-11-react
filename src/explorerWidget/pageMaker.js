@@ -5,6 +5,7 @@
 
 import React from 'react';
 import App from '../components/individualComponents/App';
+import Folder from './folder';
 
 const PageMaker = ({
 	id,
@@ -12,10 +13,34 @@ const PageMaker = ({
 	headerIcon,
 	style,
 	apps,
+	folders,
 	maximize,
 	appReducer: { allApplications },
 	dockIcons
 }) => {
+	const renderFolders = () => {
+		if (folders && Object.keys(folders).length !== 0) {
+			return Object.keys(folders).map((folder, index) => {
+				return (
+					<Folder
+						key={folder}
+						identifier={folder}
+						icon={() => {
+							return <img src='assets/explorerIcons/Folder.png' alt='Folder' />;
+						}}
+						name={folders[folder].folderName}
+						callback={(e) => {
+							return;
+						}}
+						fromPage={id}
+					/>
+				);
+			});
+		} else {
+			return '';
+		}
+	};
+
 	const renderApps = () => {
 		if (dockIcons) {
 			const filteredApps = allApplications.filter((app) => {
@@ -41,12 +66,12 @@ const PageMaker = ({
 				result.map((app) => {
 					return (
 						<App
-							key={app.identifier + 'explorerApp'}
+							key={app.identifier + 'explorerFavApp'}
 							identifier={app.identifier}
 							badge={app.badge}
 							icon={app.icon}
 							name={app.name}
-							className={'explorerApp'}
+							className={'explorerFavApp'}
 							hideName={false}
 						/>
 					);
@@ -85,6 +110,7 @@ const PageMaker = ({
 				<div className='explorer-title'>{headerTitle}</div>
 			</div>
 			<div className={!maximize ? 'explorer-apps' : 'explorer-apps maximized'}>
+				{renderFolders()}
 				{renderApps()}
 			</div>
 		</div>

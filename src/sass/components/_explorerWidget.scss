@@ -118,7 +118,9 @@
 			height: 285px;
 		}
 
-		.explorerApp {
+		.explorerFavApp,
+		.explorerApp,
+		.explorerFolder {
 			text-align: center;
 			display: flex;
 			flex-direction: column;

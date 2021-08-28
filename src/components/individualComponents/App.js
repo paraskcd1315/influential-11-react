@@ -37,7 +37,7 @@ const App = ({
 	const longPress = useLongPress(
 		() => {
 			if (!menuReducer.replaceApp) {
-				if (className === 'app') {
+				if (className === 'app' || className === 'explorerApp') {
 					showAddAppsMenu({
 						identifier: identifier,
 						name: name,

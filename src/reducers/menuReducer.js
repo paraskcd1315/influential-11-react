@@ -3,7 +3,11 @@
  * All rights reserved.
  */
 
-import { ADD_APPS_MENU, REPLACE_APPS_MENU } from '../actions/types';
+import {
+	ADD_APPS_MENU,
+	REMOVE_FOLDER_MENU,
+	REPLACE_APPS_MENU
+} from '../actions/types';
 
 const initialState = {
 	identifier: '',
@@ -11,7 +15,9 @@ const initialState = {
 	icon: '',
 	removeApp: false,
 	replaceApp: false,
-	addApp: false
+	removeFolder: false,
+	addApp: false,
+	addAppToFolder: false
 };
 
 function menuReducer(state = initialState, action) {
@@ -35,6 +41,16 @@ function menuReducer(state = initialState, action) {
 				icon: payload.icon,
 				replaceApp: payload.replaceApp,
 				removeApp: payload.removeApp
+			};
+
+		case REMOVE_FOLDER_MENU:
+			return {
+				...state,
+				identifier: payload.folderID,
+				name: payload.folderName,
+				icon: payload.icon ? 'assets/explorerIcons/Folder.png' : '',
+				removeFolder: payload.removeFolder,
+				fromPage: payload.fromPage ? payload.fromPage : null
 			};
 
 		default:

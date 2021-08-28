@@ -1,15 +1,18 @@
 import {
 	ADD_DOCUMENT_FOLDER,
+	REMOVE_DOCUMENT_FOLDER,
 	ADD_PHOTO_FOLDER,
 	ADD_MUSIC_FOLDER,
 	ADD_VIDEO_FOLDER
 } from '../actions/types';
 
-const localstore = localStorage.getItem('FluentUI');
+const localstore = JSON.parse(localStorage.getItem('FluentUI'));
 
 const initialState = {
 	documentApps: {
-		folders: localstore.documentFolders ? localstore.documentFolders : {},
+		documentFolders: localstore.documentFolders
+			? localstore.documentFolders
+			: {},
 		apps: [
 			'ru.domo.cocoatop64',
 			'com.getdropbox.Dropbox',
@@ -58,7 +61,7 @@ const initialState = {
 		]
 	},
 	musicApps: {
-		folders: localstore.musicFolders ? localstore.musicFolders : {},
+		musicFolders: localstore.musicFolders ? localstore.musicFolders : {},
 		apps: [
 			'com.apple.Music',
 			'com.spotify.client',
@@ -90,7 +93,7 @@ const initialState = {
 		]
 	},
 	videoApps: {
-		folders: localstore.videoFolders ? localstore.videoFolders : {},
+		videoFolders: localstore.videoFolders ? localstore.videoFolders : {},
 		apps: [
 			'com.google.ios.youtube',
 			'com.netflix.Netflix',
@@ -130,7 +133,7 @@ const initialState = {
 		]
 	},
 	photoApps: {
-		folders: localstore.photoFolders ? localstore.photoFolders : {},
+		photoFolders: localstore.photoFolders ? localstore.photoFolders : {},
 		apps: [
 			'com.burbn.instagram',
 			'com.toyopagroup.picaboo',
@@ -177,6 +180,7 @@ function explorerAppsReducer(state = initialState, action) {
 
 	switch (type) {
 		case ADD_DOCUMENT_FOLDER:
+		case REMOVE_DOCUMENT_FOLDER:
 			return {
 				...state,
 				documentApps: {

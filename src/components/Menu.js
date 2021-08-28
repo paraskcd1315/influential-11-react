@@ -9,7 +9,12 @@ import { connect } from 'react-redux';
 import MenuButton from './individualComponents/MenuButton';
 import { addApp, removeApp } from '../actions/storage';
 import { showMenu, openStartMenu } from '../actions/components';
-import { showAddAppsMenu, showReplaceAppsMenu } from '../actions/menu';
+import { removeFolderFromDocuments } from '../actions/explorer';
+import {
+	showAddAppsMenu,
+	showReplaceAppsMenu,
+	showRemoveFolderMenu
+} from '../actions/menu';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
@@ -21,9 +26,11 @@ const Menu = ({
 	showMenu,
 	showAddAppsMenu,
 	showReplaceAppsMenu,
+	showRemoveFolderMenu,
 	openStartMenu,
 	menuStyle,
-	hideMenu
+	hideMenu,
+	removeFolderFromDocuments
 }) => {
 	const { identifier, icon, name } = menuReducer;
 	const [style, setStyle] = useState({ pointerEvents: 'none' });
@@ -72,7 +79,30 @@ const Menu = ({
 					}}
 				/>
 			);
-		} else {
+		}
+		if (menuReducer.removeFolder) {
+			return (
+				<MenuButton
+					icon={'icon-ic_fluent_folder_prohibited_24_regular'}
+					title={'Remove Folder'}
+					callback={() => {
+						removeFolderFromDocuments(identifier);
+						showRemoveFolderMenu({
+							identifier: '',
+							name: '',
+							icon: '',
+							removeFolder: false
+						});
+						hideMenu();
+						setStyle({ pointerEvents: 'none' });
+						setTimeout(() => {
+							showMenu(false);
+						}, 250);
+					}}
+				/>
+			);
+		}
+		if (menuReducer.replaceApp) {
 			return (
 				<>
 					<MenuButton
@@ -141,6 +171,13 @@ const Menu = ({
 									name: '',
 									addApp: false
 								});
+							} else if (menuReducer.removeFolder) {
+								showRemoveFolderMenu({
+									folderID: '',
+									folderName: '',
+									icon: false,
+									removeFolder: false
+								});
 							} else {
 								showReplaceAppsMenu({
 									identifier: '',
@@ -196,7 +233,9 @@ export default connect(mapStateToProps, {
 	showMenu,
 	showAddAppsMenu,
 	showReplaceAppsMenu,
+	showRemoveFolderMenu,
 	addApp,
 	removeApp,
-	openStartMenu
+	openStartMenu,
+	removeFolderFromDocuments
 })(Menu);

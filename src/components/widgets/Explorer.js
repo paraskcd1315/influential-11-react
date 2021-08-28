@@ -8,6 +8,12 @@ import { connect } from 'react-redux';
 
 import { openExplorer } from '../../actions/widget';
 import { addValue, removeValue } from '../../actions/storage';
+import {
+	addFolderToDocument,
+	addFolderToPhotos,
+	addFolderToMusic,
+	addFolderToVideo
+} from '../../actions/explorer';
 import { DraggableCore } from 'react-draggable';
 import WidgetMaker from '../individualComponents/WidgetMaker';
 import PageMaker from '../../explorerWidget/pageMaker';
@@ -20,7 +26,11 @@ const Explorer = ({
 	explorerAppsReducer: { documentApps, musicApps, videoApps, photoApps },
 	openExplorer,
 	addValue,
-	removeValue
+	removeValue,
+	addFolderToDocument,
+	addFolderToPhotos,
+	addFolderToMusic,
+	addFolderToVideo
 }) => {
 	const [style, setStyle] = useState({
 		maxHeight: 300 + 'px',
@@ -160,7 +170,43 @@ const Explorer = ({
 								);
 							}}
 							title='Add Folder'
-							callback={(e) => {}}
+							callback={(e) => {
+								const popup = prompt('Please enter the folder Name', '');
+								if (popup !== null) {
+									switch (true) {
+										default:
+											break;
+										case documentsAppsPage:
+											addFolderToDocument({
+												folderID: popup.replace(/\s+/g, '').trim(),
+												folderName: popup,
+												apps: []
+											});
+											break;
+										case photosAppsPage:
+											addFolderToPhotos({
+												folderID: popup.replace(/\s+/g, '').trim(),
+												folderName: popup,
+												apps: []
+											});
+											break;
+										case musicAppsPage:
+											addFolderToMusic({
+												folderID: popup.replace(/\s+/g, '').trim(),
+												folderName: popup,
+												apps: []
+											});
+											break;
+										case videoAppsPage:
+											addFolderToVideo({
+												folderID: popup.replace(/\s+/g, '').trim(),
+												folderName: popup,
+												apps: []
+											});
+											break;
+									}
+								}
+							}}
 						/>
 					) : (
 						''
@@ -257,7 +303,7 @@ const Explorer = ({
 					)}
 					{documentsAppsPage ? (
 						<PageMaker
-							id='documentsApps'
+							id='documentApps'
 							headerTitle='Document Apps'
 							headerIcon={() => {
 								return (
@@ -269,6 +315,7 @@ const Explorer = ({
 							}}
 							appReducer={appsReducer}
 							apps={documentApps.apps}
+							folders={documentApps.documentFolders}
 							maximize={maximize}
 							style={documentsAppsPageStyle}
 						/>
@@ -277,7 +324,7 @@ const Explorer = ({
 					)}
 					{photosAppsPage ? (
 						<PageMaker
-							id='photosApps'
+							id='photoApps'
 							headerTitle='Photo Apps'
 							headerIcon={() => {
 								return (
@@ -286,6 +333,7 @@ const Explorer = ({
 							}}
 							appReducer={appsReducer}
 							apps={photoApps.apps}
+							folders={photoApps.photoFolders}
 							maximize={maximize}
 							style={photosAppsPageStyle}
 						/>
@@ -301,6 +349,7 @@ const Explorer = ({
 							}}
 							appReducer={appsReducer}
 							apps={musicApps.apps}
+							folders={musicApps.musicFolders}
 							maximize={maximize}
 							style={musicAppsPageStyle}
 						/>
@@ -316,6 +365,7 @@ const Explorer = ({
 							}}
 							appReducer={appsReducer}
 							apps={videoApps.apps}
+							folders={videoApps.videoFolders}
 							maximize={maximize}
 							style={videoAppsPageStyle}
 						/>
@@ -440,5 +490,9 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
 	openExplorer,
 	addValue,
-	removeValue
+	removeValue,
+	addFolderToDocument,
+	addFolderToPhotos,
+	addFolderToMusic,
+	addFolderToVideo
 })(Explorer);
