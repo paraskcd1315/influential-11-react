@@ -13,7 +13,12 @@ import {
 	REMOVE_DOCUMENT_FOLDER,
 	ADD_PHOTO_FOLDER,
 	ADD_MUSIC_FOLDER,
-	ADD_VIDEO_FOLDER
+	ADD_VIDEO_FOLDER,
+	ADD_APP_TO_FOLDER,
+	REMOVE_APP_FROM_FOLDER,
+	REMOVE_PHOTO_FOLDER,
+	REMOVE_MUSIC_FOLDER,
+	REMOVE_VIDEO_FOLDER
 } from '../actions/types';
 
 const initialState = localStorage.getItem('FluentUI')
@@ -51,6 +56,23 @@ function storageReducer(state = initialState, action) {
 				extraValues: payload
 			};
 
+		case ADD_APP_TO_FOLDER:
+		case REMOVE_APP_FROM_FOLDER:
+			if (payload.flag) {
+				return state;
+			} else {
+				return {
+					...state,
+					[payload.pageID]: {
+						...state[payload.pageID],
+						[payload.folderID]: {
+							...state[payload.pageID][payload.folderID],
+							apps: payload.apps
+						}
+					}
+				};
+			}
+
 		case ADD_DOCUMENT_FOLDER:
 		case REMOVE_DOCUMENT_FOLDER:
 			return {
@@ -59,18 +81,21 @@ function storageReducer(state = initialState, action) {
 			};
 
 		case ADD_PHOTO_FOLDER:
+		case REMOVE_PHOTO_FOLDER:
 			return {
 				...state,
 				photoFolders: payload
 			};
 
 		case ADD_MUSIC_FOLDER:
+		case REMOVE_MUSIC_FOLDER:
 			return {
 				...state,
 				musicFolders: payload
 			};
 
 		case ADD_VIDEO_FOLDER:
+		case REMOVE_VIDEO_FOLDER:
 			return {
 				...state,
 				videoFolders: payload

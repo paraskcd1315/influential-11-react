@@ -183,8 +183,59 @@ const Common = ({
 		});
 	};
 
+	const [hideExplorerBGStyle, sethideExplorerBGStyle] = useState('');
+	const [hideExplorerFolderTitleStyle, sethideExplorerFolderTitleStyle] =
+		useState('');
+
+	useEffect(() => {
+		sethideExplorerBGStyle((state) => {
+			let newState = state;
+			if (storage.extraValues) {
+				if (storage.extraValues.hideExplorerBG) {
+					newState += `
+						#explorerWidget:before {
+							content: unset;
+							backdrop-filter: unset;
+							-webkit-backdrop-filter: unset;
+						}
+						#explorerWidget {
+							background-color: transparent;
+							border: none!important;
+							box-shadow: unset;
+						}
+					`;
+				}
+			}
+			return newState;
+		});
+		sethideExplorerFolderTitleStyle((state) => {
+			let newState = state;
+			if (storage.extraValues) {
+				if (storage.extraValues.hideExplorerFolderTitle) {
+					newState += `
+						#explorerWidget .explorer-header {
+							display: none;
+						}
+					`;
+				}
+			}
+			return newState;
+		});
+		//eslint-disable-next-line
+	}, [storage]);
+
 	return (
 		<>
+			{/* <div
+				className='wallpaper'
+				style={{
+					backgroundImage: 'url(https://wallpapercave.com/wp/wp8791332.jpg)',
+					width: '100vw',
+					height: '100vh',
+					backgroundSize: 'contain',
+					zIndex: -1,
+					position: 'absolute'
+				}}></div> */}
 			<Desktop />
 			<Taskbar
 				buttonAnimate={buttonAnimate}
@@ -201,6 +252,18 @@ const Common = ({
 			)}
 			{showMenu ? <Menu menuStyle={menuStyle} hideMenu={hideMenu} /> : ''}
 			{ccOpen ? <ControlCenter ccStyle={ccStyle} /> : ''}
+			{storage.extraValues && storage.extraValues.hideExplorerBG ? (
+				<style id='hideExplorerBG'>{hideExplorerBGStyle}</style>
+			) : (
+				''
+			)}
+			{storage.extraValues && storage.extraValues.hideExplorerFolderTitle ? (
+				<style id='hideExplorerFolderTitle'>
+					{hideExplorerFolderTitleStyle}
+				</style>
+			) : (
+				''
+			)}
 		</>
 	);
 };

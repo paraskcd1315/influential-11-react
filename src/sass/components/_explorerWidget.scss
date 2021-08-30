@@ -62,6 +62,7 @@
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				overflow-x: hidden;
+				text-shadow: 0px 1px 5px #0006;
 			}
 		}
 	}
@@ -89,6 +90,7 @@
 			text-overflow: ellipsis;
 			white-space: nowrap;
 			overflow-x: hidden;
+			text-shadow: 0px 1px 5px #0006;
 		}
 	}
 
@@ -118,9 +120,27 @@
 			height: 285px;
 		}
 
+		.folderNoApps,
+		.noApps {
+			padding-top: 1rem;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			font-size: 1.4rem;
+			margin-left: -1rem;
+
+			i {
+				margin-top: 1rem;
+				font-size: 2.5rem;
+			}
+		}
+
 		.explorerFavApp,
 		.explorerApp,
-		.explorerFolder {
+		.explorerFolder,
+		.addApp,
+		.folderApp {
 			text-align: center;
 			display: flex;
 			flex-direction: column;
@@ -128,8 +148,13 @@
 			justify-content: center;
 			@include set-size(71px, 90px);
 
+			&.icon-ic_fluent_add_circle_24_regular {
+				font-size: 30px;
+			}
+
 			.icon {
 				margin-bottom: 0.5rem;
+				pointer-events: none;
 			}
 
 			.icon,
@@ -143,6 +168,21 @@
 				white-space: nowrap;
 				font-size: 0.7rem;
 				width: 65px;
+				pointer-events: none;
+				text-shadow: 0px 1px 5px #0006;
+			}
+
+			.badge {
+				position: absolute;
+				@include set-size(10px, 10px);
+				@include set-border-radius(5rem);
+				background-color: set-transparency($dark-color, 0.4);
+				margin: -20px 0 0 30px;
+				@include set-shadows(
+					set-transparency($dark-color, 0.3),
+					set-transparency($dark-color, 0.2)
+				);
+				pointer-events: none;
 			}
 		}
 	}
@@ -151,5 +191,12 @@
 @media (prefers-color-scheme: dark) {
 	#explorerWidget .explorer-sidebar.open {
 		border-right: 1px solid set-text-color-transparency($dark-color, 0.2);
+	}
+	#explorerWidget .explorer-apps .explorerFavApp .badge,
+	#explorerWidget .explorer-apps .explorerApp .badge,
+	#explorerWidget .explorer-apps .explorerFolder .badge,
+	#explorerWidget .explorer-apps .addApp .badge,
+	#explorerWidget .explorer-apps .folderApp .badge {
+		background-color: set-transparency($light-color, 0.4);
 	}
 }

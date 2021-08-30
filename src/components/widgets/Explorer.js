@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import { openFolder, closeFolder } from '../../actions/components';
 import { openExplorer } from '../../actions/widget';
 import { addValue, removeValue } from '../../actions/storage';
 import {
@@ -22,18 +23,22 @@ import SidebarButton from '../../explorerWidget/sidebarButton';
 const Explorer = ({
 	appsReducer,
 	widgetReducer: { explorerOpen },
-	storageReducer: { extraValues, dockIcons },
+	storageReducer,
 	explorerAppsReducer: { documentApps, musicApps, videoApps, photoApps },
+	explorerCustomFolderReducer: { folderID, pageID },
 	openExplorer,
 	addValue,
 	removeValue,
 	addFolderToDocument,
 	addFolderToPhotos,
 	addFolderToMusic,
-	addFolderToVideo
+	addFolderToVideo,
+	openFolder,
+	closeFolder
 }) => {
+	const { extraValues, dockIcons } = storageReducer;
 	const [style, setStyle] = useState({
-		maxHeight: 300 + 'px',
+		maxHeight: extraValues.explorerMaximized ? 400 + 'px' : 300 + 'px',
 		opacity: 0,
 		transform: !extraValues
 			? 'translate(-50%, 0px)'
@@ -63,6 +68,12 @@ const Explorer = ({
 
 	const [maximize, setMaximize] = useState(false);
 
+	useEffect(() => {
+		if (extraValues && extraValues.explorerMaximized) {
+			setMaximize(true);
+		}
+	}, [extraValues]);
+
 	const [sidebar, openSidebar] = useState(false);
 
 	const [pageOpened, openPage] = useState({
@@ -70,7 +81,8 @@ const Explorer = ({
 		documentsAppsPage: false,
 		photosAppsPage: false,
 		musicAppsPage: false,
-		videoAppsPage: false
+		videoAppsPage: false,
+		customFolderPage: false
 	});
 
 	const {
@@ -78,7 +90,8 @@ const Explorer = ({
 		documentsAppsPage,
 		photosAppsPage,
 		musicAppsPage,
-		videoAppsPage
+		videoAppsPage,
+		customFolderPage
 	} = pageOpened;
 
 	const pageOpenedStyle = {
@@ -96,7 +109,8 @@ const Explorer = ({
 		documentsAppsPageStyle: pageClosedStyle,
 		photosAppsPageStyle: pageClosedStyle,
 		musicAppsPageStyle: pageClosedStyle,
-		videoAppsPageStyle: pageClosedStyle
+		videoAppsPageStyle: pageClosedStyle,
+		customFolderPageStyle: pageClosedStyle
 	});
 
 	const {
@@ -104,11 +118,12 @@ const Explorer = ({
 		documentsAppsPageStyle,
 		photosAppsPageStyle,
 		musicAppsPageStyle,
-		videoAppsPageStyle
+		videoAppsPageStyle,
+		customFolderPageStyle
 	} = pageStyle;
 
-	const sidebarClick = (e) => {
-		const key = e.target.id;
+	const sidebarClick = (e, specialKey) => {
+		const key = !specialKey ? e.target.id : specialKey;
 
 		setTimeout(() => {
 			setPageStyle((state) => {
@@ -132,8 +147,14 @@ const Explorer = ({
 			const updatedState = Object.entries(state).reduce(
 				(memo, [currentKey]) => {
 					if (currentKey === key) {
+						if (key !== 'customFolderPage') {
+							addValue({ key: '' + key, value: true });
+						}
 						memo[currentKey] = true;
 					} else {
+						if (extraValues[currentKey] && key !== 'customFolderPage') {
+							removeValue(currentKey);
+						}
 						memo[currentKey] = false;
 					}
 					return memo;
@@ -144,6 +165,234 @@ const Explorer = ({
 			return updatedState;
 		});
 	};
+
+	useEffect(() => {
+		let key = 'favouriteAppsPage';
+		switch (true) {
+			case extraValues.favouriteAppsPage:
+				key = 'favouriteAppsPage';
+				setPageStyle((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key + 'Style') {
+								memo[currentKey] = pageOpenedStyle;
+							} else {
+								memo[currentKey] = pageClosedStyle;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				openPage((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key) {
+								memo[currentKey] = true;
+							} else {
+								if (extraValues[currentKey]) {
+									removeValue(currentKey);
+								}
+								memo[currentKey] = false;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				break;
+
+			case extraValues.documentsAppsPage:
+				key = 'documentsAppsPage';
+				setPageStyle((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key + 'Style') {
+								memo[currentKey] = pageOpenedStyle;
+							} else {
+								memo[currentKey] = pageClosedStyle;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				openPage((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key) {
+								memo[currentKey] = true;
+							} else {
+								if (extraValues[currentKey]) {
+									removeValue(currentKey);
+								}
+								memo[currentKey] = false;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				break;
+
+			case extraValues.photosAppsPage:
+				key = 'photosAppsPage';
+				setPageStyle((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key + 'Style') {
+								memo[currentKey] = pageOpenedStyle;
+							} else {
+								memo[currentKey] = pageClosedStyle;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				openPage((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key) {
+								memo[currentKey] = true;
+							} else {
+								if (extraValues[currentKey]) {
+									removeValue(currentKey);
+								}
+								memo[currentKey] = false;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				break;
+
+			case extraValues.musicAppsPage:
+				key = 'musicAppsPage';
+				setPageStyle((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key + 'Style') {
+								memo[currentKey] = pageOpenedStyle;
+							} else {
+								memo[currentKey] = pageClosedStyle;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				openPage((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key) {
+								memo[currentKey] = true;
+							} else {
+								if (extraValues[currentKey]) {
+									removeValue(currentKey);
+								}
+								memo[currentKey] = false;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				break;
+
+			case extraValues.videoAppsPage:
+				key = 'videoAppsPage';
+				setPageStyle((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key + 'Style') {
+								memo[currentKey] = pageOpenedStyle;
+							} else {
+								memo[currentKey] = pageClosedStyle;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				openPage((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key) {
+								memo[currentKey] = true;
+							} else {
+								if (extraValues[currentKey]) {
+									removeValue(currentKey);
+								}
+								memo[currentKey] = false;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				break;
+
+			default:
+				setPageStyle((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key + 'Style') {
+								memo[currentKey] = pageOpenedStyle;
+							} else {
+								memo[currentKey] = pageClosedStyle;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				openPage((state) => {
+					const updatedState = Object.entries(state).reduce(
+						(memo, [currentKey]) => {
+							if (currentKey === key) {
+								memo[currentKey] = true;
+							} else {
+								if (extraValues[currentKey]) {
+									removeValue(currentKey);
+								}
+								memo[currentKey] = false;
+							}
+							return memo;
+						},
+						{}
+					);
+
+					return updatedState;
+				});
+				break;
+		}
+
+		//eslint-disable-next-line
+	}, []);
 
 	const explorerContent = () => {
 		return (
@@ -318,6 +567,16 @@ const Explorer = ({
 							folders={documentApps.documentFolders}
 							maximize={maximize}
 							style={documentsAppsPageStyle}
+							folderClick={(e) => {
+								openFolder({
+									folderID: e.target.id,
+									pageID: 'documentFolders',
+									page: 'documentApps'
+								});
+								setTimeout(() => {
+									sidebarClick(e, 'customFolderPage');
+								}, 150);
+							}}
 						/>
 					) : (
 						''
@@ -336,6 +595,16 @@ const Explorer = ({
 							folders={photoApps.photoFolders}
 							maximize={maximize}
 							style={photosAppsPageStyle}
+							folderClick={(e) => {
+								openFolder({
+									folderID: e.target.id,
+									pageID: 'photoFolders',
+									page: 'photoApps'
+								});
+								setTimeout(() => {
+									sidebarClick(e, 'customFolderPage');
+								}, 150);
+							}}
 						/>
 					) : (
 						''
@@ -352,6 +621,16 @@ const Explorer = ({
 							folders={musicApps.musicFolders}
 							maximize={maximize}
 							style={musicAppsPageStyle}
+							folderClick={(e) => {
+								openFolder({
+									folderID: e.target.id,
+									pageID: 'musicFolders',
+									page: 'musicApps'
+								});
+								setTimeout(() => {
+									sidebarClick(e, 'customFolderPage');
+								}, 150);
+							}}
 						/>
 					) : (
 						''
@@ -368,6 +647,37 @@ const Explorer = ({
 							folders={videoApps.videoFolders}
 							maximize={maximize}
 							style={videoAppsPageStyle}
+							folderClick={(e) => {
+								openFolder({
+									folderID: e.target.id,
+									pageID: 'videoFolders',
+									page: 'videoApps'
+								});
+								setTimeout(() => {
+									sidebarClick(e, 'customFolderPage');
+								}, 150);
+							}}
+						/>
+					) : (
+						''
+					)}
+					{customFolderPage ? (
+						<PageMaker
+							id={folderID}
+							headerTitle={storageReducer[pageID][folderID].folderName}
+							headerIcon={() => {
+								return (
+									<img
+										src='assets/explorerIcons/Folder.png'
+										alt={storageReducer[pageID][folderID].folderName}
+									/>
+								);
+							}}
+							appReducer={appsReducer}
+							apps={storageReducer[pageID][folderID].apps}
+							maximize={maximize}
+							style={customFolderPageStyle}
+							customFolder={true}
 						/>
 					) : (
 						''
@@ -435,6 +745,31 @@ const Explorer = ({
 				id={'explorerWidget'}
 				className={'desktopWidget'}
 				title={''}
+				showBackButton={true}
+				activeBackButton={!customFolderPage}
+				backButtonCallback={(e) => {
+					switch (pageID) {
+						case 'documentFolders':
+							sidebarClick(e, 'documentsAppsPage');
+							break;
+
+						case 'photoFolders':
+							sidebarClick(e, 'photosAppsPage');
+							break;
+
+						case 'musicFolders':
+							sidebarClick(e, 'musicAppsPage');
+							break;
+
+						case 'videoFolders':
+							sidebarClick(e, 'videoAppsPage');
+							break;
+
+						default:
+							break;
+					}
+					closeFolder();
+				}}
 				showMenu={true}
 				showMaximiseButton={true}
 				startMenu={false}
@@ -462,6 +797,7 @@ const Explorer = ({
 								maxHeight: 400 + 'px'
 							};
 						});
+						addValue({ key: 'explorerMaximized', value: true });
 					} else {
 						setMaximize(false);
 						setStyle((state) => {
@@ -470,6 +806,7 @@ const Explorer = ({
 								maxHeight: 300 + 'px'
 							};
 						});
+						removeValue('explorerMaximized');
 					}
 				}}
 				menuButtonCallback={() => {
@@ -484,7 +821,8 @@ const mapStateToProps = (state) => ({
 	appsReducer: state.appsReducer,
 	widgetReducer: state.widgetReducer,
 	storageReducer: state.storageReducer,
-	explorerAppsReducer: state.explorerAppsReducer
+	explorerAppsReducer: state.explorerAppsReducer,
+	explorerCustomFolderReducer: state.explorerCustomFolderReducer
 });
 
 export default connect(mapStateToProps, {
@@ -494,5 +832,7 @@ export default connect(mapStateToProps, {
 	addFolderToDocument,
 	addFolderToPhotos,
 	addFolderToMusic,
-	addFolderToVideo
+	addFolderToVideo,
+	openFolder,
+	closeFolder
 })(Explorer);

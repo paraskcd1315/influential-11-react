@@ -8,7 +8,9 @@ import {
 	OPEN_CC,
 	SEARCHBAR_ACTIVE,
 	SEARCHQUERY,
-	SHOWMENU
+	SHOWMENU,
+	OPEN_FOLDER,
+	CLOSE_FOLDER
 } from './types';
 
 export const openStartMenu = (startMenuOpen) => (dispatch) => {
@@ -43,5 +45,25 @@ export const showMenu = (showMenu) => (dispatch) => {
 	dispatch({
 		type: SHOWMENU,
 		payload: showMenu
+	});
+};
+
+export const openFolder =
+	({ folderID, pageID, page }) =>
+	(dispatch) => {
+		dispatch({
+			type: OPEN_FOLDER,
+			payload: {
+				flag: true,
+				page: page,
+				folderID: folderID,
+				pageID: pageID
+			}
+		});
+	};
+
+export const closeFolder = () => (dispatch) => {
+	dispatch({
+		type: CLOSE_FOLDER
 	});
 };

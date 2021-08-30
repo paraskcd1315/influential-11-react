@@ -3,8 +3,55 @@ import {
 	ADD_PHOTO_FOLDER,
 	ADD_MUSIC_FOLDER,
 	ADD_VIDEO_FOLDER,
-	REMOVE_DOCUMENT_FOLDER
+	REMOVE_DOCUMENT_FOLDER,
+	ADD_APP_TO_FOLDER,
+	REMOVE_APP_FROM_FOLDER,
+	REMOVE_PHOTO_FOLDER,
+	REMOVE_MUSIC_FOLDER,
+	REMOVE_VIDEO_FOLDER
 } from './types';
+
+export const addAppToFolder =
+	({ folderID, pageID, app, page }) =>
+	(dispatch) => {
+		const localstore = JSON.parse(localStorage.getItem('FluentUI'));
+
+		localstore[pageID][folderID].apps.push(app);
+
+		localStorage.setItem('FluentUI', JSON.stringify(localstore));
+
+		dispatch({
+			type: ADD_APP_TO_FOLDER,
+			payload: {
+				flag: false,
+				page: page,
+				pageID: pageID,
+				folderID: folderID,
+				apps: localstore[pageID][folderID].apps
+			}
+		});
+	};
+
+export const removeAppFromFolder =
+	({ folderID, pageID, app, page }) =>
+	(dispatch) => {
+		const localstore = JSON.parse(localStorage.getItem('FluentUI'));
+
+		let index = localstore[pageID][folderID].apps.indexOf(app);
+		localstore[pageID][folderID].apps.splice(index, 1);
+
+		localStorage.setItem('FluentUI', JSON.stringify(localstore));
+
+		dispatch({
+			type: REMOVE_APP_FROM_FOLDER,
+			payload: {
+				page: page,
+				pageID: pageID,
+				folderID: folderID,
+				apps: localstore[pageID][folderID].apps
+			}
+		});
+	};
 
 export const addFolderToDocument =
 	({ folderID, folderName, apps }) =>
@@ -87,6 +134,19 @@ export const addFolderToPhotos =
 		});
 	};
 
+export const removeFolderFromPhotos = (folderID) => (dispatch) => {
+	const localstore = JSON.parse(localStorage.getItem('FluentUI'));
+
+	delete localstore.photoFolders[folderID];
+
+	localStorage.setItem('FluentUI', JSON.stringify(localstore));
+
+	dispatch({
+		type: REMOVE_PHOTO_FOLDER,
+		payload: localstore.photoFolders
+	});
+};
+
 export const addFolderToMusic =
 	({ folderID, folderName, apps }) =>
 	(dispatch) => {
@@ -121,6 +181,19 @@ export const addFolderToMusic =
 		});
 	};
 
+export const removeFolderFromMusic = (folderID) => (dispatch) => {
+	const localstore = JSON.parse(localStorage.getItem('FluentUI'));
+
+	delete localstore.musicFolders[folderID];
+
+	localStorage.setItem('FluentUI', JSON.stringify(localstore));
+
+	dispatch({
+		type: REMOVE_MUSIC_FOLDER,
+		payload: localstore.musicFolders
+	});
+};
+
 export const addFolderToVideo =
 	({ folderID, folderName, apps }) =>
 	(dispatch) => {
@@ -154,3 +227,16 @@ export const addFolderToVideo =
 			payload: localstore.videoFolders
 		});
 	};
+
+export const removeFolderFromVideo = (folderID) => (dispatch) => {
+	const localstore = JSON.parse(localStorage.getItem('FluentUI'));
+
+	delete localstore.videoFolders[folderID];
+
+	localStorage.setItem('FluentUI', JSON.stringify(localstore));
+
+	dispatch({
+		type: REMOVE_VIDEO_FOLDER,
+		payload: localstore.videoFolders
+	});
+};

@@ -5,10 +5,13 @@
 
 import React from 'react';
 
-const InputSwitch = ({ label, inputName, onChange, value }) => {
+const InputSwitch = ({ label, description, inputName, onChange, value }) => {
 	return (
 		<div className='settings-inputSwitch'>
-			<div className='settings-label'>{label}</div>
+			<div>
+				<div className='settings-label'>{label}</div>
+				<div className='settings-description'>{description}</div>
+			</div>
 			<div className='settings-switch'>
 				<input
 					type='checkbox'

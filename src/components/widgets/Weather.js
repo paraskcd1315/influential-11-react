@@ -9,14 +9,13 @@ import { DraggableCore } from 'react-draggable';
 
 import WidgetMaker from '../individualComponents/WidgetMaker';
 import { openWeather } from '../../actions/widget';
-import { addValue } from '../../actions/storage';
-import { removeValue } from '../../actions/storage';
+import { addValue, removeValue } from '../../actions/storage';
 
 const Weather = ({
 	weatherReducer,
 	storageReducer: { extraValues },
 	widgetReducer: { weatherOpen },
-	timeReducer: { date, rawHour },
+	timeReducer: { date },
 	startMenu,
 	openWeather,
 	addValue,
@@ -40,7 +39,11 @@ const Weather = ({
 		}
 
 		return {
-			maxHeight: !startMenu ? '200px' : null,
+			maxHeight: !startMenu
+				? extraValues.weatherMaximized
+					? '400px'
+					: '200px'
+				: null,
 			backgroundColor: color_2,
 			backgroundImage:
 				'linear-gradient(to bottom right,' + color_2 + ',' + color_1 + ')',
@@ -77,6 +80,12 @@ const Weather = ({
 	});
 
 	const [maximize, setMaximize] = useState(false);
+
+	useEffect(() => {
+		if (extraValues && extraValues.weatherMaximized) {
+			setMaximize(true);
+		}
+	}, [extraValues]);
 
 	const weatherContent = () => {
 		return startMenu ? (
@@ -289,9 +298,10 @@ const Weather = ({
 						setStyle((state) => {
 							return {
 								...state,
-								maxHeight: 500 + 'px'
+								maxHeight: 400 + 'px'
 							};
 						});
+						addValue({ key: 'weatherMaximized', value: true });
 					} else {
 						setMaximize(false);
 						setStyle((state) => {
@@ -300,6 +310,7 @@ const Weather = ({
 								maxHeight: 200 + 'px'
 							};
 						});
+						removeValue('weatherMaximized');
 					}
 				}}
 			/>

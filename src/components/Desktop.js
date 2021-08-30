@@ -32,9 +32,9 @@ const Desktop = ({
 
 	return (
 		<div id='desktop'>
+			{explorerOpen ? <Explorer /> : ''}
 			{weatherOpen ? <Weather startMenu={false} /> : ''}
 			{mediaOpen ? <Music startMenu={false} /> : ''}
-			{explorerOpen ? <Explorer /> : ''}
 			{settingsOpen ? <Settings /> : ''}
 		</div>
 	);

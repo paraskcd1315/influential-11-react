@@ -25,7 +25,9 @@ const Settings = ({
 	const [options, setOptions] = useState({
 		username: '',
 		hideIconLabels: false,
-		twentyFourHourTime: false
+		twentyFourHourTime: false,
+		hideExplorerBG: false,
+		hideExplorerFolderTitle: false
 	});
 
 	useEffect(() => {
@@ -45,6 +47,16 @@ const Settings = ({
 				twentyFourHourTime: !storageReducer.extraValues
 					? false
 					: !storageReducer.extraValues.twentyFourHourTime
+					? false
+					: true,
+				hideExplorerBG: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.hideExplorerBG
+					? false
+					: true,
+				hideExplorerFolderTitle: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.hideExplorerFolderTitle
 					? false
 					: true
 			};
@@ -283,9 +295,24 @@ const Settings = ({
 							handleTextChange={handleTextChange}
 							handleSwitchChange={handleSwitchChange}
 						/>
-						<IndividualWidgetSettings style={individualSettingsStyle.style} />
-						<LookNFeelSettings style={lookNFeelSettingsStyle.style} />
-						<ColorSettings style={colorSettingsStyle.style} />
+						<IndividualWidgetSettings
+							style={individualSettingsStyle.style}
+							options={options}
+							handleTextChange={handleTextChange}
+							handleSwitchChange={handleSwitchChange}
+						/>
+						<LookNFeelSettings
+							style={lookNFeelSettingsStyle.style}
+							options={options}
+							handleTextChange={handleTextChange}
+							handleSwitchChange={handleSwitchChange}
+						/>
+						<ColorSettings
+							style={colorSettingsStyle.style}
+							options={options}
+							handleTextChange={handleTextChange}
+							handleSwitchChange={handleSwitchChange}
+						/>
 					</div>
 				</div>
 			</>

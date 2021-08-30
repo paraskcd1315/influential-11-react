@@ -8,7 +8,16 @@ switch (MK1_ARG) {
 		break;
 
 	case 'cellularData':
-		cellularData.setEnabled(!cellularData.isEnabled());
+		confirm(
+			'Influential 11',
+			cellularData.isEnabled()
+				? 'Are you sure you want to Disable Cellular Data?'
+				: 'Are you sure you want to Enable Cellular Data?',
+			(c) => {
+				if (c) cellularData.setEnabled(!cellularData.isEnabled());
+			}
+		);
+
 		break;
 
 	case 'respring':

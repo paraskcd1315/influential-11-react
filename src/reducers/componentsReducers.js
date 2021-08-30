@@ -4,11 +4,14 @@
  */
 
 import {
+	ADD_APP_TO_FOLDER,
 	OPEN_CC,
 	OPEN_START_MENU,
 	SEARCHBAR_ACTIVE,
 	SEARCHQUERY,
-	SHOWMENU
+	SHOWMENU,
+	OPEN_FOLDER,
+	CLOSE_FOLDER
 } from '../actions/types';
 
 const initialState = {
@@ -16,7 +19,9 @@ const initialState = {
 	ccOpen: false,
 	searchbarActive: false,
 	searchQuery: '',
-	showMenu: false
+	showMenu: false,
+	addAppToFolderFlag: false,
+	folderOpened: false
 };
 
 function componentsReducer(state = initialState, action) {
@@ -51,6 +56,24 @@ function componentsReducer(state = initialState, action) {
 			return {
 				...state,
 				showMenu: payload
+			};
+
+		case ADD_APP_TO_FOLDER:
+			return {
+				...state,
+				addAppToFolderFlag: payload.flag
+			};
+
+		case OPEN_FOLDER:
+			return {
+				...state,
+				folderOpened: payload.flag
+			};
+
+		case CLOSE_FOLDER:
+			return {
+				...state,
+				folderOpened: false
 			};
 
 		default:

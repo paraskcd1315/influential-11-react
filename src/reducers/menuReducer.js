@@ -5,6 +5,7 @@
 
 import {
 	ADD_APPS_MENU,
+	REMOVE_APP_FROM_FOLDER_MENU,
 	REMOVE_FOLDER_MENU,
 	REPLACE_APPS_MENU
 } from '../actions/types';
@@ -40,6 +41,15 @@ function menuReducer(state = initialState, action) {
 				name: payload.name,
 				icon: payload.icon,
 				replaceApp: payload.replaceApp,
+				removeApp: payload.removeApp
+			};
+
+		case REMOVE_APP_FROM_FOLDER_MENU:
+			return {
+				...state,
+				identifier: payload.identifier,
+				name: payload.name,
+				icon: payload.icon,
 				removeApp: payload.removeApp
 			};
 

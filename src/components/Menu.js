@@ -9,11 +9,18 @@ import { connect } from 'react-redux';
 import MenuButton from './individualComponents/MenuButton';
 import { addApp, removeApp } from '../actions/storage';
 import { showMenu, openStartMenu } from '../actions/components';
-import { removeFolderFromDocuments } from '../actions/explorer';
+import {
+	removeAppFromFolder,
+	removeFolderFromDocuments,
+	removeFolderFromMusic,
+	removeFolderFromPhotos,
+	removeFolderFromVideo
+} from '../actions/explorer';
 import {
 	showAddAppsMenu,
 	showReplaceAppsMenu,
-	showRemoveFolderMenu
+	showRemoveFolderMenu,
+	showRemoveAppFromFolderMenu
 } from '../actions/menu';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -30,7 +37,13 @@ const Menu = ({
 	openStartMenu,
 	menuStyle,
 	hideMenu,
-	removeFolderFromDocuments
+	removeFolderFromDocuments,
+	removeFolderFromMusic,
+	removeFolderFromPhotos,
+	removeFolderFromVideo,
+	removeAppFromFolder,
+	explorerAppsReducer: { documentApps, musicApps, photoApps, videoApps },
+	explorerCustomFolderReducer: { page, pageID, folderID }
 }) => {
 	const { identifier, icon, name } = menuReducer;
 	const [style, setStyle] = useState({ pointerEvents: 'none' });
@@ -86,12 +99,50 @@ const Menu = ({
 					icon={'icon-ic_fluent_folder_prohibited_24_regular'}
 					title={'Remove Folder'}
 					callback={() => {
-						removeFolderFromDocuments(identifier);
+						if (documentApps.documentFolders[identifier]) {
+							removeFolderFromDocuments(identifier);
+						}
+						if (musicApps.musicFolders[identifier]) {
+							removeFolderFromMusic(identifier);
+						}
+						if (photoApps.photoFolders[identifier]) {
+							removeFolderFromPhotos(identifier);
+						}
+						if (videoApps.videoFolders[identifier]) {
+							removeFolderFromVideo(identifier);
+						}
 						showRemoveFolderMenu({
 							identifier: '',
 							name: '',
 							icon: '',
 							removeFolder: false
+						});
+						hideMenu();
+						setStyle({ pointerEvents: 'none' });
+						setTimeout(() => {
+							showMenu(false);
+						}, 250);
+					}}
+				/>
+			);
+		}
+		if (menuReducer.removeApp && !menuReducer.replaceApp) {
+			return (
+				<MenuButton
+					icon={'icon-ic_fluent_pin_off_24_regular'}
+					title={'Remove App'}
+					callback={() => {
+						removeAppFromFolder({
+							folderID: folderID,
+							page: page,
+							pageID: pageID,
+							app: identifier
+						});
+						showRemoveAppFromFolderMenu({
+							identifier: '',
+							name: '',
+							icon: '',
+							removeApp: false
 						});
 						hideMenu();
 						setStyle({ pointerEvents: 'none' });
@@ -226,7 +277,9 @@ const Menu = ({
 
 const mapStateToProps = (state) => ({
 	componentsReducer: state.componentsReducer,
-	menuReducer: state.menuReducer
+	menuReducer: state.menuReducer,
+	explorerAppsReducer: state.explorerAppsReducer,
+	explorerCustomFolderReducer: state.explorerCustomFolderReducer
 });
 
 export default connect(mapStateToProps, {
@@ -237,5 +290,9 @@ export default connect(mapStateToProps, {
 	addApp,
 	removeApp,
 	openStartMenu,
-	removeFolderFromDocuments
+	removeFolderFromDocuments,
+	removeFolderFromMusic,
+	removeFolderFromPhotos,
+	removeFolderFromVideo,
+	removeAppFromFolder
 })(Menu);

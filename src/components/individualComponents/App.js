@@ -3,15 +3,19 @@
  * All rights reserved.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useLongPress } from 'use-long-press';
 import { connect } from 'react-redux';
 
 import { showMenu, openStartMenu } from '../../actions/components';
 import { replaceApp } from '../../actions/storage';
-import { showAddAppsMenu, showReplaceAppsMenu } from '../../actions/menu';
+import {
+	showAddAppsMenu,
+	showRemoveAppFromFolderMenu,
+	showReplaceAppsMenu
+} from '../../actions/menu';
 import { searchQuery } from '../../actions/components';
-import { useState } from 'react';
+import { addAppToFolder } from '../../actions/explorer';
 
 const App = ({
 	identifier,
@@ -28,9 +32,13 @@ const App = ({
 	replaceApp,
 	searchQuery,
 	hideBadge,
-	componentsReducer: { startMenuOpen },
+	componentsReducer: { startMenuOpen, addAppToFolderFlag, folderOpened },
+	explorerCustomFolderReducer: { page, pageID, folderID },
+	storageReducer: { extraValues },
 	openStartMenu,
-	hideStartMenu
+	hideStartMenu,
+	addAppToFolder,
+	showRemoveAppFromFolderMenu
 }) => {
 	const [moved, setPointerMove] = useState(false);
 
@@ -43,6 +51,14 @@ const App = ({
 						name: name,
 						icon: icon,
 						addApp: true
+					});
+					showMenu(true);
+				} else if (className === 'folderApp') {
+					showRemoveAppFromFolderMenu({
+						identifier: identifier,
+						name: name,
+						icon: icon,
+						removeApp: true
 					});
 					showMenu(true);
 				} else {
@@ -82,6 +98,20 @@ const App = ({
 							replaceApp: false,
 							removeApp: false
 						});
+					} else if (addAppToFolderFlag) {
+						addAppToFolder({
+							flag: false,
+							page: page,
+							pageID: pageID,
+							folderID: folderID,
+							app: identifier
+						});
+						if (startMenuOpen) {
+							hideStartMenu();
+							setTimeout(() => {
+								openStartMenu(false);
+							}, 250);
+						}
 					} else {
 						window.api.apps.launchApplication(identifier);
 						if (startMenuOpen) {
@@ -110,7 +140,13 @@ const App = ({
 			<div className='icon'>
 				<img src={icon} alt={name} />
 			</div>
-			{hideName ? '' : <div className='title'>{name}</div>}
+			{hideName ? (
+				''
+			) : extraValues && extraValues.hideIconLabels ? (
+				''
+			) : (
+				<div className='title'>{name}</div>
+			)}
 		</div>
 	);
 };
@@ -125,5 +161,7 @@ export default connect(mapStateToProps, {
 	showReplaceAppsMenu,
 	searchQuery,
 	replaceApp,
-	openStartMenu
+	openStartMenu,
+	addAppToFolder,
+	showRemoveAppFromFolderMenu
 })(App);

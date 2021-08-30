@@ -42,7 +42,7 @@ export const addValue =
 export const removeValue = (value) => (dispatch) => {
 	const localstore = JSON.parse(localStorage.getItem('FluentUI'));
 
-	localstore.extraValues[value] = null;
+	delete localstore.extraValues[value];
 
 	localStorage.setItem('FluentUI', JSON.stringify(localstore));
 

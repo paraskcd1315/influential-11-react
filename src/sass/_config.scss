@@ -43,7 +43,7 @@ $noise: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51A
 	right: 0;
 	bottom: 0;
 	backdrop-filter: blur($blurStrength) saturate(2);
-	-webkit-backdrop-filter: blur($blurStrength);
+	-webkit-backdrop-filter: blur($blurStrength) saturate(2);
 	background-image: $noise;
 }
 

@@ -3,9 +3,13 @@
  * All rights reserved.
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+
 import App from '../components/individualComponents/App';
 import Folder from './folder';
+import { openStartMenu } from '../actions/components';
+import { ADD_APP_TO_FOLDER } from '../actions/types';
 
 const PageMaker = ({
 	id,
@@ -16,11 +20,26 @@ const PageMaker = ({
 	folders,
 	maximize,
 	appReducer: { allApplications },
-	dockIcons
+	dockIcons,
+	folderClick,
+	customFolder,
+	componentsReducer: { startMenuOpen },
+	openStartMenu,
+	activateAddAppToFolder
 }) => {
+	const [pointerEventss, setPointerEvents] = useState({
+		pointerEvents: 'none'
+	});
+
+	useEffect(() => {
+		setTimeout(() => {
+			setPointerEvents({ pointerEvents: null });
+		}, 250);
+	}, []);
+
 	const renderFolders = () => {
 		if (folders && Object.keys(folders).length !== 0) {
-			return Object.keys(folders).map((folder, index) => {
+			return Object.keys(folders).map((folder) => {
 				return (
 					<Folder
 						key={folder}
@@ -29,9 +48,7 @@ const PageMaker = ({
 							return <img src='assets/explorerIcons/Folder.png' alt='Folder' />;
 						}}
 						name={folders[folder].folderName}
-						callback={(e) => {
-							return;
-						}}
+						callback={folderClick}
 						fromPage={id}
 					/>
 				);
@@ -87,19 +104,79 @@ const PageMaker = ({
 				return apps.includes(app.identifier);
 			});
 
-			return filteredApps.map((app) => {
-				return (
-					<App
-						key={app.identifier + 'explorerApp'}
-						identifier={app.identifier}
-						badge={app.badge}
-						icon={app.icon}
-						name={app.name}
-						className={'explorerApp'}
-						hideName={false}
-					/>
-				);
+			let result = [];
+
+			apps.forEach((key) => {
+				let found = false;
+				filteredApps.filter((item) => {
+					if (!found && item.identifier === key) {
+						result.push(item);
+						found = true;
+						return false;
+					} else {
+						return true;
+					}
+				});
 			});
+
+			return customFolder ? (
+				apps.length < 1 ? (
+					<div
+						style={pointerEventss}
+						className='folderNoApps'
+						onClick={() => {
+							if (!startMenuOpen) {
+								openStartMenu(true);
+							}
+							activateAddAppToFolder({
+								flag: true
+							});
+						}}>
+						Tap here to Pin some Apps to the folder - {headerTitle}.
+						<i className='icon-ic_fluent_add_circle_24_regular'></i>
+					</div>
+				) : (
+					<>
+						{result.map((app) => {
+							return (
+								<App
+									key={app.identifier + 'folderApp'}
+									identifier={app.identifier}
+									badge={app.badge}
+									icon={app.icon}
+									name={app.name}
+									className={'folderApp'}
+									hideName={false}
+								/>
+							);
+						})}
+						<i
+							className='icon-ic_fluent_add_circle_24_regular addApp'
+							onClick={() => {
+								if (!startMenuOpen) {
+									openStartMenu(true);
+								}
+								activateAddAppToFolder({
+									flag: true
+								});
+							}}></i>
+					</>
+				)
+			) : (
+				filteredApps.map((app) => {
+					return (
+						<App
+							key={app.identifier + 'explorerApp'}
+							identifier={app.identifier}
+							badge={app.badge}
+							icon={app.icon}
+							name={app.name}
+							className={'explorerApp'}
+							hideName={false}
+						/>
+					);
+				})
+			);
 		}
 	};
 
@@ -117,4 +194,20 @@ const PageMaker = ({
 	);
 };
 
-export default PageMaker;
+const mapStateToProps = (state) => ({
+	componentsReducer: state.componentsReducer
+});
+
+const activateAddAppToFolder = () => (dispatch) => {
+	dispatch({
+		type: ADD_APP_TO_FOLDER,
+		payload: {
+			flag: true
+		}
+	});
+};
+
+export default connect(mapStateToProps, {
+	openStartMenu,
+	activateAddAppToFolder
+})(PageMaker);
