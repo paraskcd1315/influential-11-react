@@ -164,6 +164,51 @@ const Explorer = ({
 
 			return updatedState;
 		});
+
+		console.log(key);
+
+		if (key !== 'customFolderPage') {
+			switch (key) {
+				case 'documentsAppsPage':
+					setTimeout(() => {
+						openFolder({
+							folderID: '',
+							pageID: '',
+							page: 'documentApps'
+						});
+					}, 250);
+					break;
+				case 'photosAppsPage':
+					setTimeout(() => {
+						openFolder({
+							folderID: '',
+							pageID: '',
+							page: 'photoApps'
+						});
+					}, 250);
+					break;
+				case 'musicAppsPage':
+					setTimeout(() => {
+						openFolder({
+							folderID: '',
+							pageID: '',
+							page: 'musicApps'
+						});
+					}, 250);
+					break;
+				case 'videoAppsPage':
+					setTimeout(() => {
+						openFolder({
+							folderID: '',
+							pageID: '',
+							page: 'videoApps'
+						});
+					}, 250);
+					break;
+				default:
+					break;
+			}
+		}
 	};
 
 	useEffect(() => {
@@ -208,6 +253,7 @@ const Explorer = ({
 
 			case extraValues.documentsAppsPage:
 				key = 'documentsAppsPage';
+				openFolder({ folderID: '', pageID: '', page: 'documentApps' });
 				setPageStyle((state) => {
 					const updatedState = Object.entries(state).reduce(
 						(memo, [currentKey]) => {
@@ -245,6 +291,7 @@ const Explorer = ({
 
 			case extraValues.photosAppsPage:
 				key = 'photosAppsPage';
+				openFolder({ folderID: '', pageID: '', page: 'photoApps' });
 				setPageStyle((state) => {
 					const updatedState = Object.entries(state).reduce(
 						(memo, [currentKey]) => {
@@ -282,6 +329,7 @@ const Explorer = ({
 
 			case extraValues.musicAppsPage:
 				key = 'musicAppsPage';
+				openFolder({ folderID: '', pageID: '', page: 'musicApps' });
 				setPageStyle((state) => {
 					const updatedState = Object.entries(state).reduce(
 						(memo, [currentKey]) => {
@@ -319,6 +367,7 @@ const Explorer = ({
 
 			case extraValues.videoAppsPage:
 				key = 'videoAppsPage';
+				openFolder({ folderID: '', pageID: '', page: 'videoApps' });
 				setPageStyle((state) => {
 					const updatedState = Object.entries(state).reduce(
 						(memo, [currentKey]) => {
@@ -406,57 +455,63 @@ const Explorer = ({
 							: 'explorer-sidebar'
 					}>
 					{!favouriteAppsPage ? (
-						<SidebarButton
-							id='addFolder'
-							active={false}
-							icon={() => {
-								return (
-									<i
-										className='iconf-ic_fluent_folder_add_24_filled'
-										style={{
-											color: '#2F93DE'
-										}}></i>
-								);
-							}}
-							title='Add Folder'
-							callback={(e) => {
-								const popup = prompt('Please enter the folder Name', '');
-								if (popup !== null) {
-									switch (true) {
-										default:
-											break;
-										case documentsAppsPage:
-											addFolderToDocument({
-												folderID: popup.replace(/\s+/g, '').trim(),
-												folderName: popup,
-												apps: []
-											});
-											break;
-										case photosAppsPage:
-											addFolderToPhotos({
-												folderID: popup.replace(/\s+/g, '').trim(),
-												folderName: popup,
-												apps: []
-											});
-											break;
-										case musicAppsPage:
-											addFolderToMusic({
-												folderID: popup.replace(/\s+/g, '').trim(),
-												folderName: popup,
-												apps: []
-											});
-											break;
-										case videoAppsPage:
-											addFolderToVideo({
-												folderID: popup.replace(/\s+/g, '').trim(),
-												folderName: popup,
-												apps: []
-											});
-											break;
+						extraValues && extraValues.hideAddFolder ? (
+							''
+						) : (
+							<SidebarButton
+								id='addFolder'
+								active={false}
+								icon={() => {
+									return (
+										<i
+											className='iconf-ic_fluent_folder_add_24_filled'
+											style={{
+												color: '#2F93DE'
+											}}></i>
+									);
+								}}
+								title='Add Folder'
+								callback={(e) => {
+									const popup = prompt('Please enter the folder Name', '');
+									if (popup && popup !== null) {
+										switch (true) {
+											default:
+												break;
+											case documentsAppsPage:
+												addFolderToDocument({
+													folderID: popup.replace(/\s+/g, '').trim(),
+													folderName: popup,
+													apps: []
+												});
+												break;
+											case photosAppsPage:
+												addFolderToPhotos({
+													folderID: popup.replace(/\s+/g, '').trim(),
+													folderName: popup,
+													apps: []
+												});
+												break;
+											case musicAppsPage:
+												addFolderToMusic({
+													folderID: popup.replace(/\s+/g, '').trim(),
+													folderName: popup,
+													apps: []
+												});
+												break;
+											case videoAppsPage:
+												addFolderToVideo({
+													folderID: popup.replace(/\s+/g, '').trim(),
+													folderName: popup,
+													apps: []
+												});
+												break;
+										}
+									} else {
+										return;
 									}
-								}
-							}}
-						/>
+								}}
+							/>
+						)
 					) : (
 						''
 					)}
@@ -563,7 +618,13 @@ const Explorer = ({
 								);
 							}}
 							appReducer={appsReducer}
-							apps={documentApps.apps}
+							apps={
+								extraValues && extraValues.useOwnAppsOnPages
+									? storageReducer['documentApps']
+										? storageReducer['documentApps']
+										: []
+									: documentApps.apps
+							}
 							folders={documentApps.documentFolders}
 							maximize={maximize}
 							style={documentsAppsPageStyle}
@@ -591,7 +652,13 @@ const Explorer = ({
 								);
 							}}
 							appReducer={appsReducer}
-							apps={photoApps.apps}
+							apps={
+								extraValues && extraValues.useOwnAppsOnPages
+									? storageReducer['photoApps']
+										? storageReducer['photoApps']
+										: []
+									: photoApps.apps
+							}
 							folders={photoApps.photoFolders}
 							maximize={maximize}
 							style={photosAppsPageStyle}
@@ -617,7 +684,13 @@ const Explorer = ({
 								return <img src='assets/explorerIcons/Music.png' alt='Music' />;
 							}}
 							appReducer={appsReducer}
-							apps={musicApps.apps}
+							apps={
+								extraValues && extraValues.useOwnAppsOnPages
+									? storageReducer['musicApps']
+										? storageReducer['musicApps']
+										: []
+									: musicApps.apps
+							}
 							folders={musicApps.musicFolders}
 							maximize={maximize}
 							style={musicAppsPageStyle}
@@ -643,7 +716,13 @@ const Explorer = ({
 								return <img src='assets/explorerIcons/Video.png' alt='Video' />;
 							}}
 							appReducer={appsReducer}
-							apps={videoApps.apps}
+							apps={
+								extraValues && extraValues.useOwnAppsOnPages
+									? storageReducer['videoApps']
+										? storageReducer['videoApps']
+										: []
+									: videoApps.apps
+							}
 							folders={videoApps.videoFolders}
 							maximize={maximize}
 							style={videoAppsPageStyle}

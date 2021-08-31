@@ -40,8 +40,10 @@ const Weather = ({
 
 		return {
 			maxHeight: !startMenu
-				? extraValues.weatherMaximized
+				? extraValues && extraValues.weatherMaximized
 					? '400px'
+					: extraValues && extraValues.compactifyWeather
+					? '165px'
 					: '200px'
 				: null,
 			backgroundColor: color_2,
@@ -298,7 +300,7 @@ const Weather = ({
 						setStyle((state) => {
 							return {
 								...state,
-								maxHeight: 400 + 'px'
+								maxHeight: 450 + 'px'
 							};
 						});
 						addValue({ key: 'weatherMaximized', value: true });
@@ -307,7 +309,10 @@ const Weather = ({
 						setStyle((state) => {
 							return {
 								...state,
-								maxHeight: 200 + 'px'
+								maxHeight:
+									extraValues && extraValues.compactifyWeather
+										? '165px'
+										: '200px'
 							};
 						});
 						removeValue('weatherMaximized');

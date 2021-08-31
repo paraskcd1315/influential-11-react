@@ -140,7 +140,9 @@
 		.explorerApp,
 		.explorerFolder,
 		.addApp,
-		.folderApp {
+		.folderApp,
+		.pageApp {
+			position: relative;
 			text-align: center;
 			display: flex;
 			flex-direction: column;

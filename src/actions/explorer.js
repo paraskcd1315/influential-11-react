@@ -8,8 +8,56 @@ import {
 	REMOVE_APP_FROM_FOLDER,
 	REMOVE_PHOTO_FOLDER,
 	REMOVE_MUSIC_FOLDER,
-	REMOVE_VIDEO_FOLDER
+	REMOVE_VIDEO_FOLDER,
+	ADD_APP_TO_PAGE,
+	REMOVE_APP_FROM_PAGE
 } from './types';
+
+export const addAppToPage =
+	({ pageID, app }) =>
+	(dispatch) => {
+		let localstore = JSON.parse(localStorage.getItem('FluentUI'));
+
+		if (!localstore[pageID]) {
+			localstore = {
+				...localstore,
+				[pageID]: [app]
+			};
+		} else {
+			let apps = localstore[pageID];
+			apps.push(app);
+			localstore[pageID] = apps;
+		}
+
+		localStorage.setItem('FluentUI', JSON.stringify(localstore));
+
+		dispatch({
+			type: ADD_APP_TO_PAGE,
+			payload: {
+				pageID: pageID,
+				apps: localstore[pageID]
+			}
+		});
+	};
+
+export const removeAppFromPage =
+	({ pageID, app }) =>
+	(dispatch) => {
+		const localstore = JSON.parse(localStorage.getItem('FluentUI'));
+
+		let index = localstore[pageID].indexOf(app);
+		localstore[pageID].splice(index, 1);
+
+		localStorage.setItem('FluentUI', JSON.stringify(localstore));
+
+		dispatch({
+			type: REMOVE_APP_FROM_PAGE,
+			payload: {
+				pageID: pageID,
+				apps: localstore[pageID]
+			}
+		});
+	};
 
 export const addAppToFolder =
 	({ folderID, pageID, app, page }) =>

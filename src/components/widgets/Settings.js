@@ -27,7 +27,12 @@ const Settings = ({
 		hideIconLabels: false,
 		twentyFourHourTime: false,
 		hideExplorerBG: false,
-		hideExplorerFolderTitle: false
+		hideExplorerFolderTitle: false,
+		useOwnAppsOnPages: false,
+		hideAddApp: false,
+		hideAddFolder: false,
+		disableGradient: false,
+		compactifyWeather: false
 	});
 
 	useEffect(() => {
@@ -57,6 +62,31 @@ const Settings = ({
 				hideExplorerFolderTitle: !storageReducer.extraValues
 					? false
 					: !storageReducer.extraValues.hideExplorerFolderTitle
+					? false
+					: true,
+				useOwnAppsOnPages: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.useOwnAppsOnPages
+					? false
+					: true,
+				hideAddApp: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.hideAddApp
+					? false
+					: true,
+				hideAddFolder: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.hideAddFolder
+					? false
+					: true,
+				disableGradient: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.disableGradient
+					? false
+					: true,
+				compactifyWeather: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.compactifyWeather
 					? false
 					: true
 			};

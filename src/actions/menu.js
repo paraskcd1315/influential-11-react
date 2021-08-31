@@ -7,7 +7,8 @@ import {
 	ADD_APPS_MENU,
 	REPLACE_APPS_MENU,
 	REMOVE_FOLDER_MENU,
-	REMOVE_APP_FROM_FOLDER_MENU
+	REMOVE_APP_FROM_FOLDER_MENU,
+	REMOVE_APP_FROM_PAGE_MENU
 } from './types';
 
 export const showAddAppsMenu = (addAppsMenu) => (dispatch) => {
@@ -36,5 +37,13 @@ export const showRemoveAppFromFolderMenu =
 		dispatch({
 			type: REMOVE_APP_FROM_FOLDER_MENU,
 			payload: removeAppFromFolderMenu
+		});
+	};
+
+export const showRemoveAppFromPageMenu =
+	(removeAppFromPageMenu) => (dispatch) => {
+		dispatch({
+			type: REMOVE_APP_FROM_PAGE_MENU,
+			payload: removeAppFromPageMenu
 		});
 	};

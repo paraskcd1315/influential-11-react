@@ -18,7 +18,9 @@ import {
 	REMOVE_APP_FROM_FOLDER,
 	REMOVE_PHOTO_FOLDER,
 	REMOVE_MUSIC_FOLDER,
-	REMOVE_VIDEO_FOLDER
+	REMOVE_VIDEO_FOLDER,
+	ADD_APP_TO_PAGE,
+	REMOVE_APP_FROM_PAGE
 } from '../actions/types';
 
 const initialState = localStorage.getItem('FluentUI')
@@ -100,6 +102,17 @@ function storageReducer(state = initialState, action) {
 				...state,
 				videoFolders: payload
 			};
+
+		case ADD_APP_TO_PAGE:
+		case REMOVE_APP_FROM_PAGE:
+			if (payload.flag) {
+				return state;
+			} else {
+				return {
+					...state,
+					[payload.pageID]: payload.apps
+				};
+			}
 
 		default:
 			return state;

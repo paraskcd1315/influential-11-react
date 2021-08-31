@@ -11,7 +11,8 @@ import {
 	SEARCHQUERY,
 	SHOWMENU,
 	OPEN_FOLDER,
-	CLOSE_FOLDER
+	CLOSE_FOLDER,
+	ADD_APP_TO_PAGE
 } from '../actions/types';
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
 	searchQuery: '',
 	showMenu: false,
 	addAppToFolderFlag: false,
+	addAppFoPageFlag: false,
 	folderOpened: false
 };
 
@@ -62,6 +64,12 @@ function componentsReducer(state = initialState, action) {
 			return {
 				...state,
 				addAppToFolderFlag: payload.flag
+			};
+
+		case ADD_APP_TO_PAGE:
+			return {
+				...state,
+				addAppFoPageFlag: payload.flag
 			};
 
 		case OPEN_FOLDER:

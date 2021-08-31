@@ -12,10 +12,11 @@ import { replaceApp } from '../../actions/storage';
 import {
 	showAddAppsMenu,
 	showRemoveAppFromFolderMenu,
-	showReplaceAppsMenu
+	showReplaceAppsMenu,
+	showRemoveAppFromPageMenu
 } from '../../actions/menu';
 import { searchQuery } from '../../actions/components';
-import { addAppToFolder } from '../../actions/explorer';
+import { addAppToFolder, addAppToPage } from '../../actions/explorer';
 
 const App = ({
 	identifier,
@@ -32,13 +33,15 @@ const App = ({
 	replaceApp,
 	searchQuery,
 	hideBadge,
-	componentsReducer: { startMenuOpen, addAppToFolderFlag, folderOpened },
+	componentsReducer: { startMenuOpen, addAppToFolderFlag, addAppFoPageFlag },
 	explorerCustomFolderReducer: { page, pageID, folderID },
 	storageReducer: { extraValues },
 	openStartMenu,
 	hideStartMenu,
 	addAppToFolder,
-	showRemoveAppFromFolderMenu
+	addAppToPage,
+	showRemoveAppFromFolderMenu,
+	showRemoveAppFromPageMenu
 }) => {
 	const [moved, setPointerMove] = useState(false);
 
@@ -59,6 +62,15 @@ const App = ({
 						name: name,
 						icon: icon,
 						removeApp: true
+					});
+					showMenu(true);
+				} else if (className === 'pageApp') {
+					showRemoveAppFromPageMenu({
+						identifier: identifier,
+						name: name,
+						icon: icon,
+						removeApp: true,
+						fromPage: true
 					});
 					showMenu(true);
 				} else {
@@ -104,6 +116,18 @@ const App = ({
 							page: page,
 							pageID: pageID,
 							folderID: folderID,
+							app: identifier
+						});
+						if (startMenuOpen) {
+							hideStartMenu();
+							setTimeout(() => {
+								openStartMenu(false);
+							}, 250);
+						}
+					} else if (addAppFoPageFlag) {
+						addAppToPage({
+							flag: false,
+							pageID: page,
 							app: identifier
 						});
 						if (startMenuOpen) {
@@ -163,5 +187,7 @@ export default connect(mapStateToProps, {
 	replaceApp,
 	openStartMenu,
 	addAppToFolder,
-	showRemoveAppFromFolderMenu
+	addAppToPage,
+	showRemoveAppFromFolderMenu,
+	showRemoveAppFromPageMenu
 })(App);

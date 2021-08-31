@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import App from '../components/individualComponents/App';
 import Folder from './folder';
 import { openStartMenu } from '../actions/components';
-import { ADD_APP_TO_FOLDER } from '../actions/types';
+import { ADD_APP_TO_FOLDER, ADD_APP_TO_PAGE } from '../actions/types';
 
 const PageMaker = ({
 	id,
@@ -24,8 +24,10 @@ const PageMaker = ({
 	folderClick,
 	customFolder,
 	componentsReducer: { startMenuOpen },
+	storageReducer: { extraValues },
 	openStartMenu,
-	activateAddAppToFolder
+	activateAddAppToFolder,
+	activateAddAppToPage
 }) => {
 	const [pointerEventss, setPointerEvents] = useState({
 		pointerEvents: 'none'
@@ -121,20 +123,24 @@ const PageMaker = ({
 
 			return customFolder ? (
 				apps.length < 1 ? (
-					<div
-						style={pointerEventss}
-						className='folderNoApps'
-						onClick={() => {
-							if (!startMenuOpen) {
-								openStartMenu(true);
-							}
-							activateAddAppToFolder({
-								flag: true
-							});
-						}}>
-						Tap here to Pin some Apps to the folder - {headerTitle}.
-						<i className='icon-ic_fluent_add_circle_24_regular'></i>
-					</div>
+					extraValues && extraValues.hideAddApp ? (
+						''
+					) : (
+						<div
+							style={pointerEventss}
+							className='folderNoApps'
+							onClick={() => {
+								if (!startMenuOpen) {
+									openStartMenu(true);
+								}
+								activateAddAppToFolder({
+									flag: true
+								});
+							}}>
+							Tap here to Pin some Apps to the folder - {headerTitle}.
+							<i className='icon-ic_fluent_add_circle_24_regular'></i>
+						</div>
+					)
 				) : (
 					<>
 						{result.map((app) => {
@@ -150,16 +156,70 @@ const PageMaker = ({
 								/>
 							);
 						})}
-						<i
-							className='icon-ic_fluent_add_circle_24_regular addApp'
-							onClick={() => {
-								if (!startMenuOpen) {
-									openStartMenu(true);
-								}
-								activateAddAppToFolder({
-									flag: true
-								});
-							}}></i>
+						{extraValues && extraValues.hideAddApp ? (
+							''
+						) : (
+							<i
+								className='icon-ic_fluent_add_circle_24_regular addApp'
+								onClick={() => {
+									if (!startMenuOpen) {
+										openStartMenu(true);
+									}
+									activateAddAppToFolder({
+										flag: true
+									});
+								}}></i>
+						)}
+					</>
+				)
+			) : extraValues && extraValues.useOwnAppsOnPages ? (
+				apps.length < 1 ? (
+					extraValues && extraValues.hideAddApp ? (
+						''
+					) : (
+						<div className='addApp'>
+							Add App
+							<i
+								className='icon-ic_fluent_add_circle_24_regular'
+								onClick={() => {
+									if (!startMenuOpen) {
+										openStartMenu(true);
+									}
+									activateAddAppToPage({
+										flag: true
+									});
+								}}></i>
+						</div>
+					)
+				) : (
+					<>
+						{result.map((app) => {
+							return (
+								<App
+									key={app.identifier + 'pageApp'}
+									identifier={app.identifier}
+									badge={app.badge}
+									icon={app.icon}
+									name={app.name}
+									className={'pageApp'}
+									hideName={false}
+								/>
+							);
+						})}{' '}
+						{extraValues && extraValues.hideAddApp ? (
+							''
+						) : (
+							<i
+								className='icon-ic_fluent_add_circle_24_regular addApp'
+								onClick={() => {
+									if (!startMenuOpen) {
+										openStartMenu(true);
+									}
+									activateAddAppToPage({
+										flag: true
+									});
+								}}></i>
+						)}
 					</>
 				)
 			) : (
@@ -195,7 +255,8 @@ const PageMaker = ({
 };
 
 const mapStateToProps = (state) => ({
-	componentsReducer: state.componentsReducer
+	componentsReducer: state.componentsReducer,
+	storageReducer: state.storageReducer
 });
 
 const activateAddAppToFolder = () => (dispatch) => {
@@ -207,7 +268,17 @@ const activateAddAppToFolder = () => (dispatch) => {
 	});
 };
 
+const activateAddAppToPage = () => (dispatch) => {
+	dispatch({
+		type: ADD_APP_TO_PAGE,
+		payload: {
+			flag: true
+		}
+	});
+};
+
 export default connect(mapStateToProps, {
 	openStartMenu,
-	activateAddAppToFolder
+	activateAddAppToFolder,
+	activateAddAppToPage
 })(PageMaker);

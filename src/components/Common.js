@@ -186,6 +186,8 @@ const Common = ({
 	const [hideExplorerBGStyle, sethideExplorerBGStyle] = useState('');
 	const [hideExplorerFolderTitleStyle, sethideExplorerFolderTitleStyle] =
 		useState('');
+	const [hideWeatherGradientStyle, sethideWeatherGradientStyle] = useState('');
+	const [compactifyWeatherStyle, setcompactifyWeatherStyle] = useState('');
 
 	useEffect(() => {
 		sethideExplorerBGStyle((state) => {
@@ -215,6 +217,46 @@ const Common = ({
 					newState += `
 						#explorerWidget .explorer-header {
 							display: none;
+						}
+					`;
+				}
+			}
+			return newState;
+		});
+		sethideWeatherGradientStyle((state) => {
+			let newState = state;
+			if (storage.extraValues) {
+				if (storage.extraValues.disableGradient) {
+					newState += `
+						#weatherWidget {
+							background-color: rgba(253, 253, 253, 0.4)!important;
+							background-image: unset!important;
+						}
+
+						@media (prefers-color-scheme: dark) {
+							#weatherWidget {
+								background-color: rgba(57, 57, 57, 0.5)!important;
+							}
+						}
+					`;
+				}
+			}
+			return newState;
+		});
+		setcompactifyWeatherStyle((state) => {
+			let newState = state;
+			if (storage.extraValues) {
+				if (storage.extraValues.compactifyWeather) {
+					newState += `
+						#weatherWidget .widget-header, #weatherWidget .widget-content{
+							padding: 0.3rem 1rem;
+						}
+						#weatherWidget.desktopWidget .weather-content .weather-daily {
+							margin-top: 1.2rem;
+						}
+						#weatherWidget.desktopWidget .weather-left img {
+							width: 60px;
+							height: 60px;
 						}
 					`;
 				}
@@ -261,6 +303,16 @@ const Common = ({
 				<style id='hideExplorerFolderTitle'>
 					{hideExplorerFolderTitleStyle}
 				</style>
+			) : (
+				''
+			)}
+			{storage.extraValues && storage.extraValues.disableGradient ? (
+				<style id='disableGradient'>{hideWeatherGradientStyle}</style>
+			) : (
+				''
+			)}
+			{storage.extraValues && storage.extraValues.compactifyWeather ? (
+				<style id='compactifyWeather'>{compactifyWeatherStyle}</style>
 			) : (
 				''
 			)}

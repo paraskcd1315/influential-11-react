@@ -11,6 +11,7 @@ import { addApp, removeApp } from '../actions/storage';
 import { showMenu, openStartMenu } from '../actions/components';
 import {
 	removeAppFromFolder,
+	removeAppFromPage,
 	removeFolderFromDocuments,
 	removeFolderFromMusic,
 	removeFolderFromPhotos,
@@ -20,7 +21,8 @@ import {
 	showAddAppsMenu,
 	showReplaceAppsMenu,
 	showRemoveFolderMenu,
-	showRemoveAppFromFolderMenu
+	showRemoveAppFromFolderMenu,
+	showRemoveAppFromPageMenu
 } from '../actions/menu';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -42,6 +44,8 @@ const Menu = ({
 	removeFolderFromPhotos,
 	removeFolderFromVideo,
 	removeAppFromFolder,
+	removeAppFromPage,
+	showRemoveAppFromPageMenu,
 	explorerAppsReducer: { documentApps, musicApps, photoApps, videoApps },
 	explorerCustomFolderReducer: { page, pageID, folderID }
 }) => {
@@ -126,7 +130,11 @@ const Menu = ({
 				/>
 			);
 		}
-		if (menuReducer.removeApp && !menuReducer.replaceApp) {
+		if (
+			menuReducer.removeApp &&
+			!menuReducer.replaceApp &&
+			!menuReducer.fromPage
+		) {
 			return (
 				<MenuButton
 					icon={'icon-ic_fluent_pin_off_24_regular'}
@@ -143,6 +151,36 @@ const Menu = ({
 							name: '',
 							icon: '',
 							removeApp: false
+						});
+						hideMenu();
+						setStyle({ pointerEvents: 'none' });
+						setTimeout(() => {
+							showMenu(false);
+						}, 250);
+					}}
+				/>
+			);
+		}
+		if (
+			menuReducer.removeApp &&
+			!menuReducer.replaceApp &&
+			menuReducer.fromPage
+		) {
+			return (
+				<MenuButton
+					icon={'icon-ic_fluent_pin_off_24_regular'}
+					title={'Remove App'}
+					callback={() => {
+						removeAppFromPage({
+							pageID: page,
+							app: identifier
+						});
+						showRemoveAppFromPageMenu({
+							identifier: '',
+							name: '',
+							icon: '',
+							removeApp: false,
+							fromPage: false
 						});
 						hideMenu();
 						setStyle({ pointerEvents: 'none' });
@@ -294,5 +332,7 @@ export default connect(mapStateToProps, {
 	removeFolderFromMusic,
 	removeFolderFromPhotos,
 	removeFolderFromVideo,
-	removeAppFromFolder
+	removeAppFromFolder,
+	removeAppFromPage,
+	showRemoveAppFromPageMenu
 })(Menu);

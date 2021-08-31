@@ -6,6 +6,7 @@
 import {
 	ADD_APPS_MENU,
 	REMOVE_APP_FROM_FOLDER_MENU,
+	REMOVE_APP_FROM_PAGE_MENU,
 	REMOVE_FOLDER_MENU,
 	REPLACE_APPS_MENU
 } from '../actions/types';
@@ -18,7 +19,8 @@ const initialState = {
 	replaceApp: false,
 	removeFolder: false,
 	addApp: false,
-	addAppToFolder: false
+	addAppToFolder: false,
+	fromPage: false
 };
 
 function menuReducer(state = initialState, action) {
@@ -51,6 +53,16 @@ function menuReducer(state = initialState, action) {
 				name: payload.name,
 				icon: payload.icon,
 				removeApp: payload.removeApp
+			};
+
+		case REMOVE_APP_FROM_PAGE_MENU:
+			return {
+				...state,
+				identifier: payload.identifier,
+				name: payload.name,
+				icon: payload.icon,
+				removeApp: payload.removeApp,
+				fromPage: payload.fromPage
 			};
 
 		case REMOVE_FOLDER_MENU:
