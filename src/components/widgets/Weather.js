@@ -275,7 +275,13 @@ const Weather = ({
 			}}>
 			<WidgetMaker
 				id={'weatherWidget'}
-				className={startMenu ? 'startWidget' : 'desktopWidget'}
+				className={
+					startMenu
+						? 'startWidget'
+						: maximize
+						? 'desktopWidget maximized'
+						: 'desktopWidget'
+				}
 				title={'Weather'}
 				showMaximiseButton={!startMenu}
 				startMenu={startMenu}

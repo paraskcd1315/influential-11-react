@@ -248,6 +248,12 @@ const Common = ({
 			if (storage.extraValues) {
 				if (storage.extraValues.compactifyWeather) {
 					newState += `
+						#weatherWidget .widget-header {
+							height: 6rem;
+						}
+						#weatherWidget.maximized .widget-header {
+							height: unset;
+						}
 						#weatherWidget .widget-header, #weatherWidget .widget-content{
 							padding: 0.3rem 1rem;
 						}
