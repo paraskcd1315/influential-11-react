@@ -43,6 +43,13 @@
 	.startWidget .weather-header {
 		margin: 0.5rem 0;
 	}
+
+	.settings {
+		&-content .settings-pages .page {
+			width: 92%;
+			height: 320px;
+		}
+	}
 }
 
 //iPhone 12 Pro

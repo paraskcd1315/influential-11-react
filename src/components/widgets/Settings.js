@@ -32,7 +32,14 @@ const Settings = ({
 		hideAddApp: false,
 		hideAddFolder: false,
 		disableGradient: false,
-		compactifyWeather: false
+		compactifyWeather: false,
+		noiseToTaskbar: false,
+		disableTaskbarBorder: false,
+		monochromeStartButton: false,
+		noiseToWidgets: false,
+		disableWidgetBorder: false,
+		noiseToStartmenu: false,
+		disableStartmenuBorder: false
 	});
 
 	useEffect(() => {
@@ -87,6 +94,41 @@ const Settings = ({
 				compactifyWeather: !storageReducer.extraValues
 					? false
 					: !storageReducer.extraValues.compactifyWeather
+					? false
+					: true,
+				noiseToTaskbar: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.noiseToTaskbar
+					? false
+					: true,
+				disableTaskbarBorder: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.disableTaskbarBorder
+					? false
+					: true,
+				monochromeStartButton: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.monochromeStartButton
+					? false
+					: true,
+				noiseToWidgets: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.noiseToWidgets
+					? false
+					: true,
+				disableWidgetBorder: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.disableWidgetBorder
+					? false
+					: true,
+				noiseToStartmenu: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.noiseToStartmenu
+					? false
+					: true,
+				disableStartmenuBorder: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.disableStartmenuBorder
 					? false
 					: true
 			};
