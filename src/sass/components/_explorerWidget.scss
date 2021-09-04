@@ -198,7 +198,8 @@
 	#explorerWidget .explorer-apps .explorerApp .badge,
 	#explorerWidget .explorer-apps .explorerFolder .badge,
 	#explorerWidget .explorer-apps .addApp .badge,
-	#explorerWidget .explorer-apps .folderApp .badge {
+	#explorerWidget .explorer-apps .folderApp .badge,
+	#explorerWidget .explorer-apps .pageApp .badge {
 		background-color: set-transparency($light-color, 0.4);
 	}
 }

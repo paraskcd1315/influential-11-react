@@ -52,6 +52,13 @@
 	}
 }
 
+//iPhone XS/11 pro Max
+@media only screen and (max-height: 896px) {
+	#explorerWidget .explorer-apps {
+		padding-left: 0.7rem;
+	}
+}
+
 //iPhone 12 Pro
 @media only screen and (max-height: 844px) {
 	#startMenu {
@@ -104,6 +111,28 @@
 
 	#startMenu .startTabs {
 		height: 510px;
+	}
+
+	#explorerWidget .explorer-apps {
+		padding-left: 1.4rem;
+	}
+
+	#explorerWidget .explorer-apps .explorerFavApp,
+	#explorerWidget .explorer-apps .explorerApp,
+	#explorerWidget .explorer-apps .explorerFolder,
+	#explorerWidget .explorer-apps .addApp,
+	#explorerWidget .explorer-apps .folderApp,
+	#explorerWidget .explorer-apps .pageApp {
+		width: 62px;
+	}
+
+	#explorerWidget .explorer-apps .explorerFavApp .title,
+	#explorerWidget .explorer-apps .explorerApp .title,
+	#explorerWidget .explorer-apps .explorerFolder .title,
+	#explorerWidget .explorer-apps .addApp .title,
+	#explorerWidget .explorer-apps .folderApp .title,
+	#explorerWidget .explorer-apps .pageApp .title {
+		width: 57px;
 	}
 }
 
@@ -170,6 +199,24 @@
 
 	#explorerWidget .explorer-apps {
 		padding-left: 1.2rem;
+	}
+
+	#explorerWidget .explorer-apps .explorerFavApp,
+	#explorerWidget .explorer-apps .explorerApp,
+	#explorerWidget .explorer-apps .explorerFolder,
+	#explorerWidget .explorer-apps .addApp,
+	#explorerWidget .explorer-apps .folderApp,
+	#explorerWidget .explorer-apps .pageApp {
+		width: 60px;
+	}
+
+	#explorerWidget .explorer-apps .explorerFavApp .title,
+	#explorerWidget .explorer-apps .explorerApp .title,
+	#explorerWidget .explorer-apps .explorerFolder .title,
+	#explorerWidget .explorer-apps .addApp .title,
+	#explorerWidget .explorer-apps .folderApp .title,
+	#explorerWidget .explorer-apps .pageApp .title {
+		width: 55px;
 	}
 }
 
@@ -296,7 +343,7 @@
 	}
 
 	#explorerWidget .explorer-apps {
-		padding-left: 1.5rem;
+		padding-left: 0.5rem;
 	}
 }
 

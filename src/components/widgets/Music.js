@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { usePalette } from 'react-palette';
 
 import { openMedia } from '../../actions/widget';
 import { addValue, removeValue } from '../../actions/storage';
@@ -33,7 +34,33 @@ const Music = ({
 			: null
 	});
 
+	const { nowPlaying, isPlaying, isStopped, nowPlayingApplication } =
+		mediaReducer;
+
 	useEffect(() => {
+		if (data) {
+			setStyle((state) => {
+				return {
+					...state,
+					backgroundColor: data.darkVibrant,
+					backgroundImage:
+						'linear-gradient(to bottom right,' +
+						data.darkMuted +
+						',' +
+						data.vibrant +
+						')'
+				};
+			});
+		} else {
+			setStyle((state) => {
+				return {
+					...state,
+					backgroundColor: 'unset',
+					backgroundImage: 'unset'
+				};
+			});
+		}
+
 		if (mediaOpen && !startMenu) {
 			setTimeout(() => {
 				setStyle((state) => {
@@ -44,7 +71,7 @@ const Music = ({
 				});
 			}, 250);
 		}
-	}, [mediaOpen, startMenu]);
+	}, [mediaOpen, startMenu, data]);
 
 	const [yPosition, setYPosition] = useState({
 		currentY: 0,
@@ -58,7 +85,7 @@ const Music = ({
 		<WidgetMaker
 			id={'musicWidget'}
 			className={startMenu ? 'startWidget' : 'desktopWidget'}
-			title={'Weather'}
+			title={'Media'}
 			showMaximiseButton={!startMenu}
 			startMenu={startMenu}
 			style={style}
@@ -130,7 +157,7 @@ const Music = ({
 			<WidgetMaker
 				id={'musicWidget'}
 				className={startMenu ? 'startWidget' : 'desktopWidget'}
-				title={'Weather'}
+				title={'Media'}
 				showMaximiseButton={!startMenu}
 				startMenu={startMenu}
 				style={style}

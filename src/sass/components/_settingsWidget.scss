@@ -1,3 +1,4 @@
+@import './slider';
 .settings {
 	&-header {
 		display: flex;
@@ -177,6 +178,45 @@
 			display: none;
 		}
 	}
+
+	&-range {
+		padding: 0rem 1rem;
+		margin-bottom: 1rem;
+		.slider {
+			align-items: center;
+			appearance: none;
+			background: none;
+			cursor: pointer;
+			display: flex;
+			height: 100%;
+			min-height: 50px;
+			overflow: hidden;
+			width: $slider-width;
+
+			&:focus {
+				box-shadow: none;
+				outline: none;
+			}
+
+			&::-webkit-slider-runnable-track {
+				background: $background-filled-slider;
+				content: '';
+				height: $slider-height;
+				pointer-events: none;
+			}
+
+			&::-webkit-slider-thumb {
+				@include set-size($thumb-width, $thumb-height);
+
+				appearance: none;
+				background: $thumb-background;
+				border-radius: $thumb-radius;
+				box-shadow: makelongshadow($background-slider, $shadow-size);
+				margin-top: $fit-thumb-in-slider;
+				border: $thumb-border;
+			}
+		}
+	}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -211,6 +251,12 @@
 
 		input[type='checkbox']:checked + .toggle {
 			background-color: $primary-color;
+		}
+	}
+
+	.settings-range {
+		.slider::-webkit-slider-thumb {
+			background: $primary-color;
 		}
 	}
 }

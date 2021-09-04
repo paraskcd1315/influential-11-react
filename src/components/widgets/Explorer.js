@@ -38,7 +38,11 @@ const Explorer = ({
 }) => {
 	const { extraValues, dockIcons } = storageReducer;
 	const [style, setStyle] = useState({
-		maxHeight: extraValues.explorerMaximized ? 400 + 'px' : 300 + 'px',
+		maxHeight: extraValues.explorerMaximized
+			? 400 + 'px'
+			: extraValues.hideExplorerFolderTitle
+			? 255 + 'px'
+			: 300 + 'px',
 		opacity: 0,
 		transform: !extraValues
 			? 'translate(-50%, 0px)'
@@ -882,7 +886,9 @@ const Explorer = ({
 						setStyle((state) => {
 							return {
 								...state,
-								maxHeight: 300 + 'px'
+								maxHeight: extraValues.hideExplorerFolderTitle
+									? 255 + 'px'
+									: 300 + 'px'
 							};
 						});
 						removeValue('explorerMaximized');

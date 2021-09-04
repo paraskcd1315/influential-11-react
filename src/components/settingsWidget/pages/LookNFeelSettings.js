@@ -14,7 +14,11 @@ const LookNFeelSettings = ({ style, options, handleSwitchChange }) => {
 		noiseToWidgets,
 		disableWidgetBorder,
 		noiseToStartmenu,
-		disableStartmenuBorder
+		disableStartmenuBorder,
+		noiseToActionCenter,
+		disableActionCenterBorder,
+		noiseToMenu,
+		disableMenuBorder
 	} = options;
 	return (
 		<div className={'settings-looknfeel page'} style={style}>
@@ -71,6 +75,36 @@ const LookNFeelSettings = ({ style, options, handleSwitchChange }) => {
 				value={disableWidgetBorder ? 'on' : 'off'}
 				label='Disable Border'
 				description='Disable Border effect which is enabled by default in Widgets.'
+			/>
+			<div className='settings-label'>Action Center Related Settings</div>
+			<InputSwitch
+				onChange={handleSwitchChange}
+				inputName='noiseToActionCenter'
+				value={noiseToActionCenter ? 'on' : 'off'}
+				label='Disable Background Noise effect'
+				description='Disable Background Noise effect which is enabled by default in the Action Center.'
+			/>
+			<InputSwitch
+				onChange={handleSwitchChange}
+				inputName='disableActionCenterBorder'
+				value={disableActionCenterBorder ? 'on' : 'off'}
+				label='Disable Border'
+				description='Disable Border effect which is enabled by default in Action Center.'
+			/>
+			<div className='settings-label'>Context Menu Related Settings</div>
+			<InputSwitch
+				onChange={handleSwitchChange}
+				inputName='noiseToMenu'
+				value={noiseToMenu ? 'on' : 'off'}
+				label='Disable Background Noise effect'
+				description='Disable Background Noise effect which is enabled by default in the Context Menu.'
+			/>
+			<InputSwitch
+				onChange={handleSwitchChange}
+				inputName='disableMenuBorder'
+				value={disableMenuBorder ? 'on' : 'off'}
+				label='Disable Border'
+				description='Disable Border effect which is enabled by default in Context Menu.'
 			/>
 		</div>
 	);

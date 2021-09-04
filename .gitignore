@@ -11,10 +11,10 @@
 # production
 /build
 
+# images/fonts/xenhtml emulation assets
 /public/assets/
 /public/xenEmulationStuff/
 /public/emulation.js
-
 /src/fluent-system-icons
 
 # misc

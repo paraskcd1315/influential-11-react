@@ -31,7 +31,7 @@
 			column-gap: 0.05rem;
 			padding: 0.8rem;
 			border: solid 1px #0000;
-			@include set-border-radius(0.5rem);
+			@include set-border-radius(0.4rem);
 			transition: 250ms ease;
 			margin-left: 2.13rem;
 
@@ -73,7 +73,7 @@
 			transition: 250ms ease;
 			padding: 0.8rem;
 			border: solid 1px #0000;
-			@include set-border-radius(0.5rem);
+			@include set-border-radius(0.4rem);
 		}
 
 		.statusIcons {

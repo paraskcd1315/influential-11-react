@@ -39,7 +39,13 @@ const Settings = ({
 		noiseToWidgets: false,
 		disableWidgetBorder: false,
 		noiseToStartmenu: false,
-		disableStartmenuBorder: false
+		disableStartmenuBorder: false,
+		noiseToActionCenter: false,
+		disableActionCenterBorder: false,
+		noiseToMenu: false,
+		disableMenuBorder: false,
+		blurRadius: 20,
+		borderRadius: 1.2
 	});
 
 	useEffect(() => {
@@ -130,7 +136,37 @@ const Settings = ({
 					? false
 					: !storageReducer.extraValues.disableStartmenuBorder
 					? false
-					: true
+					: true,
+				noiseToActionCenter: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.noiseToActionCenter
+					? false
+					: true,
+				disableActionCenterBorder: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.disableActionCenterBorder
+					? false
+					: true,
+				noiseToMenu: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.noiseToMenu
+					? false
+					: true,
+				disableMenuBorder: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.disableMenuBorder
+					? false
+					: true,
+				blurRadius: !storageReducer.extraValues
+					? 20
+					: !storageReducer.extraValues.blurRadius
+					? 20
+					: storageReducer.extraValues.blurRadius,
+				borderRadius: !storageReducer.extraValues
+					? 1.2
+					: !storageReducer.extraValues.borderRadius
+					? 1.2
+					: storageReducer.extraValues.borderRadius
 			};
 		});
 	}, [storageReducer]);
@@ -173,6 +209,19 @@ const Settings = ({
 				value: false
 			});
 		}
+	};
+
+	const handleRangeChange = (e) => {
+		setOptions((state) => {
+			return {
+				...state,
+				[e.target.name]: e.target.value
+			};
+		});
+		addValue({
+			key: e.target.name,
+			value: e.target.value
+		});
 	};
 
 	const [style, setStyle] = useState({
@@ -366,6 +415,7 @@ const Settings = ({
 							options={options}
 							handleTextChange={handleTextChange}
 							handleSwitchChange={handleSwitchChange}
+							handleRangeChange={handleRangeChange}
 						/>
 						<IndividualWidgetSettings
 							style={individualSettingsStyle.style}

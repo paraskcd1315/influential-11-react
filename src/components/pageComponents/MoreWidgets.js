@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import Music from '../widgets/Music';
 import Weather from '../widgets/Weather';
 
 const MoreWidgets = ({
@@ -35,6 +36,7 @@ const MoreWidgets = ({
 			</div>
 			<div id='allWidgets' className='content'>
 				<Weather startMenu={true} hideStartMenu={hideStartMenu} />
+				<Music startMenu={true} hideStartMenu={hideStartMenu} />
 			</div>
 		</div>
 	);
