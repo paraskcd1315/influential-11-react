@@ -41,7 +41,7 @@ const Explorer = ({
 		maxHeight: extraValues.explorerMaximized
 			? 400 + 'px'
 			: extraValues.hideExplorerFolderTitle
-			? 255 + 'px'
+			? 249 + 'px'
 			: 300 + 'px',
 		opacity: 0,
 		transform: !extraValues
@@ -887,7 +887,7 @@ const Explorer = ({
 							return {
 								...state,
 								maxHeight: extraValues.hideExplorerFolderTitle
-									? 255 + 'px'
+									? 249 + 'px'
 									: 300 + 'px'
 							};
 						});
