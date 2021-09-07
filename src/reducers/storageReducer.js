@@ -23,6 +23,20 @@ import {
 	REMOVE_APP_FROM_PAGE
 } from '../actions/types';
 
+if (localStorage.getItem('FluentUI')) {
+	let localstore = JSON.parse(localStorage.getItem('FluentUI'));
+	let dockIcons = localstore.dockIcons;
+
+	for (let i = 0; i < dockIcons.length; i++) {
+		if (!window.api.apps.applicationIsPresent(dockIcons[i])) {
+			let index = dockIcons.indexOf(dockIcons[i]);
+			dockIcons.splice(index, 1);
+		}
+	}
+	localstore['dockIcons'] = dockIcons;
+	localStorage.setItem('FluentUI', JSON.stringify(localstore));
+}
+
 const initialState = localStorage.getItem('FluentUI')
 	? JSON.parse(localStorage.getItem('FluentUI'))
 	: {

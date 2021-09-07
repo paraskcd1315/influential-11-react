@@ -104,7 +104,7 @@ const AllApps = ({
 						badge={app.badge}
 						icon={app.icon}
 						name={app.name}
-						className={'app'}
+						className={'app allApps'}
 						hideStartMenu={hideStartMenu}
 					/>
 				);
@@ -133,7 +133,7 @@ const AllApps = ({
 						identifier={loopVar[i].record[j].identifier}
 						icon={loopVar[i].record[j].icon}
 						name={loopVar[i].record[j].name}
-						className={'app'}
+						className={'app allApps'}
 						hideBadge={true}
 						hideStartMenu={hideStartMenu}
 					/>

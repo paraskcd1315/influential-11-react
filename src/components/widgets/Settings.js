@@ -45,7 +45,8 @@ const Settings = ({
 		noiseToMenu: false,
 		disableMenuBorder: false,
 		blurRadius: 20,
-		borderRadius: 1.2
+		borderRadius: 1.2,
+		compactifyMedia: false
 	});
 
 	useEffect(() => {
@@ -166,7 +167,12 @@ const Settings = ({
 					? 1.2
 					: !storageReducer.extraValues.borderRadius
 					? 1.2
-					: storageReducer.extraValues.borderRadius
+					: storageReducer.extraValues.borderRadius,
+				compactifyMedia: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.compactifyMedia
+					? false
+					: true
 			};
 		});
 	}, [storageReducer]);

@@ -60,6 +60,8 @@
 		justify-content: start;
 		flex-direction: column;
 		flex-wrap: nowrap;
+		flex-basis: 0;
+		flex-grow: 1;
 	}
 
 	.widget:before {

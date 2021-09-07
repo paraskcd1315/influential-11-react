@@ -39,7 +39,7 @@ const Music = ({
 		mediaReducer;
 
 	useEffect(() => {
-		if (nowPlaying.artwork) {
+		if (nowPlaying.artwork && (!isStopped || isPlaying)) {
 			setBgStyle(() => {
 				return `
 				#musicWidget:before {
@@ -68,6 +68,11 @@ const Music = ({
 					border-radius: 1rem;
 					filter: blur(8px) opacity(0.8) brightness(85%);
 				}
+
+				.startWidget .media-artwork:before {
+					width: 80px;
+					height: 90px;
+				}
 				`;
 			});
 		}
@@ -82,7 +87,7 @@ const Music = ({
 				});
 			}, 250);
 		}
-	}, [mediaOpen, startMenu, nowPlaying]);
+	}, [mediaOpen, startMenu, nowPlaying, isPlaying, isStopped]);
 
 	const [yPosition, setYPosition] = useState({
 		currentY: 0,
@@ -90,19 +95,18 @@ const Music = ({
 		yOffset: !extraValues ? 0 : !extraValues.Media ? 0 : extraValues.Media
 	});
 
-	const [maximize, setMaximize] = useState(false);
-
 	const mediaContent = () => {
 		return (
-			<div className='media'>
+			<div className={isStopped || !isPlaying ? 'media stopped' : 'media'}>
 				<div className='media-left'>
-					{isStopped ? (
+					{isStopped || !nowPlayingApplication.identifier ? (
 						<div className='media-stopped'>Not Playing</div>
 					) : (
 						<div className='media-playing'>
 							<div
 								className='media-artwork'
-								onClick={() => {
+								onClick={(e) => {
+									e.preventDefault();
 									window.api.apps.launchApplication(
 										nowPlayingApplication.identifier
 									);
@@ -126,40 +130,39 @@ const Music = ({
 						</div>
 					)}
 				</div>
-				<div className='media-right'>
-					{!isStopped ? (
-						<>
-							<button
-								className='previousTrack'
-								onClick={() => {
-									window.api.media.previousTrack();
-								}}>
-								<i className='iconf-ic_fluent_caret_left_24_filled'></i>
-								<i className='iconf-ic_fluent_caret_left_24_filled'></i>
-							</button>
-							<button
-								className='playTrack'
-								onClick={() => {
-									window.api.media.togglePlayPause();
-								}}>
-								{isPlaying ? (
-									<i className='iconf-ic_fluent_pause_circle_20_filled'></i>
-								) : (
-									<i className='iconf-ic_fluent_play_circle_20_filled'></i>
-								)}
-							</button>
-							<button
-								className='nextTrack'
-								onClick={() => {
-									window.api.media.nextTrack();
-								}}>
-								<i className='iconf-ic_fluent_caret_right_24_filled'></i>
-								<i className='iconf-ic_fluent_caret_right_24_filled'></i>
-							</button>
-						</>
-					) : (
-						''
-					)}
+				<div className={isStopped ? 'media-right stopped' : 'media-right'}>
+					<>
+						<button
+							className='previousTrack'
+							onClick={(e) => {
+								e.preventDefault();
+								window.api.media.previousTrack();
+							}}>
+							<i className='iconf-ic_fluent_caret_left_24_filled'></i>
+							<i className='iconf-ic_fluent_caret_left_24_filled'></i>
+						</button>
+						<button
+							className='playTrack'
+							onClick={(e) => {
+								e.preventDefault();
+								window.api.media.togglePlayPause();
+							}}>
+							{isPlaying ? (
+								<i className='iconf-ic_fluent_pause_circle_20_filled'></i>
+							) : (
+								<i className='iconf-ic_fluent_play_circle_20_filled'></i>
+							)}
+						</button>
+						<button
+							className='nextTrack'
+							onClick={(e) => {
+								e.preventDefault();
+								window.api.media.nextTrack();
+							}}>
+							<i className='iconf-ic_fluent_caret_right_24_filled'></i>
+							<i className='iconf-ic_fluent_caret_right_24_filled'></i>
+						</button>
+					</>
 				</div>
 			</div>
 		);
@@ -245,8 +248,8 @@ const Music = ({
 				<WidgetMaker
 					id={'musicWidget'}
 					className={startMenu ? 'startWidget' : 'desktopWidget'}
-					title={'Media'}
-					showMaximiseButton={!startMenu}
+					title={isStopped || !isPlaying ? 'Media' : nowPlayingApplication.name}
+					showMaximiseButton={false}
 					startMenu={startMenu}
 					style={style}
 					content={mediaContent()}
@@ -261,26 +264,6 @@ const Music = ({
 							removeValue('Media');
 							openMedia(false);
 						}, 250);
-					}}
-					maximize={maximize}
-					maximizeCallback={() => {
-						if (!maximize) {
-							setMaximize(true);
-							setStyle((state) => {
-								return {
-									...state,
-									maxHeight: 500 + 'px'
-								};
-							});
-						} else {
-							setMaximize(false);
-							setStyle((state) => {
-								return {
-									...state,
-									maxHeight: 300 + 'px'
-								};
-							});
-						}
 					}}
 				/>
 			</DraggableCore>

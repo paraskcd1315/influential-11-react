@@ -35,7 +35,7 @@
 	@include set-border-radius(1.2rem);
 	@include set-shadows(
 		set-transparency($dark-color, 0.3),
-		set-transparency($dark-color, 0.2)
+		set-transparency($dark-color, 0.5)
 	);
 	min-width: 45%;
 }
@@ -49,7 +49,7 @@
 	@include set-background-color(set-transparency($light-color, 0.4));
 	@include set-shadows(
 		set-transparency($dark-color, 0.3),
-		set-transparency($dark-color, 0.2)
+		set-transparency($dark-color, 0.5)
 	);
 	@include set-size(90%, auto);
 	border: 1px solid set-text-color-transparency($light-color, 0.2) !important;

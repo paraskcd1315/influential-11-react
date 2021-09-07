@@ -185,6 +185,7 @@ const Common = ({
 
 	const [blurRadiusStyle, setblurRadiusStyle] = useState('');
 	const [borderRadiusStyle, setborderRadiusStyle] = useState('');
+	const [hideIconLabelsStyle, setHideIconLabelsStyle] = useState('');
 	const [hideExplorerBGStyle, sethideExplorerBGStyle] = useState('');
 	const [hideExplorerFolderTitleStyle, sethideExplorerFolderTitleStyle] =
 		useState('');
@@ -205,8 +206,22 @@ const Common = ({
 		useState('');
 	const [noiseToMenuStyle, setnoiseToMenuStyle] = useState('');
 	const [disableMenuBorderStyle, setdisableMenuBorderStyle] = useState('');
+	const [compactifyMediaStyle, setcompactifyMediaStyle] = useState('');
 
 	useEffect(() => {
+		setHideIconLabelsStyle((state) => {
+			let newState = state;
+			if (storage.extraValues) {
+				if (storage.extraValues.hideIconLabels) {
+					newState += `
+					#explorerWidget .explorer-apps .explorerFavApp, #explorerWidget .explorer-apps .explorerApp, #explorerWidget .explorer-apps .explorerFolder, #explorerWidget .explorer-apps .addApp, #explorerWidget .explorer-apps .folderApp, #explorerWidget .explorer-apps .pageApp {
+						height: 71px;
+					}
+					`;
+				}
+			}
+			return newState;
+		});
 		setblurRadiusStyle((state) => {
 			let newState = state;
 			if (storage.extraValues) {
@@ -313,6 +328,9 @@ const Common = ({
 						#explorerWidget .explorer-header {
 							display: none;
 						}
+						#explorerWidget .explorer-sidebar {
+							height: 150px;
+						}
 					`;
 				}
 			}
@@ -359,6 +377,71 @@ const Common = ({
 							width: 60px;
 							height: 60px;
 						}
+					`;
+				}
+			}
+			return newState;
+		});
+		setcompactifyMediaStyle((state) => {
+			let newState = state;
+			if (storage.extraValues) {
+				if (storage.extraValues.compactifyMedia) {
+					newState = `
+					#musicWidget .widget-header {
+						height: 2rem;
+					}
+					#musicWidget .widget-content {
+						padding: 1rem;
+					}
+					.media-artwork img {
+						width: 90px;
+						height: 90px;
+					}
+					.media-right button.previousTrack {
+						display: none;
+					}
+					.media-right {
+						left: 70%;
+						margin-top: -65px;
+					}
+					.media-artwork:before {
+						width: 90px;
+						height: 100px;
+					}
+					.media-info .media-artist .text {
+						width: 110px;
+					}
+
+					@media only screen and (max-height: 667px) {
+						.media-info .media-artist .text {
+							width: 68px;
+						}
+					}
+					@media only screen and (max-height: 736px) { 
+						.media-info .media-artist .text {
+							width: 93px;
+						}
+					}
+					@media only screen and (max-height: 780px) {
+						.media-info .media-artist .text {
+							width: 60px;
+						}
+					}
+					@media only screen and (max-height: 812px) {
+						.media-info .media-artist .text {
+							width: 68px;
+						}
+					}
+					@media only screen and (max-height: 844px) {
+						.media-info .media-artist .text {
+							width: 75px;
+						}
+					}
+					@media only screen and (max-height: 896px) {
+						.media-info .media-artist .text {
+							width: 90px;
+						}
+					}
 					`;
 				}
 			}
@@ -659,6 +742,16 @@ const Common = ({
 			)}
 			{storage.extraValues && storage.extraValues.disableMenuBorder ? (
 				<style id='disableMenuBorder'>{disableMenuBorderStyle}</style>
+			) : (
+				''
+			)}
+			{storage.extraValues && storage.extraValues.compactifyMedia ? (
+				<style id='compactifyMedia'>{compactifyMediaStyle}</style>
+			) : (
+				''
+			)}
+			{storage.extraValues && storage.extraValues.hideIconLabels ? (
+				<style id='hideIconLabels'>{hideIconLabelsStyle}</style>
 			) : (
 				''
 			)}

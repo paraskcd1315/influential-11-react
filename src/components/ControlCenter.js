@@ -133,6 +133,21 @@ const ControlCenter = ({
 					// eslint-disable-next-line
 					toggleCallback={() => (window.location.href = window.location.href)}
 				/>
+				<CCButton
+					isEnabled={false}
+					toggleName='Reset Widget'
+					toggleIcon='icon-ic_fluent_history_24_regular'
+					toggleCallback={() => {
+						let popup = window.confirm(
+							'This Option will erase everything you have saved like Pinned Apps and all the Settings, are you sure you want to proceed?'
+						);
+						if (popup) {
+							localStorage.removeItem('FluentUI');
+							// eslint-disable-next-line
+							window.location.href = window.location.href;
+						}
+					}}
+				/>
 			</div>
 			<div className='footer'>
 				<div className='batteryInfo'>

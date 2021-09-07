@@ -15,7 +15,8 @@ const IndividualWidgetSettings = ({ style, options, handleSwitchChange }) => {
 		hideAddApp,
 		hideAddFolder,
 		disableGradient,
-		compactifyWeather
+		compactifyWeather,
+		compactifyMedia
 	} = options;
 	return (
 		<div className={'settings-individual-widgets page'} style={style}>
@@ -68,6 +69,14 @@ const IndividualWidgetSettings = ({ style, options, handleSwitchChange }) => {
 				onChange={handleSwitchChange}
 				inputName='compactifyWeather'
 				value={compactifyWeather ? 'on' : 'off'}
+				label='Make it Compact'
+				description='This setting minifies the padding between different elements inside the Widget, meaning it makes it smaller/compact if you will. (Tip: Refresh the widget for Better Results)'
+			/>
+			<div className='settings-label'>Music Widget Settings</div>
+			<InputSwitch
+				onChange={handleSwitchChange}
+				inputName='compactifyMedia'
+				value={compactifyMedia ? 'on' : 'off'}
 				label='Make it Compact'
 				description='This setting minifies the padding between different elements inside the Widget, meaning it makes it smaller/compact if you will. (Tip: Refresh the widget for Better Results)'
 			/>

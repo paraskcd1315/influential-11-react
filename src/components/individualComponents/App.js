@@ -166,7 +166,9 @@ const App = ({
 			</div>
 			{hideName ? (
 				''
-			) : extraValues && extraValues.hideIconLabels ? (
+			) : extraValues &&
+			  extraValues.hideIconLabels &&
+			  className !== 'app allApps' ? (
 				''
 			) : (
 				<div className='title'>{name}</div>
