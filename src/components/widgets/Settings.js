@@ -60,7 +60,7 @@ const Settings = ({
 		textColorLight: '#202020',
 		borderColorLight: '#' + rgbHex(243, 243, 243, 0.2),
 		backgroundColorDark: '#' + rgbHex(32, 32, 32, 0.4),
-		backgroundButtonColorDark: '#' + rgbHex(57, 57, 57, 0.4),
+		backgroundButtonColorDark: '#' + rgbHex(83, 83, 83, 0.4),
 		textColorDark: '#f3f3f3',
 		borderColorDark: '#' + rgbHex(32, 32, 32, 0.2)
 	});
@@ -250,9 +250,9 @@ const Settings = ({
 					? '#' + rgbHex(32, 32, 32, 0.4)
 					: storageReducer.extraValues.backgroundColorDark,
 				backgroundButtonColorDark: !storageReducer.extraValues
-					? '#' + rgbHex(57, 57, 57, 0.4)
+					? '#' + rgbHex(83, 83, 83, 0.4)
 					: !storageReducer.extraValues.backgroundButtonColorDark
-					? '#' + rgbHex(57, 57, 57, 0.4)
+					? '#' + rgbHex(83, 83, 83, 0.4)
 					: storageReducer.extraValues.backgroundButtonColorDark,
 				textColorDark: !storageReducer.extraValues
 					? '#f3f3f3'

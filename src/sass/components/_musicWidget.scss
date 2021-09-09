@@ -60,7 +60,7 @@
 			background: transparent;
 			border: none;
 			outline: none;
-			color: rgba($light-color, 0.6);
+			color: rgba($dark-color, 0.6);
 			padding: 0;
 
 			&.previousTrack,
@@ -73,7 +73,7 @@
 			}
 
 			&.playTrack {
-				color: rgba($light-color, 0.9);
+				color: rgba($dark-color, 0.9);
 				font-size: 3rem;
 				text-shadow: 0px 15px 20px rgba($dark-color, 0.2);
 				padding: 0.5rem;
@@ -120,5 +120,15 @@
 				}
 			}
 		}
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.media-right button.playTrack {
+		color: rgba($light-color, 0.9);
+	}
+
+	.media-right button {
+		color: rgba($light-color, 0.6);
 	}
 }

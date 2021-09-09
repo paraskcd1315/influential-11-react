@@ -50,10 +50,28 @@ const ColorSettings = ({ style, options }) => {
 				description='The Main Start Button Background Color when Start Menu is Open.'
 			/>
 			<InputColor
-				inputName='backgroundButtonColorLight'
-				color={backgroundButtonColorLight}
+				inputName='backgroundColorLight'
+				color={backgroundColorLight}
 				label='Background Color'
 				description='Background Color of all Components.'
+			/>
+			<InputColor
+				inputName='backgroundButtonColorLight'
+				color={backgroundButtonColorLight}
+				label='Background Buttton Color'
+				description='Background Color of all Button Components.'
+			/>
+			<InputColor
+				inputName='textColorLight'
+				color={textColorLight}
+				label='Text Color'
+				description='Color of all Text Components.'
+			/>
+			<InputColor
+				inputName='borderColorLight'
+				color={borderColorLight}
+				label='Border Color'
+				description='Color of all Border Components.'
 			/>
 			<div className='settings-label'>Dark Color Settings</div>
 			<hr />
@@ -69,6 +87,30 @@ const ColorSettings = ({ style, options }) => {
 				color={startButtonColor3Dark}
 				label='Start Button Color Pressed'
 				description='The Main Start Button Background Color when Start Menu is Open.'
+			/>
+			<InputColor
+				inputName='backgroundColorDark'
+				color={backgroundColorDark}
+				label='Background Color'
+				description='Background Color of all Components.'
+			/>
+			<InputColor
+				inputName='backgroundButtonColorDark'
+				color={backgroundButtonColorDark}
+				label='Background Buttton Color'
+				description='Background Color of all Button Components.'
+			/>
+			<InputColor
+				inputName='textColorDark'
+				color={textColorDark}
+				label='Text Color'
+				description='Color of all Text Components.'
+			/>
+			<InputColor
+				inputName='borderColorDark'
+				color={borderColorDark}
+				label='Border Color'
+				description='Color of all Border Components.'
 			/>
 		</div>
 	);

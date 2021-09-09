@@ -17,8 +17,8 @@ import {
 } from '../../actions/explorer';
 import { DraggableCore } from 'react-draggable';
 import WidgetMaker from '../individualComponents/WidgetMaker';
-import PageMaker from '../../explorerWidget/pageMaker';
-import SidebarButton from '../../explorerWidget/sidebarButton';
+import PageMaker from '../explorerWidget/pageMaker';
+import SidebarButton from '../explorerWidget/sidebarButton';
 
 const Explorer = ({
 	appsReducer,

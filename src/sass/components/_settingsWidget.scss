@@ -211,6 +211,7 @@ hr {
 		@include set-background-color(set-transparency($light-button-color, 0.4));
 
 		button {
+			position: relative;
 			border: none;
 			outline: none;
 			@include set-size(45px, 45px);
@@ -220,6 +221,23 @@ hr {
 				set-transparency($dark-color, 0.3),
 				set-transparency($dark-color, 0.2)
 			);
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: -1;
+				border-radius: 99px;
+				background-image: linear-gradient(45deg, #808080 25%, transparent 25%),
+					linear-gradient(-45deg, #808080 25%, transparent 25%),
+					linear-gradient(45deg, transparent 75%, #808080 75%),
+					linear-gradient(-45deg, transparent 75%, #808080 75%);
+				background-size: 20px 20px;
+				background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+			}
 		}
 	}
 

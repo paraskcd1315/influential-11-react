@@ -93,7 +93,7 @@
 
 	#taskbar {
 		.bottom-part {
-			background-color: set-transparency(lighten($dark-button-color, 10%), 0.4);
+			background-color: set-transparency($dark-button-color, 0.4);
 			border-top: 1px solid set-text-color-transparency($dark-color, 0.2) !important;
 		}
 		.center-part {
