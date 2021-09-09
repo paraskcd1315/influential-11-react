@@ -21,7 +21,9 @@ const MainSettings = ({
 		hideIconLabels,
 		twentyFourHourTime,
 		blurRadius,
-		borderRadius
+		borderRadius,
+		hideFadeEffect,
+		removeBackButton
 	} = options;
 
 	return (
@@ -46,6 +48,20 @@ const MainSettings = ({
 				value={twentyFourHourTime ? 'on' : 'off'}
 				label='24 Hour Time'
 				description='This setting enables 24 Hour Time.'
+			/>
+			<InputSwitch
+				onChange={handleSwitchChange}
+				inputName='hideFadeEffect'
+				value={hideFadeEffect ? 'on' : 'off'}
+				label='Disable Scroll Fade'
+				description='This setting disables the fade effect when scrolling.'
+			/>
+			<InputSwitch
+				onChange={handleSwitchChange}
+				inputName='removeBackButton'
+				value={removeBackButton ? 'on' : 'off'}
+				label='Remove Back Buttons'
+				description='This setting removes the back buttons from the respected Widgets when not in use.'
 			/>
 			<InputRange
 				onInput={handleRangeChange}

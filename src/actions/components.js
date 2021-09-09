@@ -10,7 +10,9 @@ import {
 	SEARCHQUERY,
 	SHOWMENU,
 	OPEN_FOLDER,
-	CLOSE_FOLDER
+	CLOSE_FOLDER,
+	OPEN_COLOR_PICKER,
+	CLOSE_COLOR_PICKER
 } from './types';
 
 export const openStartMenu = (startMenuOpen) => (dispatch) => {
@@ -65,5 +67,24 @@ export const openFolder =
 export const closeFolder = () => (dispatch) => {
 	dispatch({
 		type: CLOSE_FOLDER
+	});
+};
+
+export const openColorPicker =
+	({ color, inputName, label }) =>
+	(dispatch) => {
+		dispatch({
+			type: OPEN_COLOR_PICKER,
+			payload: {
+				color: color,
+				colorInputName: inputName,
+				colorLabel: label
+			}
+		});
+	};
+
+export const closeColorPicker = () => (dispatch) => {
+	dispatch({
+		type: CLOSE_COLOR_PICKER
 	});
 };

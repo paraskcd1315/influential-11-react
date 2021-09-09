@@ -9,7 +9,9 @@ import {
 	EXPLORER_OPEN,
 	CALENDAR_OPEN,
 	MEDIA_OPEN,
-	REMINDERS_OPEN
+	REMINDERS_OPEN,
+	OPEN_COLOR_PICKER,
+	CLOSE_COLOR_PICKER
 } from '../actions/types';
 
 const initialState = {
@@ -18,7 +20,8 @@ const initialState = {
 	explorerOpen: false,
 	calendarOpen: false,
 	mediaOpen: false,
-	remindersOpen: false
+	remindersOpen: false,
+	colorPickerOpen: false
 };
 
 function widgetReducer(state = initialState, action) {
@@ -42,6 +45,12 @@ function widgetReducer(state = initialState, action) {
 
 		case REMINDERS_OPEN:
 			return { ...state, remindersOpen: payload };
+
+		case OPEN_COLOR_PICKER:
+			return { ...state, colorPickerOpen: true };
+
+		case CLOSE_COLOR_PICKER:
+			return { ...state, colorPickerOpen: false };
 
 		default:
 			return state;

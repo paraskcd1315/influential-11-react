@@ -5,6 +5,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import rgbHex from 'rgb-hex';
 
 import WidgetMaker from '../individualComponents/WidgetMaker';
 import { openSettings } from '../../actions/widget';
@@ -46,7 +47,22 @@ const Settings = ({
 		disableMenuBorder: false,
 		blurRadius: 20,
 		borderRadius: 1.2,
-		compactifyMedia: false
+		compactifyMedia: false,
+		hideFadeEffect: false,
+		removeBackButton: false,
+		startButtonColor1: '#67cffd',
+		startButtonColor2Dark: '#00abf9',
+		startButtonColor2Light: '#2f93de',
+		startButtonColor3Light: '#1e78bc',
+		startButtonColor3Dark: '#2dbdff',
+		backgroundColorLight: '#' + rgbHex(243, 243, 243, 0.4),
+		backgroundButtonColorLight: '#' + rgbHex(253, 253, 253, 0.4),
+		textColorLight: '#202020',
+		borderColorLight: '#' + rgbHex(243, 243, 243, 0.2),
+		backgroundColorDark: '#' + rgbHex(32, 32, 32, 0.4),
+		backgroundButtonColorDark: '#' + rgbHex(57, 57, 57, 0.4),
+		textColorDark: '#f3f3f3',
+		borderColorDark: '#' + rgbHex(32, 32, 32, 0.2)
 	});
 
 	useEffect(() => {
@@ -172,7 +188,82 @@ const Settings = ({
 					? false
 					: !storageReducer.extraValues.compactifyMedia
 					? false
-					: true
+					: true,
+				hideFadeEffect: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.hideFadeEffect
+					? false
+					: true,
+				removeBackButton: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.removeBackButton
+					? false
+					: true,
+				startButtonColor1: !storageReducer.extraValues
+					? '#67cffd'
+					: !storageReducer.extraValues.startButtonColor1
+					? '#67cffd'
+					: storageReducer.extraValues.startButtonColor1,
+				startButtonColor2Dark: !storageReducer.extraValues
+					? '#00abf9'
+					: !storageReducer.extraValues.startButtonColor2Dark
+					? '#00abf9'
+					: storageReducer.extraValues.startButtonColor2Dark,
+				startButtonColor2Light: !storageReducer.extraValues
+					? '#2f93de'
+					: !storageReducer.extraValues.startButtonColor2Light
+					? '#2f93de'
+					: storageReducer.extraValues.startButtonColor2Light,
+				startButtonColor3Light: !storageReducer.extraValues
+					? '#1e78bc'
+					: !storageReducer.extraValues.startButtonColor3Light
+					? '#1e78bc'
+					: storageReducer.extraValues.startButtonColor3Light,
+				startButtonColor3Dark: !storageReducer.extraValues
+					? '#2dbdff'
+					: !storageReducer.extraValues.startButtonColor3Dark
+					? '#2dbdff'
+					: storageReducer.extraValues.startButtonColor3Dark,
+				backgroundColorLight: !storageReducer.extraValues
+					? '#' + rgbHex(243, 243, 243, 0.4)
+					: !storageReducer.extraValues.backgroundColorLight
+					? '#' + rgbHex(243, 243, 243, 0.4)
+					: storageReducer.extraValues.backgroundColorLight,
+				backgroundButtonColorLight: !storageReducer.extraValues
+					? '#' + rgbHex(253, 253, 253, 0.4)
+					: !storageReducer.extraValues.backgroundButtonColorLight
+					? '#' + rgbHex(253, 253, 253, 0.4)
+					: storageReducer.extraValues.backgroundButtonColorLight,
+				textColorLight: !storageReducer.extraValues
+					? '#202020'
+					: !storageReducer.extraValues.textColorLight
+					? '#202020'
+					: storageReducer.extraValues.textColorLight,
+				borderColorLight: !storageReducer.extraValues
+					? '#' + rgbHex(243, 243, 243, 0.2)
+					: !storageReducer.extraValues.borderColorLight
+					? '#' + rgbHex(243, 243, 243, 0.2)
+					: storageReducer.extraValues.borderColorLight,
+				backgroundColorDark: !storageReducer.extraValues
+					? '#' + rgbHex(32, 32, 32, 0.4)
+					: !storageReducer.extraValues.backgroundColorDark
+					? '#' + rgbHex(32, 32, 32, 0.4)
+					: storageReducer.extraValues.backgroundColorDark,
+				backgroundButtonColorDark: !storageReducer.extraValues
+					? '#' + rgbHex(57, 57, 57, 0.4)
+					: !storageReducer.extraValues.backgroundButtonColorDark
+					? '#' + rgbHex(57, 57, 57, 0.4)
+					: storageReducer.extraValues.backgroundButtonColorDark,
+				textColorDark: !storageReducer.extraValues
+					? '#f3f3f3'
+					: !storageReducer.extraValues.textColorDark
+					? '#f3f3f3'
+					: storageReducer.extraValues.textColorDark,
+				borderColorDark: !storageReducer.extraValues
+					? '#' + rgbHex(32, 32, 32, 0.2)
+					: !storageReducer.extraValues.borderColorDark
+					? '#' + rgbHex(32, 32, 32, 0.2)
+					: storageReducer.extraValues.borderColorDark
 			};
 		});
 	}, [storageReducer]);
@@ -435,12 +526,7 @@ const Settings = ({
 							handleTextChange={handleTextChange}
 							handleSwitchChange={handleSwitchChange}
 						/>
-						<ColorSettings
-							style={colorSettingsStyle.style}
-							options={options}
-							handleTextChange={handleTextChange}
-							handleSwitchChange={handleSwitchChange}
-						/>
+						<ColorSettings style={colorSettingsStyle.style} options={options} />
 					</div>
 				</div>
 			</>
@@ -460,7 +546,14 @@ const Settings = ({
 				});
 				setTimeout(() => openSettings(false), 250);
 			}}
-			showBackButton={true}
+			showBackButton={
+				storageReducer.extraValues &&
+				storageReducer.extraValues.removeBackButton
+					? homePageStyle.flag
+						? false
+						: true
+					: true
+			}
 			activeBackButton={homePageStyle.flag}
 			backButtonCallback={backCallback}
 		/>

@@ -828,7 +828,13 @@ const Explorer = ({
 				id={'explorerWidget'}
 				className={'desktopWidget'}
 				title={''}
-				showBackButton={true}
+				showBackButton={
+					extraValues && extraValues.removeBackButton
+						? !customFolderPage
+							? false
+							: true
+						: true
+				}
 				activeBackButton={!customFolderPage}
 				backButtonCallback={(e) => {
 					switch (pageID) {

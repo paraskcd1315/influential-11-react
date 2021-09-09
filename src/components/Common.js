@@ -183,6 +183,7 @@ const Common = ({
 		});
 	};
 
+	const [hideFadeEffectStyle, sethideFadeEffectStyle] = useState('');
 	const [blurRadiusStyle, setblurRadiusStyle] = useState('');
 	const [borderRadiusStyle, setborderRadiusStyle] = useState('');
 	const [hideIconLabelsStyle, setHideIconLabelsStyle] = useState('');
@@ -209,6 +210,22 @@ const Common = ({
 	const [compactifyMediaStyle, setcompactifyMediaStyle] = useState('');
 
 	useEffect(() => {
+		sethideFadeEffectStyle((state) => {
+			let newState = state;
+			if (storage.extraValues) {
+				if (storage.extraValues.hideFadeEffect) {
+					newState += `
+					#startMenu .content,
+					.settings-content .settings-pages .page,
+					#explorerWidget .explorer-apps {
+						mask-image: unset;
+						-webkit-mask-image: unset;
+					}
+					`;
+				}
+			}
+			return newState;
+		});
 		setHideIconLabelsStyle((state) => {
 			let newState = state;
 			if (storage.extraValues) {
@@ -752,6 +769,11 @@ const Common = ({
 			)}
 			{storage.extraValues && storage.extraValues.hideIconLabels ? (
 				<style id='hideIconLabels'>{hideIconLabelsStyle}</style>
+			) : (
+				''
+			)}
+			{storage.extraValues && storage.extraValues.hideFadeEffect ? (
+				<style id='hideFadeEffect'>{hideFadeEffectStyle}</style>
 			) : (
 				''
 			)}

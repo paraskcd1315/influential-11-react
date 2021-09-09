@@ -6,6 +6,7 @@ import Weather from './widgets/Weather';
 import { openExplorer, openMedia, openWeather } from '../actions/widget';
 import Music from './widgets/Music';
 import Explorer from './widgets/Explorer';
+import ColorPicker from './widgets/ColorPicker';
 
 const Desktop = ({
 	widgetReducer,
@@ -14,7 +15,13 @@ const Desktop = ({
 	openExplorer,
 	openMedia
 }) => {
-	const { settingsOpen, weatherOpen, mediaOpen, explorerOpen } = widgetReducer;
+	const {
+		settingsOpen,
+		weatherOpen,
+		mediaOpen,
+		explorerOpen,
+		colorPickerOpen
+	} = widgetReducer;
 
 	useEffect(() => {
 		if (extraValues) {
@@ -36,6 +43,7 @@ const Desktop = ({
 			{weatherOpen ? <Weather startMenu={false} /> : ''}
 			{mediaOpen ? <Music startMenu={false} /> : ''}
 			{settingsOpen ? <Settings /> : ''}
+			{colorPickerOpen ? <ColorPicker /> : ''}
 		</div>
 	);
 };

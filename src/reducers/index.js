@@ -17,6 +17,7 @@ import systemReducer from './systemReducer';
 import widgetReducer from './widgetsReducer';
 import explorerAppsReducer from './explorerAppsReducer';
 import explorerCustomFolderReducer from './explorerCustomFolderReducer';
+import colorPickerReducer from './colorPickerReducer';
 
 export default combineReducers({
 	timeReducer,
@@ -31,5 +32,6 @@ export default combineReducers({
 	systemReducer,
 	widgetReducer,
 	explorerAppsReducer,
-	explorerCustomFolderReducer
+	explorerCustomFolderReducer,
+	colorPickerReducer
 });

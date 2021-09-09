@@ -1,4 +1,24 @@
 @import './slider';
+#colorPickerWidget {
+	.widget-buttons-left {
+		pointer-events: none;
+	}
+
+	.widget-header {
+		padding-bottom: 0rem;
+	}
+
+	.sketch-picker {
+		width: unset !important;
+		background: transparent !important;
+		box-shadow: unset !important;
+	}
+}
+
+hr {
+	opacity: 0.3;
+}
+
 .settings {
 	&-header {
 		display: flex;
@@ -179,6 +199,30 @@
 		}
 	}
 
+	&-inputColor {
+		display: flex;
+		justify-content: space-between;
+		width: 93%;
+		align-items: center;
+		margin-bottom: 1rem;
+		padding: 0.8rem;
+		border-top: 1px solid set-text-color-transparency($light-color, 0.1) !important;
+		@include set-border-radius(0.5rem);
+		@include set-background-color(set-transparency($light-button-color, 0.4));
+
+		button {
+			border: none;
+			outline: none;
+			@include set-size(45px, 45px);
+			border-radius: 99px;
+			margin-right: 1rem;
+			@include set-shadows(
+				set-transparency($dark-color, 0.3),
+				set-transparency($dark-color, 0.2)
+			);
+		}
+	}
+
 	&-range {
 		padding: 0rem 1rem;
 		margin-bottom: 1rem;
@@ -254,9 +298,22 @@
 		}
 	}
 
+	.settings-inputColor {
+		border-top: 1px solid set-text-color-transparency($dark-color, 0.1) !important;
+		@include set-background-color(set-transparency($dark-button-color, 0.4));
+	}
+
 	.settings-range {
 		.slider::-webkit-slider-thumb {
 			background: $primary-color;
+		}
+	}
+
+	#colorPickerWidget {
+		.sketch-picker {
+			label {
+				color: $light-color !important;
+			}
 		}
 	}
 }

@@ -6,6 +6,10 @@
 
 	#startMenu #pinnedApps {
 		height: 240px;
+
+		.favApp .badge {
+			margin: -28px 0 0 30px;
+		}
 	}
 
 	#startMenu #pinnedWidgets {
@@ -26,7 +30,7 @@
 	}
 
 	#allApps {
-		height: 430px;
+		height: 408px;
 	}
 
 	#startMenu .widget {
@@ -62,6 +66,15 @@
 	.media-right button.playTrack {
 		font-size: 3rem;
 	}
+
+	#explorerWidget .explorer-apps .explorerFavApp .badge,
+	#explorerWidget .explorer-apps .explorerApp .badge,
+	#explorerWidget .explorer-apps .explorerFolder .badge,
+	#explorerWidget .explorer-apps .addApp .badge,
+	#explorerWidget .explorer-apps .folderApp .badge,
+	#explorerWidget .explorer-apps .pageApp .badge {
+		margin: -28px 0 0 27px;
+	}
 }
 
 //iPhone XS/11 pro Max
@@ -71,14 +84,23 @@
 	}
 
 	#allApps {
-		height: 425px;
+		height: 408px;
 	}
 
 	.settings {
 		&-content .settings-pages .page {
 			width: 92%;
-			height: 355px;
+			height: 361px;
 		}
+	}
+
+	#explorerWidget .explorer-apps .explorerFavApp .badge,
+	#explorerWidget .explorer-apps .explorerApp .badge,
+	#explorerWidget .explorer-apps .explorerFolder .badge,
+	#explorerWidget .explorer-apps .addApp .badge,
+	#explorerWidget .explorer-apps .folderApp .badge,
+	#explorerWidget .explorer-apps .pageApp .badge {
+		margin: -28px 0 0 27px;
 	}
 }
 
@@ -98,7 +120,7 @@
 	}
 
 	#allApps {
-		height: 378px;
+		height: 358px;
 	}
 	.desktopWidget .weather-content .weather-daily img {
 		@include set-size(40px, 40px);
@@ -119,7 +141,7 @@
 
 		&-content .settings-pages .page {
 			width: 92%;
-			height: 355px;
+			height: 352px;
 		}
 
 		&-inputSwitch {
@@ -160,6 +182,15 @@
 	#explorerWidget .explorer-apps .pageApp .title {
 		width: 57px;
 	}
+
+	#explorerWidget .explorer-apps .explorerFavApp .badge,
+	#explorerWidget .explorer-apps .explorerApp .badge,
+	#explorerWidget .explorer-apps .explorerFolder .badge,
+	#explorerWidget .explorer-apps .addApp .badge,
+	#explorerWidget .explorer-apps .folderApp .badge,
+	#explorerWidget .explorer-apps .pageApp .badge {
+		margin: -28px 0 0 27px;
+	}
 }
 
 //iPhone X/XS/11/11Pro
@@ -173,7 +204,7 @@
 	}
 
 	#allApps {
-		height: 350px;
+		height: 328px;
 	}
 
 	#startMenu #pinnedApps {
@@ -298,7 +329,7 @@
 	}
 
 	#allApps {
-		height: 305px;
+		height: 288px;
 	}
 
 	.widget.x-large {
@@ -318,7 +349,7 @@
 
 		&-content .settings-pages .page {
 			width: 90%;
-			height: 280px;
+			height: 284px;
 		}
 
 		&-inputSwitch {
@@ -350,7 +381,7 @@
 	}
 
 	#allApps {
-		height: 278px;
+		height: 258px;
 	}
 
 	#startMenu #pinnedApps {
@@ -380,7 +411,7 @@
 
 		&-content .settings-pages .page {
 			width: 92%;
-			height: 287px;
+			height: 256px;
 		}
 
 		&-inputSwitch {
@@ -395,6 +426,19 @@
 	#explorerWidget .explorer-apps {
 		padding-left: 0.5rem;
 	}
+
+	#explorerWidget .explorer-apps .explorerFavApp .badge,
+	#explorerWidget .explorer-apps .explorerApp .badge,
+	#explorerWidget .explorer-apps .explorerFolder .badge,
+	#explorerWidget .explorer-apps .addApp .badge,
+	#explorerWidget .explorer-apps .folderApp .badge,
+	#explorerWidget .explorer-apps .pageApp .badge {
+		margin: -28px 0 0 27px;
+	}
+
+	.favApp .badge {
+		margin: -24px 0 0 30px;
+	}
 }
 
 //iPhone 6/7/8
@@ -407,7 +451,7 @@
 	}
 
 	#allApps {
-		height: 205px;
+		height: 188px;
 	}
 
 	#allWidgets {
@@ -423,8 +467,10 @@
 	}
 
 	#controlCenter {
+		bottom: 12rem;
+
 		.header button {
-			padding: 0.4rem;
+			padding: 0.5rem;
 		}
 	}
 
@@ -448,7 +494,7 @@
 
 		&-content .settings-pages .page {
 			width: 92%;
-			height: 200px;
+			height: 198px;
 		}
 
 		&-inputSwitch {
@@ -467,5 +513,18 @@
 	#explorerWidget .explorer-apps .explorerApp .icon,
 	#explorerWidget .explorer-apps .explorerApp .icon img {
 		@include set-size(40px, 40px);
+	}
+
+	#explorerWidget .explorer-apps .explorerFavApp .badge,
+	#explorerWidget .explorer-apps .explorerApp .badge,
+	#explorerWidget .explorer-apps .explorerFolder .badge,
+	#explorerWidget .explorer-apps .addApp .badge,
+	#explorerWidget .explorer-apps .folderApp .badge,
+	#explorerWidget .explorer-apps .pageApp .badge {
+		margin: -28px 0 0 27px;
+	}
+
+	.favApp .badge {
+		margin: -24px 0 0 30px;
 	}
 }
