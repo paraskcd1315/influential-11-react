@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import Weather from '../widgets/Weather';
 
 import PinnedApps from '../individualComponents/PinnedApps';
+import Music from '../widgets/Music';
 
 const MainScreen = ({
 	allAppsOpen,
@@ -29,6 +30,23 @@ const MainScreen = ({
 			setStyle({ display: 'block' });
 		}
 	}, [storageReducer]);
+
+	const renderWidgets = () => {
+		if (!storageReducer.extraValues) {
+			return <Weather startMenu={true} hideStartMenu={hideStartMenu} />;
+		} else {
+			if (
+				!storageReducer.extraValues.weatherPin &&
+				!storageReducer.extraValues.musicPin
+			) {
+				return <Weather startMenu={true} hideStartMenu={hideStartMenu} />;
+			} else if (storageReducer.extraValues.weatherPin) {
+				return <Weather startMenu={true} hideStartMenu={hideStartMenu} />;
+			} else if (storageReducer.extraValues.musicPin) {
+				return <Music startMenu={true} hideStartMenu={hideStartMenu} />;
+			}
+		}
+	};
 
 	return (
 		<div
@@ -58,7 +76,7 @@ const MainScreen = ({
 				</button>
 			</div>
 			<div id='pinnedWidgets' className='content'>
-				<Weather startMenu={true} hideStartMenu={hideStartMenu} />
+				{renderWidgets()}
 			</div>
 		</div>
 	);

@@ -188,6 +188,24 @@ const Music = ({
 						});
 					}
 				}}
+				onHoldClick={() => {
+					if (!extraValues || !extraValues.musicPin) {
+						if (extraValues && 'weatherPin' in extraValues) {
+							removeValue('weatherPin');
+						}
+						let popup = window.confirm(
+							'Are you sure you want to pin the Media Widget?'
+						);
+						if (popup) {
+							addValue({
+								key: 'musicPin',
+								value: true
+							});
+						}
+					} else {
+						window.confirm('Media Widget is already Pinned :)');
+					}
+				}}
 			/>
 		</>
 	) : (

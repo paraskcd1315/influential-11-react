@@ -8,13 +8,15 @@ import InputRange from '../InputRange';
 
 import InputSwitch from '../InputSwitch';
 import InputText from '../InputText';
+import ResetButton from '../ResetButton';
 
 const MainSettings = ({
 	style,
 	options,
 	handleTextChange,
 	handleSwitchChange,
-	handleRangeChange
+	handleRangeChange,
+	handleMainReset
 }) => {
 	const {
 		username,
@@ -28,6 +30,7 @@ const MainSettings = ({
 
 	return (
 		<div className='settings-main page' style={style}>
+			<ResetButton callback={handleMainReset} title='Reset Main Settings' />
 			<InputText
 				onChange={handleTextChange}
 				inputName='username'

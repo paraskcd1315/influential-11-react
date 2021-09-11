@@ -14,14 +14,15 @@ import MainSettings from '../settingsWidget/pages/MainSettings';
 import IndividualWidgetSettings from '../settingsWidget/pages/IndividualWidgetSettings';
 import LookNFeelSettings from '../settingsWidget/pages/LookNFeelSettings';
 import ColorSettings from '../settingsWidget/pages/ColorSettings';
-import { addValue } from '../../actions/storage';
+import { addValue, removeValue } from '../../actions/storage';
 
 const Settings = ({
 	widgetReducer: { settingsOpen },
 	openSettings,
 	systemReducer: { deviceModel, deviceModelPromotional, deviceName },
 	storageReducer,
-	addValue
+	addValue,
+	removeValue
 }) => {
 	const [options, setOptions] = useState({
 		username: '',
@@ -51,18 +52,12 @@ const Settings = ({
 		hideFadeEffect: false,
 		removeBackButton: false,
 		startButtonColor1: '#67cffd',
-		startButtonColor2Dark: '#00abf9',
 		startButtonColor2Light: '#2f93de',
 		startButtonColor3Light: '#1e78bc',
-		startButtonColor3Dark: '#2dbdff',
 		backgroundColorLight: '#' + rgbHex(243, 243, 243, 0.4),
 		backgroundButtonColorLight: '#' + rgbHex(253, 253, 253, 0.4),
 		textColorLight: '#202020',
-		borderColorLight: '#' + rgbHex(243, 243, 243, 0.2),
-		backgroundColorDark: '#' + rgbHex(32, 32, 32, 0.4),
-		backgroundButtonColorDark: '#' + rgbHex(83, 83, 83, 0.4),
-		textColorDark: '#f3f3f3',
-		borderColorDark: '#' + rgbHex(32, 32, 32, 0.2)
+		borderColorLight: '#' + rgbHex(243, 243, 243, 0.2)
 	});
 
 	useEffect(() => {
@@ -204,11 +199,6 @@ const Settings = ({
 					: !storageReducer.extraValues.startButtonColor1
 					? '#67cffd'
 					: storageReducer.extraValues.startButtonColor1,
-				startButtonColor2Dark: !storageReducer.extraValues
-					? '#00abf9'
-					: !storageReducer.extraValues.startButtonColor2Dark
-					? '#00abf9'
-					: storageReducer.extraValues.startButtonColor2Dark,
 				startButtonColor2Light: !storageReducer.extraValues
 					? '#2f93de'
 					: !storageReducer.extraValues.startButtonColor2Light
@@ -219,11 +209,6 @@ const Settings = ({
 					: !storageReducer.extraValues.startButtonColor3Light
 					? '#1e78bc'
 					: storageReducer.extraValues.startButtonColor3Light,
-				startButtonColor3Dark: !storageReducer.extraValues
-					? '#2dbdff'
-					: !storageReducer.extraValues.startButtonColor3Dark
-					? '#2dbdff'
-					: storageReducer.extraValues.startButtonColor3Dark,
 				backgroundColorLight: !storageReducer.extraValues
 					? '#' + rgbHex(243, 243, 243, 0.4)
 					: !storageReducer.extraValues.backgroundColorLight
@@ -243,27 +228,7 @@ const Settings = ({
 					? '#' + rgbHex(243, 243, 243, 0.2)
 					: !storageReducer.extraValues.borderColorLight
 					? '#' + rgbHex(243, 243, 243, 0.2)
-					: storageReducer.extraValues.borderColorLight,
-				backgroundColorDark: !storageReducer.extraValues
-					? '#' + rgbHex(32, 32, 32, 0.4)
-					: !storageReducer.extraValues.backgroundColorDark
-					? '#' + rgbHex(32, 32, 32, 0.4)
-					: storageReducer.extraValues.backgroundColorDark,
-				backgroundButtonColorDark: !storageReducer.extraValues
-					? '#' + rgbHex(83, 83, 83, 0.4)
-					: !storageReducer.extraValues.backgroundButtonColorDark
-					? '#' + rgbHex(83, 83, 83, 0.4)
-					: storageReducer.extraValues.backgroundButtonColorDark,
-				textColorDark: !storageReducer.extraValues
-					? '#f3f3f3'
-					: !storageReducer.extraValues.textColorDark
-					? '#f3f3f3'
-					: storageReducer.extraValues.textColorDark,
-				borderColorDark: !storageReducer.extraValues
-					? '#' + rgbHex(32, 32, 32, 0.2)
-					: !storageReducer.extraValues.borderColorDark
-					? '#' + rgbHex(32, 32, 32, 0.2)
-					: storageReducer.extraValues.borderColorDark
+					: storageReducer.extraValues.borderColorLight
 			};
 		});
 	}, [storageReducer]);
@@ -338,6 +303,50 @@ const Settings = ({
 		pointerEvents: null
 	};
 
+	const [homePageStyle, setHomePageStyle] = useState({
+		flag: true,
+		style: pageOpenedStyle
+	});
+
+	const [mainSettingsStyle, setMainSettingsStyle] = useState({
+		flag: false,
+		style: pageClosedStyle
+	});
+
+	const [individualSettingsStyle, setIndividualSettingsStyle] = useState({
+		flag: false,
+		style: pageClosedStyle
+	});
+
+	const [lookNFeelSettingsStyle, setLookNFeelSettingsStyle] = useState({
+		flag: false,
+		style: pageClosedStyle
+	});
+
+	const [colorSettingsStyle, setColorSettingsStyle] = useState({
+		flag: false,
+		style: pageClosedStyle
+	});
+
+	const widgetTitle = () => {
+		if (!homePageStyle.flag) {
+			if (mainSettingsStyle.flag) {
+				return 'Settings - Main Settings';
+			}
+			if (individualSettingsStyle.flag) {
+				return 'Settings - Individual Widget Settings';
+			}
+			if (lookNFeelSettingsStyle.flag) {
+				return 'Settings - Look & Feel Settings';
+			}
+			if (colorSettingsStyle.flag) {
+				return 'Settings - Color Settings';
+			}
+		} else {
+			return 'Settings';
+		}
+	};
+
 	const backCallback = () => {
 		if (!homePageStyle.flag) {
 			if (mainSettingsStyle.flag) {
@@ -385,31 +394,6 @@ const Settings = ({
 			});
 		}
 	};
-
-	const [homePageStyle, setHomePageStyle] = useState({
-		flag: true,
-		style: pageOpenedStyle
-	});
-
-	const [mainSettingsStyle, setMainSettingsStyle] = useState({
-		flag: false,
-		style: pageClosedStyle
-	});
-
-	const [individualSettingsStyle, setIndividualSettingsStyle] = useState({
-		flag: false,
-		style: pageClosedStyle
-	});
-
-	const [lookNFeelSettingsStyle, setLookNFeelSettingsStyle] = useState({
-		flag: false,
-		style: pageClosedStyle
-	});
-
-	const [colorSettingsStyle, setColorSettingsStyle] = useState({
-		flag: false,
-		style: pageClosedStyle
-	});
 
 	useEffect(() => {
 		if (settingsOpen) {
@@ -513,20 +497,222 @@ const Settings = ({
 							handleTextChange={handleTextChange}
 							handleSwitchChange={handleSwitchChange}
 							handleRangeChange={handleRangeChange}
+							handleMainReset={() => {
+								const popup = window.confirm(
+									'Are you sure you want to Reset Individual Widget Settings?'
+								);
+
+								if (popup) {
+									const { extraValues } = storageReducer;
+
+									setOptions((state) => {
+										return {
+											...state,
+											username: '',
+											hideIconLabels: false,
+											twentyFourHourTime: false,
+											hideFadeEffect: false,
+											removeBackButton: false,
+											blurRadius: 20,
+											borderRadius: 1.2
+										};
+									});
+
+									if (extraValues) {
+										if (extraValues.username) {
+											removeValue('username');
+										}
+										if (extraValues.hideIconLabels) {
+											removeValue('hideIconLabels');
+										}
+										if (extraValues.twentyFourHourTime) {
+											removeValue('twentyFourHourTime');
+										}
+										if (extraValues.hideFadeEffect) {
+											removeValue('hideFadeEffect');
+										}
+										if (extraValues.removeBackButton) {
+											removeValue('removeBackButton');
+										}
+										if (extraValues.blurRadius) {
+											removeValue('blurRadius');
+										}
+										if (extraValues.borderRadius) {
+											removeValue('borderRadius');
+										}
+									}
+								} else return;
+							}}
 						/>
 						<IndividualWidgetSettings
 							style={individualSettingsStyle.style}
 							options={options}
 							handleTextChange={handleTextChange}
 							handleSwitchChange={handleSwitchChange}
+							handleIndividualWidgetReset={() => {
+								const popup = window.confirm(
+									'Are you sure you want to Reset Individual Widget Settings?'
+								);
+								if (popup) {
+									const { extraValues } = storageReducer;
+
+									setOptions((state) => {
+										return {
+											...state,
+											hideExplorerBG: false,
+											hideExplorerFolderTitle: false,
+											useOwnAppsOnPages: false,
+											hideAddApp: false,
+											hideAddFolder: false,
+											disableGradient: false,
+											compactifyWeather: false,
+											compactifyMedia: false
+										};
+									});
+									if (extraValues) {
+										if (extraValues.hideExplorerBG) {
+											removeValue('hideExplorerBG');
+										}
+										if (extraValues.hideExplorerFolderTitle) {
+											removeValue('hideExplorerFolderTitle');
+										}
+										if (extraValues.useOwnAppsOnPages) {
+											removeValue('useOwnAppsOnPages');
+										}
+										if (extraValues.hideAddApp) {
+											removeValue('hideAddApp');
+										}
+										if (extraValues.hideAddFolder) {
+											removeValue('hideAddFolder');
+										}
+										if (extraValues.disableGradient) {
+											removeValue('disableGradient');
+										}
+										if (extraValues.compactifyWeather) {
+											removeValue('compactifyWeather');
+										}
+										if (extraValues.compactifyMedia) {
+											removeValue('compactifyMedia');
+										}
+									}
+								} else return;
+							}}
 						/>
 						<LookNFeelSettings
 							style={lookNFeelSettingsStyle.style}
 							options={options}
 							handleTextChange={handleTextChange}
 							handleSwitchChange={handleSwitchChange}
+							handleLookNFeelReset={() => {
+								const popup = window.confirm(
+									'Are you sure you want to Reset Look & Feel Settings?'
+								);
+								if (popup) {
+									const { extraValues } = storageReducer;
+
+									setOptions((state) => {
+										return {
+											...state,
+											noiseToTaskbar: false,
+											disableTaskbarBorder: false,
+											monochromeStartButton: false,
+											noiseToWidgets: false,
+											disableWidgetBorder: false,
+											noiseToStartmenu: false,
+											disableStartmenuBorder: false,
+											noiseToActionCenter: false,
+											disableActionCenterBorder: false,
+											noiseToMenu: false,
+											disableMenuBorder: false
+										};
+									});
+									if (extraValues) {
+										if (extraValues.noiseToTaskbar) {
+											removeValue('noiseToTaskbar');
+										}
+										if (extraValues.disableTaskbarBorder) {
+											removeValue('disableTaskbarBorder');
+										}
+										if (extraValues.monochromeStartButton) {
+											removeValue('monochromeStartButton');
+										}
+										if (extraValues.noiseToWidgets) {
+											removeValue('noiseToWidgets');
+										}
+										if (extraValues.disableWidgetBorder) {
+											removeValue('disableWidgetBorder');
+										}
+										if (extraValues.noiseToStartmenu) {
+											removeValue('noiseToStartmenu');
+										}
+										if (extraValues.disableStartmenuBorder) {
+											removeValue('disableStartmenuBorder');
+										}
+										if (extraValues.noiseToActionCenter) {
+											removeValue('noiseToActionCenter');
+										}
+										if (extraValues.disableActionCenterBorder) {
+											removeValue('disableActionCenterBorder');
+										}
+										if (extraValues.noiseToMenu) {
+											removeValue('noiseToMenu');
+										}
+										if (extraValues.disableMenuBorder) {
+											removeValue('disableMenuBorder');
+										}
+									}
+								} else return;
+							}}
 						/>
-						<ColorSettings style={colorSettingsStyle.style} options={options} />
+						<ColorSettings
+							style={colorSettingsStyle.style}
+							options={options}
+							handleColorReset={() => {
+								const popup = window.confirm(
+									'Are you sure you want to Reset Color Settings?'
+								);
+								if (popup) {
+									const { extraValues } = storageReducer;
+
+									setOptions((state) => {
+										return {
+											...state,
+											startButtonColor1: '#67cffd',
+											startButtonColor2Light: '#2f93de',
+											startButtonColor3Light: '#1e78bc',
+											backgroundColorLight: '#' + rgbHex(243, 243, 243, 0.4),
+											backgroundButtonColorLight:
+												'#' + rgbHex(253, 253, 253, 0.4),
+											textColorLight: '#202020',
+											borderColorLight: '#' + rgbHex(243, 243, 243, 0.2)
+										};
+									});
+									if (extraValues) {
+										if (extraValues.startButtonColor1) {
+											removeValue('startButtonColor1');
+										}
+										if (extraValues.startButtonColor2Light) {
+											removeValue('startButtonColor2Light');
+										}
+										if (extraValues.startButtonColor3Light) {
+											removeValue('startButtonColor3Light');
+										}
+										if (extraValues.backgroundColorLight) {
+											removeValue('backgroundColorLight');
+										}
+										if (extraValues.backgroundButtonColorLight) {
+											removeValue('backgroundButtonColorLight');
+										}
+										if (extraValues.textColorLight) {
+											removeValue('textColorLight');
+										}
+										if (extraValues.borderColorLight) {
+											removeValue('borderColorLight');
+										}
+									}
+								} else return;
+							}}
+						/>
 					</div>
 				</div>
 			</>
@@ -537,7 +723,7 @@ const Settings = ({
 		<WidgetMaker
 			id={'settingsWidget'}
 			className={'desktopWidget x-large'}
-			title={'Settings'}
+			title={widgetTitle()}
 			style={style}
 			content={settingsContent()}
 			closeCallback={() => {
@@ -566,4 +752,8 @@ const mapStateToProps = (state) => ({
 	storageReducer: state.storageReducer
 });
 
-export default connect(mapStateToProps, { openSettings, addValue })(Settings);
+export default connect(mapStateToProps, {
+	openSettings,
+	addValue,
+	removeValue
+})(Settings);

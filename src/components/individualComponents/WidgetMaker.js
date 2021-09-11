@@ -3,7 +3,8 @@
  * All rights reserved.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useLongPress } from 'use-long-press';
 import { connect } from 'react-redux';
 
 import { openStartMenu } from '../../actions/components';
@@ -24,27 +25,45 @@ const WidgetMaker = ({
 	menuButtonCallback,
 	startMenu,
 	onStartClick,
+	onHoldClick,
 	openStartMenu,
 	hideStartMenu,
 	maximize,
 	maximizeCallback
 }) => {
+	const [moved, setMoved] = useState(false);
+
+	const longPress = useLongPress(
+		() => {
+			if (startMenu) {
+				console.log('long');
+				onHoldClick();
+				return;
+			} else {
+				return;
+			}
+		},
+		{
+			onCancel: (e) => {
+				if (!moved && startMenu) {
+					onStartClick();
+					hideStartMenu();
+					setTimeout(() => {
+						openStartMenu(false);
+					}, 250);
+				}
+				setMoved(false);
+			},
+			onMove: () => setMoved(true),
+			threshold: 500,
+			captureEvent: true,
+			cancelOnMovement: true,
+			detect: 'touch'
+		}
+	);
+
 	return (
-		<div
-			style={style}
-			id={id}
-			className={className + ' widget'}
-			onClick={
-				startMenu
-					? () => {
-							onStartClick();
-							hideStartMenu();
-							setTimeout(() => {
-								openStartMenu(false);
-							}, 250);
-					  }
-					: null
-			}>
+		<div style={style} id={id} className={className + ' widget'} {...longPress}>
 			{startMenu ? (
 				''
 			) : (

@@ -45,7 +45,7 @@ const initialState = localStorage.getItem('FluentUI')
 				'com.apple.mobilesafari',
 				'com.apple.camera',
 				'com.apple.Preferences',
-				'com.apple.mobilenotes'
+				'com.apple.AppStore'
 			]
 	  };
 

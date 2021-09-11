@@ -12,6 +12,10 @@
 		}
 	}
 
+	.widget-title {
+		width: 265px;
+	}
+
 	#startMenu #pinnedWidgets {
 		margin-top: -10px;
 		height: 135px;
@@ -83,6 +87,10 @@
 		padding-left: 0.7rem;
 	}
 
+	.widget-title {
+		width: 260px;
+	}
+
 	#allApps {
 		height: 408px;
 	}
@@ -128,6 +136,9 @@
 	.widget.x-large {
 		height: 68%;
 	}
+	.widget-title {
+		width: 250px;
+	}
 	.settings {
 		&-header {
 			.deviceStuff .devicePic img {
@@ -145,7 +156,7 @@
 		}
 
 		&-inputSwitch {
-			width: 92%;
+			width: 83%;
 		}
 	}
 
@@ -220,6 +231,10 @@
 		height: 69%;
 	}
 
+	.widget-title {
+		width: 230px;
+	}
+
 	.settings {
 		&-header {
 			.deviceStuff .devicePic img {
@@ -237,7 +252,7 @@
 		}
 
 		&-inputSwitch {
-			width: 92%;
+			width: 83%;
 		}
 	}
 
@@ -336,6 +351,10 @@
 		height: 65%;
 	}
 
+	.widget-title {
+		width: 225px;
+	}
+
 	.settings {
 		&-header {
 			.deviceStuff .devicePic img {
@@ -353,7 +372,7 @@
 		}
 
 		&-inputSwitch {
-			width: 91%;
+			width: 81%;
 		}
 	}
 
@@ -396,6 +415,10 @@
 		&.x-large {
 			top: 40%;
 		}
+
+		&-title {
+			width: 260px;
+		}
 	}
 
 	.settings {
@@ -415,7 +438,7 @@
 		}
 
 		&-inputSwitch {
-			width: 92%;
+			width: 83%;
 		}
 	}
 
@@ -479,6 +502,10 @@
 			top: 39%;
 			height: 63%;
 		}
+
+		&-title {
+			width: 230px;
+		}
 	}
 
 	.settings {
@@ -498,7 +525,7 @@
 		}
 
 		&-inputSwitch {
-			width: 92%;
+			width: 83%;
 		}
 	}
 

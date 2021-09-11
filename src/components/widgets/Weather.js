@@ -218,6 +218,31 @@ const Weather = ({
 					});
 				}
 			}}
+			onHoldClick={() => {
+				if (
+					!extraValues ||
+					(!extraValues.weatherPin && !extraValues.musicPin)
+				) {
+					window.confirm('Weather Widget is already Pinned :)');
+					return;
+				}
+				if (!extraValues || !extraValues.weatherPin) {
+					if (extraValues && 'musicPin' in extraValues) {
+						removeValue('musicPin');
+					}
+					let popup = window.confirm(
+						'Are you sure you want to pin the Weather Widget?'
+					);
+					if (popup) {
+						addValue({
+							key: 'weatherPin',
+							value: true
+						});
+					}
+				} else {
+					window.confirm('Weather Widget is already Pinned :)');
+				}
+			}}
 		/>
 	) : (
 		<DraggableCore

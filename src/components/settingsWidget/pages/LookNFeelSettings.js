@@ -5,8 +5,14 @@
 
 import React from 'react';
 import InputSwitch from '../InputSwitch';
+import ResetButton from '../ResetButton';
 
-const LookNFeelSettings = ({ style, options, handleSwitchChange }) => {
+const LookNFeelSettings = ({
+	style,
+	options,
+	handleSwitchChange,
+	handleLookNFeelReset
+}) => {
 	const {
 		noiseToTaskbar,
 		disableTaskbarBorder,
@@ -22,6 +28,10 @@ const LookNFeelSettings = ({ style, options, handleSwitchChange }) => {
 	} = options;
 	return (
 		<div className={'settings-looknfeel page'} style={style}>
+			<ResetButton
+				callback={handleLookNFeelReset}
+				title={`Reset Look & Feel Settings`}
+			/>
 			<div className='settings-label'>Taskbar Related Settings</div>
 			<InputSwitch
 				onChange={handleSwitchChange}
@@ -76,6 +86,7 @@ const LookNFeelSettings = ({ style, options, handleSwitchChange }) => {
 				label='Disable Border'
 				description='Disable Border effect which is enabled by default in Widgets.'
 			/>
+			<br />
 			<div className='settings-label'>Action Center Related Settings</div>
 			<InputSwitch
 				onChange={handleSwitchChange}
@@ -91,6 +102,7 @@ const LookNFeelSettings = ({ style, options, handleSwitchChange }) => {
 				label='Disable Border'
 				description='Disable Border effect which is enabled by default in Action Center.'
 			/>
+			<br />
 			<div className='settings-label'>Context Menu Related Settings</div>
 			<InputSwitch
 				onChange={handleSwitchChange}

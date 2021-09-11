@@ -190,222 +190,6 @@ const Common = ({
 		setColorStyles(() => {
 			let newState = '';
 			if (extraValues) {
-				if (
-					extraValues.startButtonColor1 &&
-					!extraValues.startButtonColor2Light
-				) {
-					let style = `
-					#taskbar .center-part .start-button span:first-child {
-						background-image: linear-gradient(
-							120deg
-							, ${extraValues.startButtonColor1}, #2f93de);
-					}
-					#taskbar .center-part .start-button span {
-						background-color: #2f93de !important;
-					}
-					#startMenu .searchbar {
-						border-bottom: 3px solid #2f93de;
-					}
-					`;
-					newState += style;
-				} else if (
-					!extraValues.startButtonColor1 &&
-					extraValues.startButtonColor2Light
-				) {
-					let style = `
-					#taskbar .center-part .start-button span:first-child {
-						background-image: linear-gradient(
-							120deg
-							, #67cffd, ${extraValues.startButtonColor2Light});
-					}
-					#taskbar .center-part .start-button span,
-					#controlCenter .header button.enabled {
-						background-color: ${extraValues.startButtonColor2Light} !important;
-					}
-					#startMenu .searchbar {
-						border-bottom: 3px solid ${extraValues.startButtonColor2Light};
-					}
-					`;
-					newState += style;
-				} else if (
-					extraValues.startButtonColor1 &&
-					extraValues.startButtonColor2Light
-				) {
-					let style = `
-					#taskbar .center-part .start-button span:first-child {
-						background-image: linear-gradient(
-							120deg
-							, ${extraValues.startButtonColor1}, ${extraValues.startButtonColor2Light});
-					}
-					#taskbar .center-part .start-button span,
-					#controlCenter .header button.enabled {
-						background-color: ${extraValues.startButtonColor2Light} !important;
-					}
-					#startMenu .searchbar {
-						border-bottom: 3px solid ${extraValues.startButtonColor2Light};
-					}
-					`;
-					newState += style;
-				} else {
-					let style = `
-					#taskbar .center-part .start-button span:first-child {
-						background-image: linear-gradient(
-							120deg
-							, #67cffd, #2f93de);
-					}
-					#taskbar .center-part .start-button span {
-						background-color: #2f93de !important;
-					}
-					#startMenu .searchbar {
-						border-bottom: 3px solid #2f93de;
-					}
-					`;
-					newState += style;
-				}
-
-				if (
-					extraValues.startButtonColor1 &&
-					!extraValues.startButtonColor2Dark
-				) {
-					let style = `
-					@media (prefers-color-scheme: dark) {
-						#taskbar .center-part .start-button span:first-child {
-							background-image: linear-gradient(
-								120deg
-								, ${extraValues.startButtonColor1}, #00abf9);
-						}
-						#taskbar .center-part .start-button span {
-							background-color: #00abf9 !important;
-						}
-						#startMenu .searchbar {
-							border-bottom: 3px solid #00abf9;
-						}
-					}
-					`;
-					newState += style;
-				} else if (
-					!extraValues.startButtonColor1 &&
-					extraValues.startButtonColor2Dark
-				) {
-					let style = `
-					@media (prefers-color-scheme: dark) {
-						#taskbar .center-part .start-button span:first-child {
-							background-image: linear-gradient(
-								120deg
-								, #67cffd, ${extraValues.startButtonColor2Dark});
-						}
-						#taskbar .center-part .start-button span,
-						#controlCenter .header button.enabled {
-							background-color: ${extraValues.startButtonColor2Dark} !important;
-						}
-						#startMenu .searchbar {
-							border-bottom: 3px solid ${extraValues.startButtonColor2Dark};
-						}
-					}
-					`;
-					newState += style;
-				} else if (
-					extraValues.startButtonColor1 &&
-					extraValues.startButtonColor2Dark
-				) {
-					let style = `
-					@media (prefers-color-scheme: dark) {
-						#taskbar .center-part .start-button span:first-child {
-							background-image: linear-gradient(
-								120deg
-								, ${extraValues.startButtonColor1}, ${extraValues.startButtonColor2Dark});
-						}
-						#taskbar .center-part .start-button span,
-						#controlCenter .header button.enabled {
-							background-color: ${extraValues.startButtonColor2Dark} !important;
-						}
-						#startMenu .searchbar {
-							border-bottom: 3px solid ${extraValues.startButtonColor2Dark};
-						}
-					}
-					`;
-					newState += style;
-				} else {
-					let style = `
-					@media (prefers-color-scheme: dark) {
-						#taskbar .center-part .start-button span:first-child {
-							background-image: linear-gradient(
-								120deg
-								, #67cffd, #00abf9);
-						}
-						#taskbar .center-part .start-button span {
-							background-color: #00abf9 !important;
-						}
-						#startMenu .searchbar {
-							border-bottom: 3px solid #00abf9;
-						}
-					}
-					`;
-					newState += style;
-				}
-
-				if (extraValues.startButtonColor3Light) {
-					let style = `
-					#taskbar .center-part .start-button.active span {
-						background-color: ${extraValues.startButtonColor3Light}!important;
-					}
-					`;
-					newState += style;
-				}
-
-				if (extraValues.startButtonColor3Dark) {
-					let style = `
-					@media (prefers-color-scheme: dark) {
-						#taskbar .center-part .start-button.active span {
-							background-color: ${extraValues.startButtonColor3Dark}!important;
-						}
-					}
-					`;
-					newState += style;
-				}
-
-				if (extraValues.backgroundColorLight) {
-					let style = `
-					#taskbar, #startMenu, #controlCenter {
-						background-color: ${extraValues.backgroundColorLight};
-					}
-					@media (prefers-color-scheme: dark) {
-						.favApp .badge,
-						.app .badge,  
-						#explorerWidget .explorer-apps .explorerFavApp .badge,
-						#explorerWidget .explorer-apps .explorerApp .badge,
-						#explorerWidget .explorer-apps .explorerFolder .badge,
-						#explorerWidget .explorer-apps .addApp .badge,
-						#explorerWidget .explorer-apps .folderApp .badge,
-						#explorerWidget .explorer-apps .pageApp .badge {
-							background-color: ${extraValues.backgroundColorLight};
-						}
-					}
-					`;
-					newState += style;
-				}
-
-				if (extraValues.backgroundColorDark) {
-					let style = `
-					.favApp .badge,
-					.app .badge,  
-					#explorerWidget .explorer-apps .explorerFavApp .badge,
-					#explorerWidget .explorer-apps .explorerApp .badge,
-					#explorerWidget .explorer-apps .explorerFolder .badge,
-					#explorerWidget .explorer-apps .addApp .badge,
-					#explorerWidget .explorer-apps .folderApp .badge,
-					#explorerWidget .explorer-apps .pageApp .badge {
-						background-color: ${extraValues.backgroundColorDark}!important;
-					}
-					@media (prefers-color-scheme: dark) {
-						#taskbar, #startMenu, #controlCenter {
-							background-color: ${extraValues.backgroundColorDark}!important;
-						}
-					}
-					`;
-					newState += style;
-				}
-
 				if (extraValues.backgroundButtonColorLight) {
 					let style = `
 					.appMenu, 
@@ -425,34 +209,133 @@ const Common = ({
 					.settings-inputSwitch .toggle,
 					.settings-inputColor,
 					#taskbar .bottom-part {
-						background-color: ${extraValues.backgroundButtonColorLight};
+						background-color: ${extraValues.backgroundButtonColorLight}!important;
 					}
 					`;
 					newState += style;
 				}
 
-				if (extraValues.backgroundButtonColorDark) {
+				if (extraValues.borderColorLight) {
 					let style = `
+					.active,
+					.scrollHelper .alphabet,
+					.settings-inputColor,
+					.settings-inputSwitch,
+					.settings-menu,
+					.settings-text,
+					#taskbar .bottom-part {
+						border-top: 1px solid ${extraValues.borderColorLight} !important;
+					}
+					.appMenu,
+					.scrollHelper,
+					.widget,
+					#taskbar,
+					#startMenu,
+					#controlCenter,
+					#controlCenter button,
+					#startMenu .searchbar,
+					#startMenu .header button {
+						border: 1px solid ${extraValues.borderColorLight} !important;
+					}
+					.appMenu .menuButton,
+					#controlCenter .header,
+					.appMenu .settings,
+					#startMenu .startTabs {
+						border-bottom: 1px solid ${extraValues.borderColorLight} !important;
+					}
+					.appMenu .menuButton:last-child {
+						border: none !important;
+					}
+					#explorerWidget .explorer-sidebar.open {
+						border-right: 1px solid ${extraValues.borderColorLight} !important;
+					}
+					`;
+					newState += style;
+				}
+
+				if (
+					extraValues.startButtonColor1 &&
+					!extraValues.startButtonColor2Light
+				) {
+					let style = `
+					#taskbar .center-part .start-button span:first-child {
+						background-image: linear-gradient(
+							120deg
+							, ${extraValues.startButtonColor1}, #2f93de)!important;
+					}
+					#taskbar .center-part .start-button span {
+						background-color: #2f93de !important;
+					}
+					#startMenu .searchbar {
+						border-bottom: 3px solid #2f93de;
+					}
+					`;
+					newState += style;
+				} else if (
+					!extraValues.startButtonColor1 &&
+					extraValues.startButtonColor2Light
+				) {
+					let style = `
+					#taskbar .center-part .start-button span:first-child {
+						background-image: linear-gradient(
+							120deg
+							, #67cffd, ${extraValues.startButtonColor2Light})!important;
+					}
+					#taskbar .center-part .start-button span,
+					#controlCenter .header button.enabled,
+					.settings-inputSwitch input[type='checkbox']:checked + .toggle {
+						background-color: ${extraValues.startButtonColor2Light} !important;
+					}
+					#startMenu .searchbar {
+						border-bottom: 3px solid ${extraValues.startButtonColor2Light}!important;
+					}
 					@media (prefers-color-scheme: dark) {
-						.appMenu, 
-						.scrollHelper, 
-						.widget, 
-						.active, 
-						#startMenu .startTabs,
-						#startMenu .searchbar,
-						#startMenu .header button,
-						.appMenu .settings,
-						#controlCenter .header,
-						#controlCenter .header button,
-						.scrollHelper .alphabet,
-						.settings-menu,
-						.settings-text,
-						.settings-inputSwitch,
-						.settings-inputSwitch .toggle,
-						.settings-inputColor,
-						#taskbar .bottom-part {
-							background-color: ${extraValues.backgroundButtonColorDark}!important;
+						#DarkMode {
+							background-color: ${extraValues.startButtonColor2Light}!important;
 						}
+					}
+					`;
+					newState += style;
+				} else if (
+					extraValues.startButtonColor1 &&
+					extraValues.startButtonColor2Light
+				) {
+					let style = `
+					#taskbar .center-part .start-button span:first-child {
+						background-image: linear-gradient(
+							120deg
+							, ${extraValues.startButtonColor1}, ${extraValues.startButtonColor2Light})!important;
+					}
+					#taskbar .center-part .start-button span,
+					#controlCenter .header button.enabled,
+					.settings-inputSwitch input[type='checkbox']:checked + .toggle {
+						background-color: ${extraValues.startButtonColor2Light} !important;
+					}
+					#startMenu .searchbar {
+						border-bottom: 3px solid ${extraValues.startButtonColor2Light}!important;
+					}
+					@media (prefers-color-scheme: dark) {
+						#controlCenter button#DarkMode {
+							background-color: ${extraValues.startButtonColor2Light}!important;
+						}
+					}
+					`;
+					newState += style;
+				}
+
+				if (extraValues.startButtonColor3Light) {
+					let style = `
+					#taskbar .center-part .start-button.active span {
+						background-color: ${extraValues.startButtonColor3Light}!important;
+					}
+					`;
+					newState += style;
+				}
+
+				if (extraValues.backgroundColorLight) {
+					let style = `
+					#taskbar, #startMenu, #controlCenter {
+						background-color: ${extraValues.backgroundColorLight};
 					}
 					`;
 					newState += style;
@@ -478,35 +361,17 @@ const Common = ({
 					#startMenu .header button,
 					.widget-header .widget-btn,
 					.settings-text input {
-						color: ${extraValues.textColorLight};
+						color: ${extraValues.textColorLight}!important;
 					}
-					`;
-					newState += style;
-				}
-
-				if (extraValues.textColorDark) {
-					let style = `
-					@media (prefers-color-scheme: dark) {
-						.appMenu,
-						.scrollHelper,
-						.widget,
-						#taskbar,
-						#startMenu,
-						#controlCenter,
-						.appMenu .settings,
-						#controlCenter .header button,
-						.scrollHelper .alphabet,
-						.settings-menu,
-						.settings-text,
-						.settings-inputSwitch,
-						.settings-inputColor,
-						#startMenu .searchbar,
-						#startMenu .searchbar input,
-						#startMenu .header button,
-						.widget-header .widget-btn,
-						.settings-text input {
-							color: ${extraValues.textColorDark}!important;
-						}
+					.favApp .badge,
+					.app .badge,  
+					#explorerWidget .explorer-apps .explorerFavApp .badge,
+					#explorerWidget .explorer-apps .explorerApp .badge,
+					#explorerWidget .explorer-apps .explorerFolder .badge,
+					#explorerWidget .explorer-apps .addApp .badge,
+					#explorerWidget .explorer-apps .folderApp .badge,
+					#explorerWidget .explorer-apps .pageApp .badge {
+						background-color: ${extraValues.textColorLight}!important;
 					}
 					`;
 					newState += style;

@@ -42,6 +42,13 @@
 		}
 	}
 
+	&-title {
+		width: 230px;
+		overflow-x: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
 	&-content {
 		display: flex;
 		flex-direction: column;

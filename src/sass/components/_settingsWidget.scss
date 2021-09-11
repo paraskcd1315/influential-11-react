@@ -78,18 +78,36 @@ hr {
 		}
 	}
 
+	&-reset-button {
+		border: none;
+		outline: none;
+		border-top: 1px solid set-text-color-transparency($light-color, 0.1) !important;
+		padding: 1rem;
+		margin: 1rem;
+		@include set-border-radius(0.5rem);
+		@include set-background-color($primary-color);
+		@include set-shadows(
+			set-transparency($dark-color, 0.3),
+			set-transparency($dark-color, 0.3)
+		);
+	}
+
 	&-menu {
 		border: none;
 		outline: none;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		width: 100%;
+		width: 90%;
 		border-top: 1px solid set-text-color-transparency($light-color, 0.1) !important;
 		@include set-border-radius(0.5rem);
 		@include set-background-color(set-transparency($light-button-color, 0.4));
 		padding: 1rem;
-		margin-bottom: 1rem;
+		margin: 0rem 1rem 1.5rem;
+		@include set-shadows(
+			set-transparency($dark-color, 0.3),
+			set-transparency($dark-color, 0.3)
+		);
 
 		.settings-menu-stuff {
 			display: flex;
@@ -126,11 +144,16 @@ hr {
 	}
 
 	&-text {
-		width: 100%;
+		width: 90%;
 		margin-bottom: 1rem;
 		border-top: 1px solid set-text-color-transparency($light-color, 0.1) !important;
 		@include set-border-radius(0.5rem);
 		@include set-background-color(set-transparency($light-button-color, 0.4));
+		margin: 0rem 1rem 1.5rem;
+		@include set-shadows(
+			set-transparency($dark-color, 0.3),
+			set-transparency($dark-color, 0.3)
+		);
 
 		input {
 			outline: none;
@@ -145,13 +168,17 @@ hr {
 	&-inputSwitch {
 		display: flex;
 		justify-content: space-between;
-		width: 93%;
+		width: 83%;
 		align-items: center;
-		margin-bottom: 1rem;
 		padding: 0.8rem;
 		border-top: 1px solid set-text-color-transparency($light-color, 0.1) !important;
 		@include set-border-radius(0.5rem);
 		@include set-background-color(set-transparency($light-button-color, 0.4));
+		margin: 0rem 1rem 1.5rem;
+		@include set-shadows(
+			set-transparency($dark-color, 0.3),
+			set-transparency($dark-color, 0.3)
+		);
 
 		.toggle {
 			position: relative;
@@ -202,9 +229,13 @@ hr {
 	&-inputColor {
 		display: flex;
 		justify-content: space-between;
-		width: 93%;
+		width: 83%;
 		align-items: center;
-		margin-bottom: 1rem;
+		margin: 0rem 1rem 1.5rem;
+		@include set-shadows(
+			set-transparency($dark-color, 0.3),
+			set-transparency($dark-color, 0.3)
+		);
 		padding: 0.8rem;
 		border-top: 1px solid set-text-color-transparency($light-color, 0.1) !important;
 		@include set-border-radius(0.5rem);
@@ -241,9 +272,13 @@ hr {
 		}
 	}
 
+	&-inputRange {
+		margin: 0rem 1rem 1.5rem;
+	}
+
 	&-range {
 		padding: 0rem 1rem;
-		margin-bottom: 1rem;
+
 		.slider {
 			align-items: center;
 			appearance: none;
@@ -269,7 +304,6 @@ hr {
 
 			&::-webkit-slider-thumb {
 				@include set-size($thumb-width, $thumb-height);
-
 				appearance: none;
 				background: $thumb-background;
 				border-radius: $thumb-radius;
@@ -284,9 +318,14 @@ hr {
 @media (prefers-color-scheme: dark) {
 	$primary-color: #60cdff;
 
-	.settings-menu {
+	.settings-menu,
+	.settings-reset-button {
 		border-top: 1px solid set-text-color-transparency($dark-color, 0.1) !important;
 		@include set-background-color(set-transparency($dark-button-color, 0.4));
+	}
+
+	.settings-reset-button {
+		@include set-background-color($primary-color);
 	}
 
 	.settings-text {

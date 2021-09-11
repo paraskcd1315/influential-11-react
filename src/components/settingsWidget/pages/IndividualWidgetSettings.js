@@ -6,8 +6,14 @@
 import React from 'react';
 
 import InputSwitch from '../InputSwitch';
+import ResetButton from '../ResetButton';
 
-const IndividualWidgetSettings = ({ style, options, handleSwitchChange }) => {
+const IndividualWidgetSettings = ({
+	style,
+	options,
+	handleSwitchChange,
+	handleIndividualWidgetReset
+}) => {
 	const {
 		hideExplorerBG,
 		hideExplorerFolderTitle,
@@ -20,6 +26,10 @@ const IndividualWidgetSettings = ({ style, options, handleSwitchChange }) => {
 	} = options;
 	return (
 		<div className={'settings-individual-widgets page'} style={style}>
+			<ResetButton
+				callback={handleIndividualWidgetReset}
+				title={`Reset Individual Widget Settings`}
+			/>
 			<div className='settings-label'>Explorer Widget Settings</div>
 			<InputSwitch
 				onChange={handleSwitchChange}
@@ -72,6 +82,7 @@ const IndividualWidgetSettings = ({ style, options, handleSwitchChange }) => {
 				label='Make it Compact'
 				description='This setting minifies the padding between different elements inside the Widget, meaning it makes it smaller/compact if you will. (Tip: Refresh the widget for Better Results)'
 			/>
+			<br />
 			<div className='settings-label'>Music Widget Settings</div>
 			<InputSwitch
 				onChange={handleSwitchChange}
