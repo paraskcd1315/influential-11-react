@@ -4,7 +4,9 @@
  */
 
 import React from 'react';
+import currentTranslate from '../localizations';
 import { connect } from 'react-redux';
+
 import CCButton from './individualComponents/CCButton';
 
 const ControlCenter = ({
@@ -50,7 +52,7 @@ const ControlCenter = ({
 			<div className='header'>
 				<CCButton
 					isEnabled={commsReducer.telephony.airplaneMode}
-					toggleName='Airplane Mode'
+					toggleName={currentTranslate.controlCenter[0]}
 					toggleIcon={'icon-ic_fluent_airplane_24_regular'}
 					toggleCallback={() =>
 						(window.location.href =
@@ -59,7 +61,7 @@ const ControlCenter = ({
 				/>
 				<CCButton
 					isEnabled={commsReducer.wifi.enabled}
-					toggleName='Wifi'
+					toggleName={currentTranslate.controlCenter[1]}
 					toggleIcon={'icon-ic_fluent_wifi_1_24_regular'}
 					toggleCallback={() =>
 						(window.location.href = 'mk1://runscript/InfluentialScript/wifi')
@@ -67,7 +69,7 @@ const ControlCenter = ({
 				/>
 				<CCButton
 					isEnabled={commsReducer.bluetooth.enabled}
-					toggleName='Bluetooth'
+					toggleName={currentTranslate.controlCenter[2]}
 					toggleIcon={'icon-ic_fluent_bluetooth_24_regular'}
 					toggleCallback={() =>
 						(window.location.href =
@@ -76,7 +78,7 @@ const ControlCenter = ({
 				/>
 				<CCButton
 					isEnabled={false}
-					toggleName='Cellular Data'
+					toggleName={currentTranslate.controlCenter[3]}
 					toggleIcon={'icon-ic_fluent_cellular_data_1_24_regular'}
 					toggleCallback={() =>
 						(window.location.href =
@@ -85,7 +87,7 @@ const ControlCenter = ({
 				/>
 				<CCButton
 					isEnabled={false}
-					toggleName='DarkMode'
+					toggleName={currentTranslate.controlCenter[4]}
 					toggleIcon={'icon-ic_fluent_dark_theme_24_regular'}
 					toggleCallback={() =>
 						(window.location.href =
@@ -94,7 +96,7 @@ const ControlCenter = ({
 				/>
 				<CCButton
 					isEnabled={systemReducer.isLowPowerModeEnabled}
-					toggleName='Battery Saver'
+					toggleName={currentTranslate.controlCenter[5]}
 					toggleIcon={'icon-ic_fluent_battery_saver_20_regular'}
 					toggleCallback={() =>
 						(window.location.href = 'mk1://runscript/InfluentialScript/lpm')
@@ -102,7 +104,7 @@ const ControlCenter = ({
 				/>
 				<CCButton
 					isEnabled={false}
-					toggleName='Device Lock'
+					toggleName={currentTranslate.controlCenter[6]}
 					toggleIcon={'icon-ic_fluent_lock_closed_24_regular'}
 					toggleCallback={() =>
 						(window.location.href = 'mk1://runscript/InfluentialScript/lock')
@@ -110,7 +112,7 @@ const ControlCenter = ({
 				/>
 				<CCButton
 					isEnabled={false}
-					toggleName='Respring'
+					toggleName={currentTranslate.controlCenter[7]}
 					toggleIcon={'icon-ic_fluent_arrow_reset_24_regular'}
 					toggleCallback={() =>
 						(window.location.href =
@@ -119,7 +121,7 @@ const ControlCenter = ({
 				/>
 				<CCButton
 					isEnabled={false}
-					toggleName='Safe Mode'
+					toggleName={currentTranslate.controlCenter[8]}
 					toggleIcon={'icon-ic_fluent_warning_24_regular'}
 					toggleCallback={() =>
 						(window.location.href =
@@ -128,19 +130,17 @@ const ControlCenter = ({
 				/>
 				<CCButton
 					isEnabled={false}
-					toggleName='Refresh Widget'
+					toggleName={currentTranslate.controlCenter[9]}
 					toggleIcon={'icon-ic_fluent_arrow_counterclockwise_24_regular'}
 					// eslint-disable-next-line
 					toggleCallback={() => (window.location.href = window.location.href)}
 				/>
 				<CCButton
 					isEnabled={false}
-					toggleName='Reset Widget'
+					toggleName={currentTranslate.controlCenter[10]}
 					toggleIcon='icon-ic_fluent_history_24_regular'
 					toggleCallback={() => {
-						let popup = window.confirm(
-							'This Option will erase everything you have saved like Pinned Apps and all the Settings, are you sure you want to proceed?'
-						);
+						let popup = window.confirm(currentTranslate.controlCenter[11]);
 						if (popup) {
 							localStorage.removeItem('FluentUI');
 							// eslint-disable-next-line

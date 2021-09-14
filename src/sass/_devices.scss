@@ -16,6 +16,12 @@
 		width: 265px;
 	}
 
+	#colorPickerWidget {
+		.widget-title {
+			width: 215px;
+		}
+	}
+
 	#startMenu #pinnedWidgets {
 		margin-top: -10px;
 		height: 135px;
@@ -91,6 +97,12 @@
 		width: 260px;
 	}
 
+	#colorPickerWidget {
+		.widget-title {
+			width: 215px;
+		}
+	}
+
 	#allApps {
 		height: 408px;
 	}
@@ -133,12 +145,19 @@
 	.desktopWidget .weather-content .weather-daily img {
 		@include set-size(40px, 40px);
 	}
+
 	.widget.x-large {
 		height: 68%;
 	}
 	.widget-title {
 		width: 250px;
 	}
+	#colorPickerWidget {
+		.widget-title {
+			width: 215px;
+		}
+	}
+
 	.settings {
 		&-header {
 			.deviceStuff .devicePic img {
@@ -233,6 +252,12 @@
 
 	.widget-title {
 		width: 230px;
+	}
+
+	#colorPickerWidget {
+		.widget-title {
+			width: 215px;
+		}
 	}
 
 	.settings {
@@ -355,6 +380,12 @@
 		width: 225px;
 	}
 
+	#colorPickerWidget {
+		.widget-title {
+			width: 215px;
+		}
+	}
+
 	.settings {
 		&-header {
 			.deviceStuff .devicePic img {
@@ -418,6 +449,12 @@
 
 		&-title {
 			width: 260px;
+		}
+	}
+
+	#colorPickerWidget {
+		.widget-title {
+			width: 215px;
 		}
 	}
 
@@ -505,6 +542,12 @@
 
 		&-title {
 			width: 230px;
+		}
+	}
+
+	#colorPickerWidget {
+		.widget-title {
+			width: 215px;
 		}
 	}
 

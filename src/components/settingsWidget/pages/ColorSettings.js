@@ -4,6 +4,8 @@
  */
 
 import React from 'react';
+import currentTranslate from '../../../localizations';
+
 import InputColor from '../InputColor';
 import ResetButton from '../ResetButton';
 
@@ -20,51 +22,54 @@ const ColorSettings = ({ style, options, handleColorReset }) => {
 
 	return (
 		<div className={'settings-color page'} style={style}>
-			<ResetButton callback={handleColorReset} title={`Reset Color Settings`} />
-			<div className='settings-label'>Start Button Colors</div>
+			<ResetButton
+				callback={handleColorReset}
+				title={currentTranslate.settings[69]}
+			/>
+			<div className='settings-label'>{currentTranslate.settings[70]}</div>
 			<InputColor
 				inputName='startButtonColor1'
 				color={startButtonColor1}
-				label='Highlight Start Button Color'
-				description='The color that makes the Gradient Effect on the Start Button.'
+				label={currentTranslate.settings[71]}
+				description={currentTranslate.settings[72]}
 			/>
 			<InputColor
 				inputName='startButtonColor2Light'
 				color={startButtonColor2Light}
-				label='Start Button Color'
-				description='The Main Start Button Background Color.'
+				label={currentTranslate.settings[73]}
+				description={currentTranslate.settings[74]}
 			/>
 			<InputColor
 				inputName='startButtonColor3Light'
 				color={startButtonColor3Light}
-				label='Start Button Color Pressed'
-				description='The Main Start Button Background Color when Start Menu is Open.'
+				label={currentTranslate.settings[75]}
+				description={currentTranslate.settings[76]}
 			/>
 			<br />
-			<div className='settings-label'>Widget Component Colors</div>
+			<div className='settings-label'>{currentTranslate.settings[77]}</div>
 			<InputColor
 				inputName='backgroundColorLight'
 				color={backgroundColorLight}
-				label='Background Color'
-				description='Background Color of all Components.'
+				label={currentTranslate.settings[78]}
+				description={currentTranslate.settings[79]}
 			/>
 			<InputColor
 				inputName='backgroundButtonColorLight'
 				color={backgroundButtonColorLight}
-				label='Background Buttton Color'
-				description='Background Color of all Button Components.'
+				label={currentTranslate.settings[80]}
+				description={currentTranslate.settings[81]}
 			/>
 			<InputColor
 				inputName='textColorLight'
 				color={textColorLight}
-				label='Text Color'
-				description='Color of all Text Components.'
+				label={currentTranslate.settings[82]}
+				description={currentTranslate.settings[83]}
 			/>
 			<InputColor
 				inputName='borderColorLight'
 				color={borderColorLight}
-				label='Border Color'
-				description='Color of all Border Components.'
+				label={currentTranslate.settings[84]}
+				description={currentTranslate.settings[85]}
 			/>
 		</div>
 	);

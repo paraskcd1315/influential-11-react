@@ -4,8 +4,9 @@
  */
 
 import React from 'react';
-import InputRange from '../InputRange';
+import currentTranslate from '../../../localizations';
 
+import InputRange from '../InputRange';
 import InputSwitch from '../InputSwitch';
 import InputText from '../InputText';
 import ResetButton from '../ResetButton';
@@ -30,47 +31,50 @@ const MainSettings = ({
 
 	return (
 		<div className='settings-main page' style={style}>
-			<ResetButton callback={handleMainReset} title='Reset Main Settings' />
+			<ResetButton
+				callback={handleMainReset}
+				title={currentTranslate.settings[41]}
+			/>
 			<InputText
 				onChange={handleTextChange}
 				inputName='username'
 				value={username}
-				label='Username'
-				placeholder='Enter your Display Name'
+				label={currentTranslate.settings[0]}
+				placeholder={currentTranslate.settings[1]}
 			/>
 			<InputSwitch
 				onChange={handleSwitchChange}
 				inputName='hideIconLabels'
 				value={hideIconLabels ? 'on' : 'off'}
-				label='Hide Icon Labels'
-				description='This setting hides the App Names, from the Explorer and Pinned Apps.'
+				label={currentTranslate.settings[2]}
+				description={currentTranslate.settings[3]}
 			/>
 			<InputSwitch
 				onChange={handleSwitchChange}
 				inputName='twentyFourHourTime'
 				value={twentyFourHourTime ? 'on' : 'off'}
-				label='24 Hour Time'
-				description='This setting enables 24 Hour Time.'
+				label={currentTranslate.settings[4]}
+				description={currentTranslate.settings[5]}
 			/>
 			<InputSwitch
 				onChange={handleSwitchChange}
 				inputName='hideFadeEffect'
 				value={hideFadeEffect ? 'on' : 'off'}
-				label='Disable Scroll Fade'
-				description='This setting disables the fade effect when scrolling.'
+				label={currentTranslate.settings[6]}
+				description={currentTranslate.settings[7]}
 			/>
 			<InputSwitch
 				onChange={handleSwitchChange}
 				inputName='removeBackButton'
 				value={removeBackButton ? 'on' : 'off'}
-				label='Remove Back Buttons'
-				description='This setting removes the back buttons from the respected Widgets when not in use.'
+				label={currentTranslate.settings[8]}
+				description={currentTranslate.settings[9]}
 			/>
 			<InputRange
 				onInput={handleRangeChange}
 				inputName='blurRadius'
 				value={blurRadius}
-				label='Blur Strength'
+				label={currentTranslate.settings[10]}
 				rangeMin={0}
 				rangeMax={50}
 				step={1}
@@ -80,7 +84,7 @@ const MainSettings = ({
 				onInput={handleRangeChange}
 				inputName='borderRadius'
 				value={borderRadius}
-				label='Border Radius'
+				label={currentTranslate.settings[11]}
 				rangeMin={0}
 				rangeMax={2}
 				step={0.1}

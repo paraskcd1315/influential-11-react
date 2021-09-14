@@ -10,6 +10,7 @@ import App from '../individualComponents/App';
 import Folder from './folder';
 import { openStartMenu } from '../../actions/components';
 import { ADD_APP_TO_FOLDER, ADD_APP_TO_PAGE } from '../../actions/types';
+import currentTranslate from '../../localizations';
 
 const PageMaker = ({
 	id,
@@ -96,10 +97,7 @@ const PageMaker = ({
 					);
 				})
 			) : (
-				<div className='noApps'>
-					More Favourite Apps will show up here. Go to the Start Menu to pin
-					your Favourite Apps here.
-				</div>
+				<div className='noApps'>{currentTranslate.randomWords[8]}</div>
 			);
 		} else {
 			const filteredApps = allApplications.filter((app) => {
@@ -137,7 +135,7 @@ const PageMaker = ({
 									flag: true
 								});
 							}}>
-							Tap here to Pin some Apps to the folder - {headerTitle}.
+							{currentTranslate.randomWords[9]} - {headerTitle}.
 							<i className='icon-ic_fluent_add_circle_24_regular'></i>
 						</div>
 					)
@@ -178,7 +176,7 @@ const PageMaker = ({
 						''
 					) : (
 						<div className='addApp'>
-							Add App
+							{currentTranslate.randomWords[10]}
 							<i
 								className='icon-ic_fluent_add_circle_24_regular'
 								onClick={() => {

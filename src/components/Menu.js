@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import currentTranslate from '../localizations';
 import { connect } from 'react-redux';
 
 import MenuButton from './individualComponents/MenuButton';
@@ -79,7 +80,7 @@ const Menu = ({
 			return (
 				<MenuButton
 					icon={'icon-ic_fluent_pin_24_regular'}
-					title={'Pin App'}
+					title={currentTranslate.menuItems[0]}
 					callback={() => {
 						addApp(identifier);
 						showAddAppsMenu({
@@ -101,7 +102,7 @@ const Menu = ({
 			return (
 				<MenuButton
 					icon={'icon-ic_fluent_folder_prohibited_24_regular'}
-					title={'Remove Folder'}
+					title={currentTranslate.menuItems[1]}
 					callback={() => {
 						if (documentApps.documentFolders[identifier]) {
 							removeFolderFromDocuments(identifier);
@@ -138,7 +139,7 @@ const Menu = ({
 			return (
 				<MenuButton
 					icon={'icon-ic_fluent_pin_off_24_regular'}
-					title={'Remove App'}
+					title={currentTranslate.menuItems[2]}
 					callback={() => {
 						removeAppFromFolder({
 							folderID: folderID,
@@ -169,7 +170,7 @@ const Menu = ({
 			return (
 				<MenuButton
 					icon={'icon-ic_fluent_pin_off_24_regular'}
-					title={'Remove App'}
+					title={currentTranslate.menuItems[2]}
 					callback={() => {
 						removeAppFromPage({
 							pageID: page,
@@ -196,7 +197,7 @@ const Menu = ({
 				<>
 					<MenuButton
 						icon={'icon-ic_fluent_apps_24_regular'}
-						title={'Replace App'}
+						title={currentTranslate.menuItems[3]}
 						callback={() => {
 							if (!componentsReducer.startMenuOpen) {
 								openStartMenu(true);
@@ -217,7 +218,7 @@ const Menu = ({
 					/>
 					<MenuButton
 						icon={'icon-ic_fluent_pin_off_24_regular'}
-						title={'Unpin App'}
+						title={currentTranslate.menuItems[4]}
 						callback={() => {
 							removeApp(identifier);
 							showReplaceAppsMenu({
@@ -245,7 +246,7 @@ const Menu = ({
 				{showMenuButtons()}
 				<MenuButton
 					icon={'icon-ic_fluent_prohibited_24_regular'}
-					title={'Cancel'}
+					title={currentTranslate.menuItems[5]}
 					callback={() => {
 						hideMenu();
 						setStyle({ pointerEvents: 'none' });

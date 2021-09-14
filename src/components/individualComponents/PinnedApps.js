@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import currentTranslate from '../../localizations';
 import App from './App';
 
 const PinnedApps = ({
@@ -47,12 +48,7 @@ const PinnedApps = ({
 				);
 			});
 		} else {
-			return (
-				<div className='noApps'>
-					More Pinned Apps will show up here. Go to All Apps to pin your
-					Favourite Apps here.
-				</div>
-			);
+			return <div className='noApps'>{currentTranslate.randomWords[7]}</div>;
 		}
 	};
 

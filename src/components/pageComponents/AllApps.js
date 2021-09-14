@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import currentTranslate from '../../localizations';
 
 import App from '../individualComponents/App';
 
@@ -150,7 +151,7 @@ const AllApps = ({
 			}
 			style={showAllApps()}>
 			<div className='header'>
-				<div className='title'>All Apps</div>
+				<div className='title'>{currentTranslate.randomWords[4]}</div>
 				<button
 					onClick={() => {
 						openAllApps(!allAppsOpen);
@@ -158,7 +159,9 @@ const AllApps = ({
 					}}
 					className='btn'>
 					<i className='btn-chevron-back icon-ic_fluent_chevron_left_48_regular'></i>
-					<div className='btn-title-back'>Back</div>
+					<div className='btn-title-back'>
+						{currentTranslate.randomWords[3]}
+					</div>
 				</button>
 			</div>
 			<div id='allApps' className='content'>

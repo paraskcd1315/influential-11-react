@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import currentTranslate from '../../../localizations';
 
 import MenuButton from '../MenuButton';
 
@@ -19,29 +20,29 @@ const Homepage = ({
 			<MenuButton
 				className='mainSettings'
 				icon='icon-ic_fluent_device_meeting_room_24_regular'
-				title='Main Widget Settings'
-				description='All the Main Widget settings appear here'
+				title={currentTranslate.settings[61]}
+				description={currentTranslate.settings[62]}
 				callback={openMainSettings}
 			/>
 			<MenuButton
 				className='individualWidgetSettings'
 				icon='icon-ic_fluent_dock_row_24_regular'
-				title='Individual Widget Settings'
-				description='All Individual Widget settings appear here'
+				title={currentTranslate.settings[63]}
+				description={currentTranslate.settings[64]}
 				callback={openIndividualWidgetSettings}
 			/>
 			<MenuButton
 				className='looknfeelSettings'
 				icon='icon-ic_fluent_paint_brush_24_regular'
-				title='Look and Feel'
-				description='Settings related to the Looks of Components'
+				title={currentTranslate.settings[65]}
+				description={currentTranslate.settings[66]}
 				callback={openLookNFeelSettings}
 			/>
 			<MenuButton
 				className='colorSettings'
 				icon='icon-ic_fluent_paint_bucket_24_regular'
-				title='Color Settings'
-				description='Settings related to the Colors of Components'
+				title={currentTranslate.settings[67]}
+				description={currentTranslate.settings[68]}
 				callback={openColorSettings}
 			/>
 		</div>

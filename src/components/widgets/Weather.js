@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import currentTranslate from '../../localizations';
 import { connect } from 'react-redux';
 import { DraggableCore } from 'react-draggable';
 
@@ -107,7 +108,9 @@ const Weather = ({
 						<div className='weather-condition-icon'>
 							<img
 								src={`assets/weatherIcons/${weatherReducer.now.condition.code}.svg`}
-								alt={weatherReducer.now.condition.description}
+								alt={
+									currentTranslate.condition[weatherReducer.now.condition.code]
+								}
 							/>
 						</div>
 						<div className='weather-temperature'>
@@ -171,7 +174,7 @@ const Weather = ({
 								<div key={dayOfWeek} id={dayOfWeek} className='weather-daily'>
 									<div className='weather-day'>
 										{index === 0
-											? 'Today'
+											? currentTranslate.randomWords[0]
 											: dayOfWeek.substring(0, 3) +
 											  ' ' +
 											  (parseInt(date) + index)}
@@ -307,7 +310,7 @@ const Weather = ({
 						? 'desktopWidget maximized'
 						: 'desktopWidget'
 				}
-				title={'Weather'}
+				title={currentTranslate.widgetNames[0]}
 				showMaximiseButton={!startMenu}
 				startMenu={startMenu}
 				style={style}

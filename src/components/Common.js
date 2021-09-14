@@ -283,7 +283,7 @@ const Common = ({
 					}
 					#taskbar .center-part .start-button span,
 					#controlCenter .header button.enabled,
-					.settings-inputSwitch input[type='checkbox']:checked + .toggle {
+					.settings-inputSwitch input[type='checkbox']:checked + .toggle, .settings-reset-button {
 						background-color: ${extraValues.startButtonColor2Light} !important;
 					}
 					#startMenu .searchbar {
@@ -308,7 +308,7 @@ const Common = ({
 					}
 					#taskbar .center-part .start-button span,
 					#controlCenter .header button.enabled,
-					.settings-inputSwitch input[type='checkbox']:checked + .toggle {
+					.settings-inputSwitch input[type='checkbox']:checked + .toggle, .settings-reset-button {
 						background-color: ${extraValues.startButtonColor2Light} !important;
 					}
 					#startMenu .searchbar {
@@ -554,7 +554,10 @@ const Common = ({
 		sethideWeatherGradientStyle((state) => {
 			let newState = state;
 			if (storage.extraValues) {
-				if (storage.extraValues.disableGradient) {
+				if (
+					storage.extraValues.disableGradient &&
+					!storage.extraValues.backgroundButtonColorLight
+				) {
 					newState = `
 						#weatherWidget {
 							background-color: rgba(253, 253, 253, 0.4)!important;
@@ -566,6 +569,22 @@ const Common = ({
 								background-color: rgba(57, 57, 57, 0.5)!important;
 							}
 						}
+					`;
+				} else if (
+					storage.extraValues.disableGradient &&
+					storage.extraValues.backgroundButtonColorLight
+				) {
+					newState = `
+					#weatherWidget {
+						background-color: ${storage.extraValues.backgroundButtonColorLight}!important;
+						background-image: unset!important;
+					}
+
+					@media (prefers-color-scheme: dark) {
+						#weatherWidget {
+							background-color: ${storage.extraValues.backgroundButtonColorLight}!important;
+						}
+					}
 					`;
 				}
 			}

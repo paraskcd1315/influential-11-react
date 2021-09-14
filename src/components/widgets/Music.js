@@ -10,6 +10,7 @@ import { openMedia } from '../../actions/widget';
 import { addValue, removeValue } from '../../actions/storage';
 import WidgetMaker from '../individualComponents/WidgetMaker';
 import { DraggableCore } from 'react-draggable';
+import currentTranslate from '../../localizations';
 
 const Music = ({
 	mediaReducer,
@@ -100,7 +101,9 @@ const Music = ({
 			<div className={isStopped || !isPlaying ? 'media stopped' : 'media'}>
 				<div className='media-left'>
 					{isStopped || !nowPlayingApplication.identifier ? (
-						<div className='media-stopped'>Not Playing</div>
+						<div className='media-stopped'>
+							{currentTranslate.randomWords[11]}
+						</div>
 					) : (
 						<div className='media-playing'>
 							<div
@@ -266,7 +269,11 @@ const Music = ({
 				<WidgetMaker
 					id={'musicWidget'}
 					className={startMenu ? 'startWidget' : 'desktopWidget'}
-					title={isStopped || !isPlaying ? 'Media' : nowPlayingApplication.name}
+					title={
+						isStopped || !isPlaying
+							? currentTranslate.widgetNames[6]
+							: nowPlayingApplication.name
+					}
 					showMaximiseButton={false}
 					startMenu={startMenu}
 					style={style}

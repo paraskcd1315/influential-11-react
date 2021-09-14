@@ -14,6 +14,7 @@ import { openSettings } from '../actions/widget';
 import { openStartMenu } from '../actions/components';
 import { openExplorer } from '../actions/widget';
 import { addValue } from '../actions/storage';
+import currentTranslate from '../localizations';
 
 const StartMenu = ({
 	timeReducer: { month, date },
@@ -104,9 +105,9 @@ const StartMenu = ({
 					</div>
 					<div className='user-name'>
 						{!storageReducer.extraValues
-							? 'Username'
+							? currentTranslate.settings[0]
 							: !storageReducer.extraValues.username
-							? 'Username'
+							? currentTranslate.settings[0]
 							: storageReducer.extraValues.username}
 					</div>
 				</div>

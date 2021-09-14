@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 import { searchQuery } from '../../actions/components';
 import { activateSearchbar } from '../../actions/components';
+import currentTranslate from '../../localizations';
 
 const Searchbar = ({
 	openAllApps,
@@ -23,7 +24,7 @@ const Searchbar = ({
 			<input
 				type='search'
 				className='searchInput'
-				placeholder='Type here to search'
+				placeholder={currentTranslate.randomWords[1]}
 				onFocus={() => {
 					activateSearchbar(true);
 					openAllApps(true);

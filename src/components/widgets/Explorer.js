@@ -19,6 +19,7 @@ import { DraggableCore } from 'react-draggable';
 import WidgetMaker from '../individualComponents/WidgetMaker';
 import PageMaker from '../explorerWidget/pageMaker';
 import SidebarButton from '../explorerWidget/sidebarButton';
+import currentTranslate from '../../localizations';
 
 const Explorer = ({
 	appsReducer,
@@ -476,7 +477,7 @@ const Explorer = ({
 								}}
 								title='Add Folder'
 								callback={(e) => {
-									const popup = prompt('Please enter the folder Name', '');
+									const popup = prompt(currentTranslate.explorer[0], '');
 									if (popup && popup !== null) {
 										switch (true) {
 											default:
@@ -531,7 +532,7 @@ const Explorer = ({
 									}}></i>
 							);
 						}}
-						title='Favourite Apps'
+						title={currentTranslate.explorer[1]}
 						callback={(e) => {
 							sidebarClick(e);
 						}}
@@ -544,7 +545,7 @@ const Explorer = ({
 								<img src='assets/explorerIcons/Documents.png' alt='Documents' />
 							);
 						}}
-						title='Document Apps'
+						title={currentTranslate.explorer[2]}
 						callback={(e) => {
 							sidebarClick(e);
 						}}
@@ -555,7 +556,7 @@ const Explorer = ({
 						icon={() => {
 							return <img src='assets/explorerIcons/Photos.png' alt='Photos' />;
 						}}
-						title='Photo Apps'
+						title={currentTranslate.explorer[3]}
 						callback={(e) => {
 							sidebarClick(e);
 						}}
@@ -566,7 +567,7 @@ const Explorer = ({
 						icon={() => {
 							return <img src='assets/explorerIcons/Music.png' alt='Music' />;
 						}}
-						title='Music Apps'
+						title={currentTranslate.explorer[4]}
 						callback={(e) => {
 							sidebarClick(e);
 						}}
@@ -577,7 +578,7 @@ const Explorer = ({
 						icon={() => {
 							return <img src='assets/explorerIcons/Video.png' alt='Video' />;
 						}}
-						title='Video Apps'
+						title={currentTranslate.explorer[5]}
 						callback={(e) => {
 							sidebarClick(e);
 						}}
@@ -590,7 +591,7 @@ const Explorer = ({
 					{favouriteAppsPage ? (
 						<PageMaker
 							id='favouriteApps'
-							headerTitle='Favourite Apps'
+							headerTitle={currentTranslate.explorer[1]}
 							headerIcon={() => {
 								return (
 									<i
@@ -612,7 +613,7 @@ const Explorer = ({
 					{documentsAppsPage ? (
 						<PageMaker
 							id='documentApps'
-							headerTitle='Document Apps'
+							headerTitle={currentTranslate.explorer[2]}
 							headerIcon={() => {
 								return (
 									<img
@@ -649,7 +650,7 @@ const Explorer = ({
 					{photosAppsPage ? (
 						<PageMaker
 							id='photoApps'
-							headerTitle='Photo Apps'
+							headerTitle={currentTranslate.explorer[3]}
 							headerIcon={() => {
 								return (
 									<img src='assets/explorerIcons/Photos.png' alt='Photos' />
@@ -683,7 +684,7 @@ const Explorer = ({
 					{musicAppsPage ? (
 						<PageMaker
 							id='musicApps'
-							headerTitle='Music Apps'
+							headerTitle={currentTranslate.explorer[4]}
 							headerIcon={() => {
 								return <img src='assets/explorerIcons/Music.png' alt='Music' />;
 							}}
@@ -715,7 +716,7 @@ const Explorer = ({
 					{videoAppsPage ? (
 						<PageMaker
 							id='videoApps'
-							headerTitle='Video Apps'
+							headerTitle={currentTranslate.explorer[5]}
 							headerIcon={() => {
 								return <img src='assets/explorerIcons/Video.png' alt='Video' />;
 							}}

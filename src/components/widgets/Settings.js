@@ -15,6 +15,7 @@ import IndividualWidgetSettings from '../settingsWidget/pages/IndividualWidgetSe
 import LookNFeelSettings from '../settingsWidget/pages/LookNFeelSettings';
 import ColorSettings from '../settingsWidget/pages/ColorSettings';
 import { addValue, removeValue } from '../../actions/storage';
+import currentTranslate from '../../localizations';
 
 const Settings = ({
 	widgetReducer: { settingsOpen },
@@ -331,19 +332,19 @@ const Settings = ({
 	const widgetTitle = () => {
 		if (!homePageStyle.flag) {
 			if (mainSettingsStyle.flag) {
-				return 'Settings - Main Settings';
+				return currentTranslate.widgetNames[2];
 			}
 			if (individualSettingsStyle.flag) {
-				return 'Settings - Individual Widget Settings';
+				return currentTranslate.widgetNames[3];
 			}
 			if (lookNFeelSettingsStyle.flag) {
-				return 'Settings - Look & Feel Settings';
+				return currentTranslate.widgetNames[4];
 			}
 			if (colorSettingsStyle.flag) {
-				return 'Settings - Color Settings';
+				return currentTranslate.widgetNames[5];
 			}
 		} else {
-			return 'Settings';
+			return currentTranslate.widgetNames[1];
 		}
 	};
 

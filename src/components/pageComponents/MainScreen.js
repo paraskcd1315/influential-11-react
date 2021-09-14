@@ -11,6 +11,7 @@ import Weather from '../widgets/Weather';
 
 import PinnedApps from '../individualComponents/PinnedApps';
 import Music from '../widgets/Music';
+import currentTranslate from '../../localizations';
 
 const MainScreen = ({
 	allAppsOpen,
@@ -57,9 +58,9 @@ const MainScreen = ({
 			}
 			style={hideMainScreen()}>
 			<div className='header'>
-				<div className='title'>Pinned</div>
+				<div className='title'>{currentTranslate.randomWords[5]}</div>
 				<button onClick={() => openAllApps(!allAppsOpen)} className='btn'>
-					<div className='btn-title'>All Apps</div>
+					<div className='btn-title'>{currentTranslate.randomWords[4]}</div>
 					<i className='btn-chevron icon-ic_fluent_chevron_right_48_regular'></i>
 				</button>
 			</div>
@@ -67,11 +68,11 @@ const MainScreen = ({
 				<PinnedApps hideStartMenu={hideStartMenu} />
 			</div>
 			<div className='header'>
-				<div className='title'>Widgets</div>
+				<div className='title'>{currentTranslate.randomWords[2]}</div>
 				<button
 					onClick={() => openMoreWidgets(!moreWidgetsOpen)}
 					className='btn'>
-					<div className='btn-title'>More</div>
+					<div className='btn-title'>{currentTranslate.randomWords[6]}</div>
 					<i className='btn-chevron icon-ic_fluent_chevron_right_48_regular'></i>
 				</button>
 			</div>
