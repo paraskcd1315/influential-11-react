@@ -1,0 +1,71 @@
+{
+	"name": "Influential | 11",
+	"author": "Paras Khanchandani",
+	"size": {
+		"width": "100%",
+		"height": "100%"
+	},
+	"options": [
+		{
+			"type": "title",
+			"text": "Translators"
+		},
+		{
+			"type": "comment",
+			"text": "- Albanian and German, by NKnives\n- Spanish, by Night"
+		},
+		{
+			"type": "gap"
+		},
+		{
+			"type": "page",
+			"text": "Licences",
+			"options": [
+				{
+					"type": "page",
+					"text": "ms-fluent-system-icons",
+					"options": [
+						{
+							"type": "link",
+							"text": "Link to Microsoft Fluent System Icons Github",
+							"url": "https://github.com/microsoft/fluentui-system-icons"
+						},
+						{
+							"type": "comment",
+							"text": "The MIT License (MIT)\n\nCopyright (c) 2020 Microsoft Corporation.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "gap"
+		},
+		{
+			"type": "title",
+			"text": "Support Links"
+		},
+		{
+			"type": "link",
+			"text": "Discord",
+			"url": "https://discord.gg/cHhz59U"
+		},
+		{
+			"type": "link",
+			"text": "Twitter",
+			"url": "https://twitter.com/ParasKCD"
+		},
+		{
+			"type": "gap"
+		},
+		{
+			"type": "title",
+			"text": "Buy Me Coffee :)"
+		},
+		{
+			"type": "link",
+			"text": "PayPal",
+			"url": "https://paypal.me/paraskcd"
+		}
+	]
+}

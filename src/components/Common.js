@@ -462,7 +462,7 @@ const Common = ({
 				if (storage.extraValues.borderRadius) {
 					let difference = storage.extraValues.borderRadius - 0.4;
 					let difference2 = storage.extraValues.borderRadius - 0.8;
-					let difference3 = storage.extraValues.borderRadius - 1.1;
+					let difference3 = storage.extraValues.borderRadius - 1.0;
 					if (difference < 0) {
 						difference = 0;
 					}
@@ -507,8 +507,17 @@ const Common = ({
 					#controlCenter .header button, #taskbar .center-part .start-button, #taskbar .right-part .status-bar, #startMenu .header button, #startMenu .searchbar {
 						border-radius: ${difference2}rem;
 					}
-					#taskbar .center-part .start-button span {
-						border-radius: ${difference3}rem;
+					#taskbar .center-part .start-button span:first-child {
+						border-top-left-radius: ${difference3}rem;
+					}
+					#taskbar .center-part .start-button span:nth-child(2) {
+						border-top-right-radius: ${difference3}rem;
+					}
+					#taskbar .center-part .start-button span:nth-child(3) {
+						border-bottom-left-radius: ${difference3}rem;
+					}
+					#taskbar .center-part .start-button span:nth-child(4) {
+						border-bottom-right-radius: ${difference3}rem;
 					}
 					`;
 				}

@@ -6,6 +6,7 @@
 import { albanian } from './albanian';
 import { english } from './english';
 import { german } from './german';
+import { spanish } from './spanish';
 
 let current =
 	window.navigator.language.length >= 2
@@ -15,7 +16,8 @@ let current =
 const translate = {
 	en: english,
 	de: german,
-	sq: albanian
+	sq: albanian,
+	es: spanish
 };
 
 if (!translate[current]) {

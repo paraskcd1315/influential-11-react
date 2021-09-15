@@ -88,6 +88,7 @@ const ControlCenter = ({
 				<CCButton
 					isEnabled={false}
 					toggleName={currentTranslate.controlCenter[4]}
+					id={'DarkMode'}
 					toggleIcon={'icon-ic_fluent_dark_theme_24_regular'}
 					toggleCallback={() =>
 						(window.location.href =

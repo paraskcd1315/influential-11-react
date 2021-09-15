@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 Paras Khanchandani
+ * All rights reserved.
+ */
+
 import { CLOSE_COLOR_PICKER, OPEN_COLOR_PICKER } from '../actions/types';
 
 const initialState = {

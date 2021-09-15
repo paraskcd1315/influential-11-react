@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021 Paras Khanchandani
+ * All rights reserved.
+ */
+
 import {
 	ADD_DOCUMENT_FOLDER,
 	REMOVE_DOCUMENT_FOLDER,

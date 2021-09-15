@@ -7,7 +7,13 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-const CCButton = ({ isEnabled, toggleName, toggleIcon, toggleCallback }) => {
+const CCButton = ({
+	isEnabled,
+	toggleName,
+	toggleIcon,
+	toggleCallback,
+	id
+}) => {
 	const [enabled, setEnabled] = useState(isEnabled);
 
 	useEffect(() => {
@@ -17,7 +23,7 @@ const CCButton = ({ isEnabled, toggleName, toggleIcon, toggleCallback }) => {
 	return (
 		<div className='toggleContainer'>
 			<button
-				id={toggleName}
+				id={id ? id : toggleName}
 				className={enabled ? 'ccToggle enabled' : 'ccToggle'}
 				onClick={() => toggleCallback()}>
 				<i className={toggleIcon + ' ccToggleIcon'}></i>
