@@ -25,7 +25,7 @@ const touchStarted = (e) => {
 
 const removeTapEvents = (id) => {
 	if (elementsAdded[id]) {
-		var element = doc.getElementById(id);
+		var element = document.getElementById(id);
 		element.removeEventListener('touchstart', touchStarted, false);
 		element.removeEventListener('touchmove', clearTimer, false);
 		element.removeEventListener('touchend', clearTimer, false);

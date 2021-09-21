@@ -3,6 +3,7 @@ window.requestAnimFrame = function () {
 };
 
 var FPI = {};
+var theDate = '';
 
 function setFPIInfo(info, label, parse) {
 	if (parse) {
@@ -26,6 +27,34 @@ function theApp({ bundleID, label, hideLabel, className, badge, hideBadge }) {
 	`;
 }
 
+function triggerComponentsActive() {
+	const { startMenuOpened } = componentsActive;
+
+	if (startMenuOpened) {
+		if (!document.getElementById('startMenu')) {
+			startMenu();
+			document.getElementById('startButton').classList.add('active');
+		}
+	} else {
+		document.getElementById('startButton').classList.remove('active');
+		removeTapEvents('pinnedApps');
+		removeEvent('pinnedAppPress');
+		removeEvent(currentTranslate.randomWords[4]);
+		removeEvent(currentTranslate.randomWords[6]);
+		Object.assign(document.getElementById('startMenu').style, {
+			opacity: 0,
+			transform: 'translate(-50%, 50px)',
+			transition: '150ms ease-out',
+			pointerEvents: 'none'
+		});
+		setTimeout(() => {
+			document
+				.getElementById('root')
+				.removeChild(document.getElementById('startMenu'));
+		}, 150);
+	}
+}
+
 function loadSystem() {}
 function loadBattery() {
 	loadStatusbar();
@@ -36,6 +65,7 @@ function loadStatusBar() {
 function loadSwitcher() {}
 function loadApps() {
 	loadDockIcons();
+	pinnedApps();
 }
 function loadMusic() {}
 function loadNotifications() {}
@@ -60,11 +90,7 @@ function FPIloaded() {
 				: !storage.extraValues.twentyFourHourTime
 				? `${t.hour()}:${t.minute()} ${t.ampm()}`
 				: `${t.hour()}:${t.minute()}`;
-			if (document.getElementById('date')) {
-				document.getElementById(
-					'date'
-				).innerHTML = `${t.sMonthText()} ${t.dateNum()}`;
-			}
+			theDate = `${t.sMonthText()} ${t.dateNum()}`;
 		}
 	});
 }
@@ -74,6 +100,7 @@ function viewRotated(direction) {}
 function loadSettings(settings) {}
 function badgeUpdated(bundle) {
 	loadDockIcons();
+	pinnedApps();
 }
 function loadReminders() {}
 function loadSwitcher() {}
@@ -115,11 +142,7 @@ const componentsActive = {
 						: !storage.extraValues.twentyFourHourTime
 						? `${t.hour()}:${t.minute()} ${t.ampm()}`
 						: `${t.hour()}:${t.minute()}`;
-					if (document.getElementById('date')) {
-						document.getElementById(
-							'date'
-						).innerHTML = `${t.sMonthText()} ${t.dateNum()}`;
-					}
+					theDate = `${t.sMonthText()} ${t.dateNum()}`;
 				}
 			})
 		);
@@ -127,9 +150,28 @@ const componentsActive = {
 
 	addEvent(document.getElementById('startButton'), {
 		event: 'click',
-		callback: () => {
+		callback: (e) => {
+			e.target.style.transform = 'scale(0.8)';
+			setTimeout(() => {
+				e.target.style.transform = 'scale(1.0)';
+			}, 100);
+
 			componentsActive.startMenuOpened = !componentsActive.startMenuOpened;
-			console.log(componentsActive.startMenuOpened);
+
+			triggerComponentsActive();
+		},
+		label: 'startButton'
+	});
+
+	addEvent(document.getElementById('statusbarContainer'), {
+		event: 'click',
+		callback: (e) => {
+			e.target.style.transform = 'scale(0.8)';
+			setTimeout(() => {
+				e.target.style.transform = 'scale(1.0)';
+			}, 100);
+
+			window.location = 'frontpage:opencc';
 		},
 		label: 'startButton'
 	});
