@@ -13,9 +13,9 @@
 
 # images/fonts/xenhtml emulation assets
 /public/assets/
-/public/xenEmulationStuff/
-/public/emulation.js
-/src/fluent-system-icons
+/Emulation.js
+/dist
+/fluent-system-icons
 
 # misc
 .DS_Store

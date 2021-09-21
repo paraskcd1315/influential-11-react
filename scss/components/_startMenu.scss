@@ -1,0 +1,284 @@
+#startMenu {
+	bottom: 14rem;
+	transition: 150ms ease-in;
+
+	.startTabs {
+		background-color: set-transparency($light-button-color, 0.4);
+		border-bottom: 1px solid set-text-color-transparency($light-color, 0.2) !important;
+		padding: 0.5rem 0;
+		border-top-left-radius: 1.2rem;
+		border-top-right-radius: 1.2rem;
+		border-bottom-left-radius: 0.8rem;
+		border-bottom-right-radius: 0.8rem;
+		height: 450px;
+	}
+
+	.searchbar {
+		margin: 1rem;
+		@include set-background-color(set-transparency($light-button-color, 0.4));
+		border: 1px solid set-text-color-transparency($light-color, 0.2);
+		border-bottom: 3px solid $primary-color;
+		@include set-border-radius(0.4rem);
+		display: flex;
+		align-items: center;
+
+		.searchIcon {
+			padding: 0.5rem;
+			font-size: 1.2rem;
+			line-height: 12px;
+			transform: rotateZ(90deg);
+		}
+
+		input {
+			width: 100%;
+			padding: 0.7rem 0;
+			background-color: transparent;
+			border: none;
+		}
+
+		input:focus {
+			outline: none;
+		}
+	}
+
+	.content {
+		margin-top: -15px;
+		padding: 0.5rem 1rem;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		mask-image: linear-gradient(transparent, #000 15%, #000 85%, transparent);
+	}
+
+	#allApps,
+	#allWidgets {
+		align-items: start;
+		justify-content: start;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		flex-basis: 0;
+		flex-grow: 1;
+		padding-bottom: 1.5rem;
+	}
+
+	.widget:before {
+		backdrop-filter: unset;
+		background-image: unset;
+		content: unset;
+		position: unset;
+	}
+
+	.widget {
+		position: unset;
+		width: 100%;
+		max-height: 95px;
+	}
+
+	#pinnedApps {
+		scroll-snap-type: y proximity;
+		margin-top: -10px;
+		margin-bottom: -10px;
+		padding: 0 1rem;
+		height: 160px;
+		overflow-y: scroll;
+		display: grid;
+		flex-wrap: unset;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+		.noApps {
+			padding-top: 1rem;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			font-size: 1rem;
+		}
+	}
+
+	#pinnedWidgets {
+		display: flex;
+		flex-direction: column;
+		overflow-y: scroll;
+		height: 130px;
+		margin-top: -30px;
+	}
+
+	.alphabet {
+		margin: 1rem 1.6rem;
+		width: 85%;
+	}
+
+	.app {
+		flex: 1 0 auto;
+		display: flex;
+		align-items: center;
+		margin: 0.4rem 1.5rem;
+		text-align: center;
+		width: 85%;
+
+		.badge {
+			position: absolute;
+			@include set-size(10px, 10px);
+			@include set-border-radius(5rem);
+			background-color: set-transparency($dark-color, 0.4);
+			margin: -2px 0 0 -20px;
+			@include set-shadows(
+				set-transparency($dark-color, 0.3),
+				set-transparency($dark-color, 0.2)
+			);
+			pointer-events: none;
+		}
+
+		.icon {
+			pointer-events: none;
+
+			img {
+				@include set-size(40px, 40px);
+			}
+		}
+
+		.title {
+			font-size: 0.8rem;
+			width: auto;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			margin-left: 2rem;
+		}
+	}
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 1rem 1.5rem;
+
+		.title {
+			font-size: 0.8rem;
+			font-weight: 700;
+		}
+
+		button {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			outline: none;
+			appearance: none;
+			@include set-background-color(set-transparency($light-button-color, 0.4));
+			border: 1px solid set-text-color-transparency($light-color, 0.2);
+			@include set-border-radius(0.4rem);
+			padding: 0.5rem;
+			font-size: 0.8rem;
+
+			.btn-chevron,
+			.btn-chevron-back {
+				line-height: 12px;
+				font-size: 1.2rem;
+				margin-left: 1rem;
+			}
+
+			.btn-chevron-back {
+				margin-left: unset;
+			}
+
+			.btn-title-back {
+				margin-left: 1rem;
+			}
+		}
+	}
+
+	.pages {
+		display: flex;
+
+		> div {
+			position: absolute;
+			flex-basis: 0;
+			flex-grow: 1;
+			width: 100%;
+			transition: 250ms ease-out;
+			scroll-snap-type: y mandatory;
+
+			&.disabled {
+				pointer-events: none;
+			}
+		}
+	}
+
+	.footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.6rem 1.5rem;
+
+		.user {
+			img {
+				margin-top: 0.45rem;
+				margin-right: 0.5rem;
+				@include set-border-radius(50rem);
+				@include set-size(35px, 35px);
+				@include set-shadows(
+					set-transparency($dark-color, 0),
+					set-transparency($dark-color, 0.3)
+				);
+			}
+		}
+
+		.start-tabs {
+			i {
+				padding: 0.75rem;
+				font-size: 1.1rem;
+				border: solid 1px #0000;
+				@include set-border-radius(0.5rem);
+				line-height: 12px;
+			}
+		}
+
+		.start-tabs,
+		.user {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 0.9rem;
+		}
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	$primary-color: #60cdff;
+
+	#startMenu {
+		.app {
+			.badge {
+				background-color: set-transparency($light-color, 0.4);
+			}
+		}
+
+		.startTabs {
+			background-color: set-transparency($dark-button-color, 0.4);
+			border-bottom: 1px solid set-text-color-transparency($dark-color, 0.2) !important;
+		}
+
+		.searchbar {
+			@include set-background-color(set-transparency($dark-button-color, 0.4));
+			border: 1px solid set-text-color-transparency($dark-color, 0.2);
+			border-bottom: 3px solid $primary-color;
+
+			input {
+				color: $light-color;
+			}
+		}
+
+		.header {
+			button {
+				@include set-background-color(
+					set-transparency($dark-button-color, 0.4)
+				);
+				border: 1px solid set-text-color-transparency($dark-color, 0.2);
+			}
+		}
+	}
+}

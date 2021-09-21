@@ -1,0 +1,134 @@
+.active {
+	background-color: set-transparency($light-button-color, 0.4);
+	border-top: 1px solid set-text-color-transparency($light-color, 0.2) !important;
+}
+
+#taskbar:before,
+#startMenu:before,
+.appMenu:before,
+.scrollHelper:before,
+#controlCenter:before,
+.widget:before {
+	@include set-blur(20px);
+	@include set-border-radius(1.2rem);
+	border: 1px solid #0000;
+}
+
+#desktop {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	z-index: 0;
+}
+
+.appMenu,
+.scrollHelper,
+.widget {
+	transition: 250ms ease-out;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	display: flex;
+	flex-direction: column;
+	@include set-background-color(set-transparency($light-button-color, 0.4));
+	border: 1px solid set-text-color-transparency($light-color, 0.2) !important;
+	@include set-border-radius(1.2rem);
+	@include set-shadows(
+		set-transparency($dark-color, 0.3),
+		set-transparency($dark-color, 0.5)
+	);
+	min-width: 45%;
+}
+
+#taskbar,
+#startMenu,
+#controlCenter {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	@include set-background-color(set-transparency($light-color, 0.4));
+	@include set-shadows(
+		set-transparency($dark-color, 0.3),
+		set-transparency($dark-color, 0.5)
+	);
+	@include set-size(90%, auto);
+	border: 1px solid set-text-color-transparency($light-color, 0.2) !important;
+	@include set-border-radius(1.2rem);
+}
+
+.favApp {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 0.5rem;
+	transition: 250ms ease;
+
+	.badge {
+		position: absolute;
+		@include set-size(10px, 10px);
+		@include set-border-radius(5rem);
+		background-color: set-transparency($dark-color, 0.4);
+		margin: -20px 0 0 30px;
+		@include set-shadows(
+			set-transparency($dark-color, 0.3),
+			set-transparency($dark-color, 0.2)
+		);
+		pointer-events: none;
+	}
+
+	.icon {
+		pointer-events: none;
+
+		img {
+			@include set-size(45px, 45px);
+		}
+	}
+
+	.title {
+		font-size: 0.7rem;
+		width: 50px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	::placeholder {
+		color: $light-color;
+		opacity: 0.5;
+	}
+
+	.active {
+		background-color: set-transparency($dark-button-color, 0.4);
+		border-top: 1px solid set-text-color-transparency($dark-color, 0.2) !important;
+	}
+
+	#taskbar,
+	#startMenu,
+	#controlCenter {
+		@include set-background-color(set-transparency($dark-color, 0.4));
+		border: 1px solid set-text-color-transparency($dark-color, 0.2) !important;
+	}
+
+	.appMenu,
+	.scrollHelper,
+	.widget {
+		@include set-background-color(set-transparency($dark-button-color, 0.4));
+		border: 1px solid set-text-color-transparency($dark-color, 0.3) !important;
+	}
+
+	.favApp {
+		.badge {
+			background-color: set-transparency($light-color, 0.4);
+		}
+	}
+
+	.app {
+		.badge {
+			background-color: set-transparency($light-color, 0.4);
+		}
+	}
+}

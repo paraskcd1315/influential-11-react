@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-long-press-delay="400">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="fluent-system-icons/FluentSystemIcons-Filled.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="fluent-system-icons/FluentSystemIcons-Regular.css"
+		/>
+		<link rel="stylesheet" href="dist/css/style.min.css" />
+		<title>Influential11</title>
+	</head>
+	<body>
+		<div id="root" class="root">
+			<div id="desktop"></div>
+			<div id="taskbar">
+				<div class="top-part">
+					<div
+						class="left-part"
+						onclick="window.location = 'frontpage:opensearch';"
+					>
+						<div class="timeDate">
+							<div id="time"></div>
+						</div>
+					</div>
+					<div class="center-part">
+						<div id="startButton" class="start-button">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+					<div
+						id="statusbarContainer"
+						class="right-part"
+						onclick="window.location = 'frontpage:opencc';"
+					></div>
+				</div>
+				<div id="dockApps" class="bottom-part"></div>
+			</div>
+		</div>
+		<script src="js/lib/TapNHold.js"></script>
+		<script src="js/lib/EventHandler.js"></script>
+		<script src="js/lib/currentTranslate.js"></script>
+		<script src="js/lib/Time.js"></script>
+		<script src="js/lib/Storage.js"></script>
+		<script src="js/global.js"></script>
+		<script src="js/components/taskbar.js"></script>
+		<script src="Emulation.js"></script>
+	</body>
+</html>
