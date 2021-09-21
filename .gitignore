@@ -16,6 +16,9 @@
 /public/xenEmulationStuff/
 /public/emulation.js
 /src/fluent-system-icons
+/dist
+/fluent-system-icons
+/Emulation.js
 
 # misc
 .DS_Store
