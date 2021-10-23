@@ -101,7 +101,7 @@ export const english = {
 		'This setting hides the Background of the Explorer Widget.', //setting43
 		'Explorer Widget Settings', //setting44
 		'Hide Folder Titles', //setting45
-		'This setting hides the Titles of the folders of the Explorer Widget.', //setting46
+		'This setting hides the Titles of the folders of the Explorer Widget. Note: If you have Hide Title Bar enabled, please refresh the entire widget after enabling this option.', //setting46
 		'Use own Apps on the Pages', //setting47
 		'This setting removes the automatic organisation of Apps to all the Explorer Pages, and gives you the freedom to add/remove your own. (Tip: If you see the page completely blank after disabling it, refresh the Widget.)', //setting48
 		'Hide Add Apps button', //setting49

@@ -139,42 +139,99 @@ const Taskbar = ({
 	return (
 		<div id='taskbar'>
 			<div className='top-part'>
-				<div className='left-part'>
-					<div className='timeDate'>
-						<div className='time'>
-							{hours}:{minutes}{' '}
-							{!extraValues
-								? ampm
-								: !extraValues.twentyFourHourTime
-								? ampm
-								: ''}
+				{extraValues && extraValues.startButtonLeft ? (
+					<>
+						{extraValues.statusbarWidget ? (
+							''
+						) : (
+							<div className='theTimeDate'>
+								<div className='time'>
+									{hours}:{minutes}{' '}
+									{!extraValues
+										? ampm
+										: !extraValues.twentyFourHourTime
+										? ampm
+										: ''}
+								</div>
+							</div>
+						)}
+
+						<div className='statusbar'>{renderComms()}</div>
+						<div className='left-part'>
+							<div
+								className={
+									startMenuOpen ? 'start-button active' : 'start-button'
+								}
+								onClick={(e) => {
+									e.preventDefault();
+									buttonAnimate(e);
+									if (startMenuOpen) {
+										hideStartMenu();
+										setTimeout(() => {
+											openStartMenu(false);
+										}, 250);
+									} else {
+										openStartMenu(true);
+									}
+								}}>
+								<span></span>
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div className='center-part'>
-					<div
-						className={startMenuOpen ? 'start-button active' : 'start-button'}
-						onClick={(e) => {
-							e.preventDefault();
-							buttonAnimate(e);
-							if (startMenuOpen) {
-								hideStartMenu();
-								setTimeout(() => {
-									openStartMenu(false);
-								}, 250);
-							} else {
-								openStartMenu(true);
-							}
-						}}>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</div>
-				</div>
-				<div className='right-part'>{renderComms()}</div>
+						<div className='theDockApps'>{renderApps()}</div>
+					</>
+				) : (
+					<>
+						<div className='left-part'>
+							<div className='timeDate'>
+								{extraValues && extraValues.statusbarWidget ? (
+									''
+								) : (
+									<div className='time'>
+										{hours}:{minutes}{' '}
+										{!extraValues
+											? ampm
+											: !extraValues.twentyFourHourTime
+											? ampm
+											: ''}
+									</div>
+								)}
+							</div>
+						</div>
+						<div className='center-part'>
+							<div
+								className={
+									startMenuOpen ? 'start-button active' : 'start-button'
+								}
+								onClick={(e) => {
+									e.preventDefault();
+									buttonAnimate(e);
+									if (startMenuOpen) {
+										hideStartMenu();
+										setTimeout(() => {
+											openStartMenu(false);
+										}, 250);
+									} else {
+										openStartMenu(true);
+									}
+								}}>
+								<span></span>
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
+						</div>
+						<div className='right-part'>{renderComms()}</div>
+					</>
+				)}
 			</div>
-			<div className='bottom-part'>{renderApps()}</div>
+			{extraValues && extraValues.startButtonLeft ? (
+				''
+			) : (
+				<div className='bottom-part'>{renderApps()}</div>
+			)}
 		</div>
 	);
 };

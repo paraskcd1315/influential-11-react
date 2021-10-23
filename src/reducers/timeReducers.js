@@ -6,7 +6,7 @@
 import { UPDATE_TIME } from '../actions/types';
 import { Time } from '../libs/Time';
 
-let hours, minutes, date, month, ampm, rawHour;
+let hours, minutes, date, month, ampm, rawHour, bigMonth, year;
 
 Time({
 	twentyfour: false,
@@ -18,6 +18,8 @@ Time({
 		month = t.sMonthText();
 		ampm = t.ampm();
 		rawHour = t.rawHour();
+		bigMonth = t.monthText();
+		year = t.year();
 	}
 });
 
@@ -27,7 +29,9 @@ const initialState = {
 	date: date,
 	month: month,
 	ampm: ampm,
-	rawHour: rawHour
+	rawHour: rawHour,
+	bigMonth: bigMonth,
+	year: year
 };
 
 function timeReducer(state = initialState, action) {

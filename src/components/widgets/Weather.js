@@ -45,6 +45,8 @@ const Weather = ({
 					? '400px'
 					: extraValues && extraValues.compactifyWeather
 					? '165px'
+					: extraValues && extraValues.hideWeatherTitleBar
+					? '130px'
 					: '200px'
 				: null,
 			backgroundColor: color_2,
@@ -251,6 +253,7 @@ const Weather = ({
 		<DraggableCore
 			handle='.widget-header-weatherWidget'
 			cancel='.widget-buttons-right'
+			disabled={extraValues && extraValues.lockWindowPanels}
 			onStart={(e, data) => {
 				if (extraValues && extraValues.Weather) {
 					setYPosition((state) => {
@@ -312,7 +315,7 @@ const Weather = ({
 				}
 				title={currentTranslate.widgetNames[0]}
 				showMaximiseButton={!startMenu}
-				startMenu={startMenu}
+				startMenu={extraValues && extraValues.hideWeatherTitleBar}
 				style={style}
 				content={weatherContent()}
 				closeCallback={() => {

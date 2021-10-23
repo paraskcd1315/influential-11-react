@@ -58,7 +58,14 @@ const Settings = ({
 		backgroundColorLight: '#' + rgbHex(243, 243, 243, 0.4),
 		backgroundButtonColorLight: '#' + rgbHex(253, 253, 253, 0.4),
 		textColorLight: '#202020',
-		borderColorLight: '#' + rgbHex(243, 243, 243, 0.2)
+		borderColorLight: '#' + rgbHex(243, 243, 243, 0.2),
+		lockWindowPanels: false,
+		hideWeatherTitleBar: false,
+		hideExplorerTitleBar: false,
+		hideMusicTitleBar: false,
+		hideTaskbarDualTone: false,
+		startButtonLeft: false,
+		statusbarWidget: false
 	});
 
 	useEffect(() => {
@@ -229,7 +236,42 @@ const Settings = ({
 					? '#' + rgbHex(243, 243, 243, 0.2)
 					: !storageReducer.extraValues.borderColorLight
 					? '#' + rgbHex(243, 243, 243, 0.2)
-					: storageReducer.extraValues.borderColorLight
+					: storageReducer.extraValues.borderColorLight,
+				lockWindowPanels: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.lockWindowPanels
+					? false
+					: true,
+				hideWeatherTitleBar: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.hideWeatherTitleBar
+					? false
+					: true,
+				hideExplorerTitleBar: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.hideExplorerTitleBar
+					? false
+					: true,
+				hideMusicTitleBar: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.hideMusicTitleBar
+					? false
+					: true,
+				hideTaskbarDualTone: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.hideTaskbarDualTone
+					? false
+					: true,
+				startButtonLeft: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.startButtonLeft
+					? false
+					: true,
+				statusbarWidget: !storageReducer.extraValues
+					? false
+					: !storageReducer.extraValues.statusbarWidget
+					? false
+					: true
 			};
 		});
 	}, [storageReducer]);
@@ -285,6 +327,41 @@ const Settings = ({
 			key: e.target.name,
 			value: e.target.value
 		});
+	};
+
+	const handleTitlebarChange = (e, flag) => {
+		let popup = window.confirm(
+			'This option will need the widget to be refreshed. Want to continue?'
+		);
+		if (popup) {
+			handleSwitchChange(e);
+			const { bool, boolName } = flag;
+			if (bool) {
+				setOptions((state) => {
+					return {
+						...state,
+						[boolName]: false
+					};
+				});
+				addValue({
+					key: boolName,
+					value: false
+				});
+			}
+			//eslint-disable-next-line
+			window.location.href = window.location.href;
+		}
+	};
+
+	const handleCompactifyingChange = (e, flag) => {
+		if (flag) {
+			window.confirm(
+				'Hide Titlebar setting is already enabled, so this option wont work.'
+			);
+			return;
+		} else {
+			handleSwitchChange(e);
+		}
 	};
 
 	const [style, setStyle] = useState({
@@ -548,8 +625,10 @@ const Settings = ({
 						<IndividualWidgetSettings
 							style={individualSettingsStyle.style}
 							options={options}
+							handleTitlebarChange={handleTitlebarChange}
 							handleTextChange={handleTextChange}
 							handleSwitchChange={handleSwitchChange}
+							handleCompactifyingChange={handleCompactifyingChange}
 							handleIndividualWidgetReset={() => {
 								const popup = window.confirm(
 									'Are you sure you want to Reset Individual Widget Settings?'

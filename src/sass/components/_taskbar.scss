@@ -20,65 +20,71 @@
 		border-bottom-right-radius: 1.2rem;
 	}
 
+	.start-button {
+		display: grid;
+		grid-template-columns: 2fr 2fr;
+		row-gap: 0.06rem;
+		column-gap: 0.05rem;
+		padding: 0.8rem;
+		border: solid 1px #0000;
+		@include set-border-radius(0.4rem);
+		transition: 250ms ease;
+		margin-left: 2.13rem;
+
+		&.active {
+			span {
+				background-color: darken($primary-color, 10%) !important;
+				background-image: unset !important;
+			}
+		}
+
+		span {
+			pointer-events: none;
+			@include set-size(15px, 15px);
+			background-color: $primary-color;
+			@include set-shadows(
+				set-transparency($dark-color, 0),
+				set-transparency($dark-color, 0.3)
+			);
+			transition: 250ms ease;
+
+			&:first-child {
+				background-image: linear-gradient(120deg, #67cffd, $primary-color);
+				border-top-left-radius: 0.2rem;
+			}
+
+			&:nth-child(2) {
+				border-top-right-radius: 0.2rem;
+			}
+
+			&:nth-child(3) {
+				border-bottom-left-radius: 0.2rem;
+			}
+
+			&:nth-child(4) {
+				border-bottom-right-radius: 0.2rem;
+			}
+		}
+	}
+
 	.center-part {
 		position: absolute;
 		left: 50%;
 		transform: translateX(-68%);
-		.start-button {
-			display: grid;
-			grid-template-columns: 2fr 2fr;
-			row-gap: 0.06rem;
-			column-gap: 0.05rem;
-			padding: 0.8rem;
-			border: solid 1px #0000;
-			@include set-border-radius(0.4rem);
-			transition: 250ms ease;
-			margin-left: 2.13rem;
-
-			&.active {
-				span {
-					background-color: darken($primary-color, 10%) !important;
-					background-image: unset !important;
-				}
-			}
-
-			span {
-				pointer-events: none;
-				@include set-size(15px, 15px);
-				background-color: $primary-color;
-				@include set-shadows(
-					set-transparency($dark-color, 0),
-					set-transparency($dark-color, 0.3)
-				);
-				transition: 250ms ease;
-
-				&:first-child {
-					background-image: linear-gradient(120deg, #67cffd, $primary-color);
-					border-top-left-radius: 0.2rem;
-				}
-
-				&:nth-child(2) {
-					border-top-right-radius: 0.2rem;
-				}
-
-				&:nth-child(3) {
-					border-bottom-left-radius: 0.2rem;
-				}
-
-				&:nth-child(4) {
-					border-bottom-right-radius: 0.2rem;
-				}
-			}
-		}
 	}
 
 	.left-part {
 		.timeDate {
 			padding: 0.8rem;
 		}
+		.start-button {
+			margin-left: unset;
+		}
 	}
 
 	.right-part {
+		display: flex;
+		align-items: center;
 		line-height: 12px;
 
 		.status-bar {
@@ -98,6 +104,44 @@
 			}
 		}
 	}
+
+	.theTimeDate {
+		position: absolute;
+		bottom: 6.5rem;
+		left: 0.5rem;
+	}
+
+	.statusbar {
+		position: absolute;
+		bottom: 5.5rem;
+		right: 0.2rem;
+
+		.statusIcons {
+			pointer-events: none;
+			font-size: 1.4rem;
+			padding: 0.1rem;
+
+			&:first-child {
+				padding: unset;
+			}
+		}
+	}
+
+	.theDockApps {
+		display: flex;
+		margin-top: 0.2rem;
+		margin-left: 3.7rem;
+		width: 80%;
+		overflow: scroll;
+
+		.favApp {
+			position: relative;
+
+			.badge {
+				margin: -25px 0 0 22px;
+			}
+		}
+	}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -108,24 +152,22 @@
 			background-color: set-transparency($dark-button-color, 0.4);
 			border-top: 1px solid set-text-color-transparency($dark-color, 0.2) !important;
 		}
-		.center-part {
-			.start-button {
-				&.active {
-					span {
-						background-color: darken($primary-color, 10%) !important;
-					}
-				}
-
+		.start-button {
+			&.active {
 				span {
-					background-color: darken($primary-color, 20%) !important;
+					background-color: darken($primary-color, 10%) !important;
+				}
+			}
 
-					&:first-child {
-						background-image: linear-gradient(
-							120deg,
-							#67cffd,
-							darken($primary-color, 20%)
-						);
-					}
+			span {
+				background-color: darken($primary-color, 20%) !important;
+
+				&:first-child {
+					background-image: linear-gradient(
+						120deg,
+						#67cffd,
+						darken($primary-color, 20%)
+					);
 				}
 			}
 		}

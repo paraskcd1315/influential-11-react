@@ -23,7 +23,7 @@ const Music = ({
 	startMenu
 }) => {
 	const [style, setStyle] = useState({
-		maxHeight: 300 + 'px',
+		maxHeight: extraValues && extraValues.hideMusicTitleBar ? '170px' : '300px',
 		opacity: !startMenu ? 0 : null,
 		transform: !startMenu
 			? !extraValues
@@ -216,6 +216,7 @@ const Music = ({
 			<DraggableCore
 				handle='.widget-header-musicWidget'
 				cancel='.widget-buttons-right'
+				disabled={extraValues && extraValues.lockWindowPanels}
 				onStart={(e, data) => {
 					if (extraValues && extraValues.Media) {
 						setYPosition((state) => {
@@ -275,7 +276,7 @@ const Music = ({
 							: nowPlayingApplication.name
 					}
 					showMaximiseButton={false}
-					startMenu={startMenu}
+					startMenu={extraValues && extraValues.hideMusicTitleBar}
 					style={style}
 					content={mediaContent()}
 					closeCallback={() => {

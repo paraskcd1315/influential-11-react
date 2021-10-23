@@ -26,7 +26,11 @@ const MainSettings = ({
 		blurRadius,
 		borderRadius,
 		hideFadeEffect,
-		removeBackButton
+		removeBackButton,
+		lockWindowPanels,
+		hideTaskbarDualTone,
+		startButtonLeft,
+		statusbarWidget
 	} = options;
 
 	return (
@@ -69,6 +73,34 @@ const MainSettings = ({
 				value={removeBackButton ? 'on' : 'off'}
 				label={currentTranslate.settings[8]}
 				description={currentTranslate.settings[9]}
+			/>
+			<InputSwitch
+				onChange={handleSwitchChange}
+				inputName='lockWindowPanels'
+				value={lockWindowPanels ? 'on' : 'off'}
+				label='Lock Window Panels'
+				description='This setting turns off the ability to move the Window Panels.'
+			/>
+			<InputSwitch
+				onChange={handleSwitchChange}
+				inputName='hideTaskbarDualTone'
+				value={hideTaskbarDualTone ? 'on' : 'off'}
+				label='Hide Taskbar Dual Tone Color'
+				description='This setting makes the entire Taskbar just with 1 color.'
+			/>
+			<InputSwitch
+				onChange={handleSwitchChange}
+				inputName='startButtonLeft'
+				value={startButtonLeft ? 'on' : 'off'}
+				label='Minify the Taskbar'
+				description='This Setting minifies the Entire Taskbar, with start button on the left, apps besides the start button. Note: Because of size constrains, the Statusbar buttons have to be disabled with this option.'
+			/>
+			<InputSwitch
+				onChange={handleSwitchChange}
+				inputName='statusbarWidget'
+				value={statusbarWidget ? 'on' : 'off'}
+				label='Make the Clock Separate from Taskbar'
+				description='This Setting makes the clock on top of the Screen, makes it bigger and removes it from the Taskbar.'
 			/>
 			<InputRange
 				onInput={handleRangeChange}

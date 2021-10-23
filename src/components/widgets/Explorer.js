@@ -41,6 +41,10 @@ const Explorer = ({
 	const [style, setStyle] = useState({
 		maxHeight: extraValues.explorerMaximized
 			? 400 + 'px'
+			: extraValues.hideExplorerTitleBar
+			? extraValues.hideExplorerFolderTitle
+				? 180 + 'px'
+				: 230 + 'px'
 			: extraValues.hideExplorerFolderTitle
 			? 249 + 'px'
 			: 300 + 'px',
@@ -49,7 +53,8 @@ const Explorer = ({
 			? 'translate(-50%, 0px)'
 			: !extraValues.Explorer
 			? 'translate(-50%, 0px)'
-			: `translate(-50%, ${extraValues.Explorer}px)`
+			: `translate(-50%, ${extraValues.Explorer}px)`,
+		paddingTop: extraValues.hideExplorerTitleBar ? '1.5rem' : null
 	});
 
 	useEffect(() => {
@@ -775,6 +780,7 @@ const Explorer = ({
 		<DraggableCore
 			handle='.widget-header-explorerWidget'
 			cancel={`.widget-buttons-right, .widget-buttons-left`}
+			disabled={extraValues && extraValues.lockWindowPanels}
 			onStart={(e, data) => {
 				if (extraValues && extraValues.Explorer) {
 					setYPosition((state) => {
@@ -862,7 +868,7 @@ const Explorer = ({
 				}}
 				showMenu={true}
 				showMaximiseButton={true}
-				startMenu={false}
+				startMenu={extraValues && extraValues.hideExplorerTitleBar}
 				style={style}
 				content={explorerContent()}
 				closeCallback={() => {

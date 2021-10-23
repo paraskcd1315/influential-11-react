@@ -5,7 +5,14 @@
 
 import React from 'react';
 
-const InputSwitch = ({ label, description, inputName, onChange, value }) => {
+const InputSwitch = ({
+	label,
+	description,
+	inputName,
+	onChange,
+	value,
+	checker
+}) => {
 	return (
 		<div className='settings-inputSwitch'>
 			<div>
@@ -17,7 +24,9 @@ const InputSwitch = ({ label, description, inputName, onChange, value }) => {
 					type='checkbox'
 					name={inputName}
 					id={inputName}
-					onChange={onChange}
+					onChange={(e) => {
+						onChange(e, checker);
+					}}
 					className='checkbox'
 					checked={value === 'on' ? true : false}
 				/>

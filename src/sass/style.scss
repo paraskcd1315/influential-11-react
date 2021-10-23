@@ -12,3 +12,30 @@
 @import './components/explorerWidget';
 @import './components/musicWidget';
 @import 'devices';
+
+.theWidgetTime {
+	z-index: -1;
+	position: absolute;
+	top: 5rem;
+	left: 2rem;
+	font-size: 4rem;
+	color: $light-color;
+
+	.time {
+		display: flex;
+
+		.clock {
+			margin-right: 0.2rem;
+			font-weight: bold;
+		}
+
+		.amPm {
+			font-size: 1rem;
+			margin-top: 0.5rem;
+		}
+	}
+
+	.date {
+		font-size: 1rem;
+	}
+}

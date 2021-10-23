@@ -1,5 +1,9 @@
 //iPhone 12 Pro Max
 @media only screen and (max-height: 926px) {
+	#taskbar .theDockApps {
+		width: 80%;
+	}
+
 	#startMenu {
 		bottom: 13rem;
 	}
@@ -40,7 +44,7 @@
 	}
 
 	#allApps {
-		height: 408px;
+		height: 272px;
 	}
 
 	#startMenu .widget {
@@ -64,7 +68,7 @@
 
 	.settings {
 		&-content .settings-pages .page {
-			width: 92%;
+			width: 98%;
 			height: 380px;
 		}
 	}
@@ -89,6 +93,16 @@
 
 //iPhone XS/11 pro Max
 @media only screen and (max-height: 896px) {
+	#taskbar .theDockApps {
+		mask-image: linear-gradient(
+			to right,
+			transparent,
+			#000 15%,
+			#000 85%,
+			transparent
+		);
+	}
+
 	#explorerWidget .explorer-apps {
 		padding-left: 0.7rem;
 	}
@@ -104,12 +118,11 @@
 	}
 
 	#allApps {
-		height: 408px;
+		height: 272px;
 	}
 
 	.settings {
 		&-content .settings-pages .page {
-			width: 92%;
 			height: 361px;
 		}
 	}
@@ -140,8 +153,9 @@
 	}
 
 	#allApps {
-		height: 358px;
+		height: 222px;
 	}
+
 	.desktopWidget .weather-content .weather-daily img {
 		@include set-size(40px, 40px);
 	}
@@ -170,7 +184,7 @@
 		}
 
 		&-content .settings-pages .page {
-			width: 92%;
+			width: 97%;
 			height: 352px;
 		}
 
@@ -234,7 +248,7 @@
 	}
 
 	#allApps {
-		height: 328px;
+		height: 192px;
 	}
 
 	#startMenu #pinnedApps {
@@ -369,7 +383,7 @@
 	}
 
 	#allApps {
-		height: 288px;
+		height: 152px;
 	}
 
 	.widget.x-large {
@@ -431,7 +445,7 @@
 	}
 
 	#allApps {
-		height: 258px;
+		height: 122px;
 	}
 
 	#startMenu #pinnedApps {
@@ -511,7 +525,7 @@
 	}
 
 	#allApps {
-		height: 188px;
+		height: 52px;
 	}
 
 	#allWidgets {

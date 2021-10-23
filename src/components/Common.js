@@ -31,7 +31,8 @@ const Common = ({
 	updateResources,
 	updateSystem,
 	components: { startMenuOpen, ccOpen, showMenu },
-	storage
+	storage,
+	time: { hours, minutes, bigMonth, year, date, ampm }
 }) => {
 	const buttonAnimate = (e) => {
 		e.target.style.transform = 'scale(0.8)';
@@ -74,7 +75,9 @@ const Common = ({
 						date: t.dateNum(),
 						month: t.sMonthText(),
 						ampm: t.ampm(),
-						rawHour: t.rawHour()
+						rawHour: t.rawHour(),
+						bigMonth: t.monthText(),
+						year: t.year()
 					});
 				}
 			});
@@ -258,12 +261,12 @@ const Common = ({
 					!extraValues.startButtonColor2Light
 				) {
 					let style = `
-					#taskbar .center-part .start-button span:first-child {
+					#taskbar .start-button span:first-child {
 						background-image: linear-gradient(
 							120deg
 							, ${extraValues.startButtonColor1}, #2f93de)!important;
 					}
-					#taskbar .center-part .start-button span {
+					#taskbar .start-button span {
 						background-color: #2f93de !important;
 					}
 					#startMenu .searchbar {
@@ -276,12 +279,12 @@ const Common = ({
 					extraValues.startButtonColor2Light
 				) {
 					let style = `
-					#taskbar .center-part .start-button span:first-child {
+					#taskbar .start-button span:first-child {
 						background-image: linear-gradient(
 							120deg
 							, #67cffd, ${extraValues.startButtonColor2Light})!important;
 					}
-					#taskbar .center-part .start-button span,
+					#taskbar .start-button span,
 					#controlCenter .header button.enabled,
 					.settings-inputSwitch input[type='checkbox']:checked + .toggle, .settings-reset-button {
 						background-color: ${extraValues.startButtonColor2Light} !important;
@@ -301,12 +304,12 @@ const Common = ({
 					extraValues.startButtonColor2Light
 				) {
 					let style = `
-					#taskbar .center-part .start-button span:first-child {
+					#taskbar .start-button span:first-child {
 						background-image: linear-gradient(
 							120deg
 							, ${extraValues.startButtonColor1}, ${extraValues.startButtonColor2Light})!important;
 					}
-					#taskbar .center-part .start-button span,
+					#taskbar .start-button span,
 					#controlCenter .header button.enabled,
 					.settings-inputSwitch input[type='checkbox']:checked + .toggle, .settings-reset-button {
 						background-color: ${extraValues.startButtonColor2Light} !important;
@@ -325,7 +328,7 @@ const Common = ({
 
 				if (extraValues.startButtonColor3Light) {
 					let style = `
-					#taskbar .center-part .start-button.active span {
+					#taskbar .start-button.active span {
 						background-color: ${extraValues.startButtonColor3Light}!important;
 					}
 					`;
@@ -406,8 +409,27 @@ const Common = ({
 	const [noiseToMenuStyle, setnoiseToMenuStyle] = useState('');
 	const [disableMenuBorderStyle, setdisableMenuBorderStyle] = useState('');
 	const [compactifyMediaStyle, setcompactifyMediaStyle] = useState('');
+	const [titlebarHideStyle, settitlebarHideStyle] = useState('');
+	const [hideTaskbarDualTone, sethideTaskbarDualTone] = useState('');
+	const [startButtonLeft, setstartButtonLeft] = useState('');
 
 	useEffect(() => {
+		settitlebarHideStyle((state) => {
+			let newState = state;
+			if (storage.extraValues) {
+				if (
+					storage.extraValues.hideMusicTitleBar ||
+					storage.extraValues.hideWeatherTitleBar
+				) {
+					newState += `
+					.widget-content {
+						padding-top: 1.5rem;
+					}
+					`;
+				}
+			}
+			return newState;
+		});
 		sethideFadeEffectStyle((state) => {
 			let newState = state;
 			if (storage.extraValues) {
@@ -504,19 +526,19 @@ const Common = ({
 						border-bottom-left-radius: ${difference}rem;
 						border-bottom-right-radius: ${difference}rem;
 					}
-					#controlCenter .header button, #taskbar .center-part .start-button, #taskbar .right-part .status-bar, #startMenu .header button, #startMenu .searchbar {
+					#controlCenter .header button, #taskbar .start-button, #taskbar .right-part .status-bar, #startMenu .header button, #startMenu .searchbar {
 						border-radius: ${difference2}rem;
 					}
-					#taskbar .center-part .start-button span:first-child {
+					#taskbar .start-button span:first-child {
 						border-top-left-radius: ${difference3}rem;
 					}
-					#taskbar .center-part .start-button span:nth-child(2) {
+					#taskbar .start-button span:nth-child(2) {
 						border-top-right-radius: ${difference3}rem;
 					}
-					#taskbar .center-part .start-button span:nth-child(3) {
+					#taskbar .start-button span:nth-child(3) {
 						border-bottom-left-radius: ${difference3}rem;
 					}
-					#taskbar .center-part .start-button span:nth-child(4) {
+					#taskbar .start-button span:nth-child(4) {
 						border-bottom-right-radius: ${difference3}rem;
 					}
 					`;
@@ -535,7 +557,7 @@ const Common = ({
 							-webkit-backdrop-filter: unset;
 						}
 						#explorerWidget {
-							background-color: transparent;
+							background-color: transparent!important;
 							border: none!important;
 							box-shadow: unset;
 						}
@@ -695,22 +717,22 @@ const Common = ({
 			if (storage.extraValues) {
 				if (storage.extraValues.monochromeStartButton) {
 					newState = `
-						#taskbar .center-part .start-button span {
+						#taskbar .start-button span {
 							background-color: #202020!important;
 							background-image: unset!important;
 						}
 
-						#taskbar .center-part .start-button.active span {
+						#taskbar .start-button.active span {
 							background-color: #101010!important;
 							background-image: unset!important;
 						}
 
 						@media (prefers-color-scheme: dark) {
-							#taskbar .center-part .start-button span {
+							#taskbar .start-button span {
 								background-color: #f3f3f3!important;
 								background-image: unset!important;
 							}
-							#taskbar .center-part .start-button.active span {
+							#taskbar .start-button.active span {
 								background-color: #d0d0d0!important;
 								background-image: unset!important;
 							}
@@ -868,11 +890,114 @@ const Common = ({
 			}
 			return newState;
 		});
+		sethideTaskbarDualTone((state) => {
+			let newState = state;
+			if (storage.extraValues) {
+				if (storage.extraValues.hideTaskbarDualTone) {
+					newState = `
+					#taskbar .bottom-part {
+						border-top: unset!important;
+						background-color: transparent!important;
+					}
+					`;
+				}
+			}
+			return newState;
+		});
+		setstartButtonLeft((state) => {
+			let newState = state;
+			if (storage.extraValues) {
+				if (storage.extraValues.startButtonLeft) {
+					newState = `
+					#taskbar .left-part {
+						position: absolute;
+					}
+					#startMenu {
+						bottom: 11rem;
+					}
+					.status-bar {
+						padding: 0.4rem;
+						border-radius: 0.4rem;
+						transition: 250ms ease;
+					}
+					.status-bar.active:before {
+						content: '';
+						position: absolute;
+						z-index: -1;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						backdrop-filter: blur(20px) saturate(2);
+						-webkit-backdrop-filter: blur(20px) saturate(2);
+						background-image: $noise;
+						border-radius: 0.4rem;
+					}
+					@media only screen and (max-height: 926px) {
+						.widget.x-large {
+							top: 48%;
+						}
+					}
+					@media only screen and (max-height: 844px) {
+						.widget.x-large {
+							top: 47%;
+						}
+					}
+					@media only screen and (max-height: 812px) {
+						.widget.x-large {
+							top: 45%;
+						}
+					}
+					@media only screen and (max-height: 736px) {
+						.widget.x-large {
+							height: 68%;
+							top: 42%;
+						}
+						.settings-content .settings-pages .page {
+							height: 279px;
+						}
+					}
+					@media only screen and (max-height: 667px) {		
+						.widget.x-large {
+							height: 65%;
+							top: 41%;
+						}
+						.settings-content .settings-pages .page {
+							height: 211px;
+						}
+					}					
+					`;
+				}
+			}
+			return newState;
+		});
 		//eslint-disable-next-line
 	}, [storage]);
 
 	return (
 		<>
+			{storage.extraValues && storage.extraValues.statusbarWidget ? (
+				<div className='theWidgetTime'>
+					<div className='time'>
+						<div className='clock'>
+							{hours}:{minutes}
+						</div>
+						<div className='amPm'>
+							{!storage.extraValues
+								? ampm
+								: !storage.extraValues.twentyFourHourTime
+								? ampm
+								: ''}
+						</div>
+					</div>
+
+					<div className='date'>
+						{date} {bigMonth}, {year}
+					</div>
+				</div>
+			) : (
+				''
+			)}
 			{/* <div
 				className='wallpaper'
 				style={{
@@ -1004,13 +1129,29 @@ const Common = ({
 			) : (
 				''
 			)}
+			{storage.extraValues && storage.extraValues.hideMusicTitleBar ? (
+				<style id='hideMusicTitleBar'>{titlebarHideStyle}</style>
+			) : (
+				''
+			)}
+			{storage.extraValues && storage.extraValues.hideTaskbarDualTone ? (
+				<style id='hideTaskbarDualTone'>{hideTaskbarDualTone}</style>
+			) : (
+				''
+			)}
+			{storage.extraValues && storage.extraValues.startButtonLeft ? (
+				<style id='startButtonLeft'>{startButtonLeft}</style>
+			) : (
+				''
+			)}
 		</>
 	);
 };
 
 const mapStateToProps = (state) => ({
 	components: state.componentsReducer,
-	storage: state.storageReducer
+	storage: state.storageReducer,
+	time: state.timeReducer
 });
 
 export default connect(mapStateToProps, {

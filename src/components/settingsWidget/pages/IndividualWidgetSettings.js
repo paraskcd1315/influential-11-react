@@ -13,7 +13,9 @@ const IndividualWidgetSettings = ({
 	style,
 	options,
 	handleSwitchChange,
-	handleIndividualWidgetReset
+	handleIndividualWidgetReset,
+	handleTitlebarChange,
+	handleCompactifyingChange
 }) => {
 	const {
 		hideExplorerBG,
@@ -23,7 +25,10 @@ const IndividualWidgetSettings = ({
 		hideAddFolder,
 		disableGradient,
 		compactifyWeather,
-		compactifyMedia
+		compactifyMedia,
+		hideExplorerTitleBar,
+		hideMusicTitleBar,
+		hideWeatherTitleBar
 	} = options;
 	return (
 		<div className={'settings-individual-widgets page'} style={style}>
@@ -67,6 +72,16 @@ const IndividualWidgetSettings = ({
 				label={currentTranslate.settings[51]}
 				description={currentTranslate.settings[52]}
 			/>
+			<InputSwitch
+				onChange={handleTitlebarChange}
+				inputName='hideExplorerTitleBar'
+				value={hideExplorerTitleBar ? 'on' : 'off'}
+				label='Hide Window Title Bar'
+				description='This setting hides the Title bar from the Explorer Window Panel. Note: You wont be able to either move or close the Window Panel when this is enabled.'
+				checker={{
+					bool: false
+				}}
+			/>
 			<br />
 			<div className='settings-label'>{currentTranslate.settings[53]}</div>
 			<InputSwitch
@@ -77,20 +92,44 @@ const IndividualWidgetSettings = ({
 				description={currentTranslate.settings[55]}
 			/>
 			<InputSwitch
-				onChange={handleSwitchChange}
+				onChange={handleCompactifyingChange}
 				inputName='compactifyWeather'
 				value={compactifyWeather ? 'on' : 'off'}
 				label={currentTranslate.settings[56]}
 				description={currentTranslate.settings[57]}
+				checker={hideWeatherTitleBar}
+			/>
+			<InputSwitch
+				onChange={handleTitlebarChange}
+				inputName='hideWeatherTitleBar'
+				value={hideWeatherTitleBar ? 'on' : 'off'}
+				label='Hide Window Title Bar'
+				description='This setting hides the Title bar from the Weather Window Panel. Note: You wont be able to either move or close the Window Panel when this is enabled.'
+				checker={{
+					bool: compactifyWeather,
+					boolName: 'compactifyWeather'
+				}}
 			/>
 			<br />
 			<div className='settings-label'>{currentTranslate.settings[58]}</div>
 			<InputSwitch
-				onChange={handleSwitchChange}
+				onChange={handleCompactifyingChange}
 				inputName='compactifyMedia'
 				value={compactifyMedia ? 'on' : 'off'}
 				label={currentTranslate.settings[59]}
 				description={currentTranslate.settings[60]}
+				checker={hideMusicTitleBar}
+			/>
+			<InputSwitch
+				onChange={handleTitlebarChange}
+				inputName='hideMusicTitleBar'
+				value={hideMusicTitleBar ? 'on' : 'off'}
+				label='Hide Window Title Bar'
+				description='This setting hides the Title bar from the Music Window Panel. Note: You wont be able to either move or close the Window Panel when this is enabled.'
+				checker={{
+					bool: compactifyMedia,
+					boolName: 'compactifyMedia'
+				}}
 			/>
 		</div>
 	);
